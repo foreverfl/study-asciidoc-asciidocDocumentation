@@ -1,0 +1,237 @@
+= AsciiDoc
+
+- AsciiDoc을 공부하기 위한 문서입니다.
+- 번역은 GPT4o 및 Claude Sonet을 활용했으며, 어색한 부분은 직접 수정했습니다.
+
+== 목차
+
+- Introduction
+    ** xref:document-structure[Document Structure]
+    ** xref:key-concepts[Key Concepts]
+    ** xref:document-processing[Document Processing]
+    ** xref:normalization[Normalization]
+
+- xref:blocks[Blocks]
+  ** xref:delimited-blocks[Delimited Blocks]
+  ** xref:basic-block[Build a Basic Block]
+  ** xref:add-title[Add a Title to a Block]
+  ** xref:assign-id[Assign an ID]
+  ** xref:block-masquerading[Block Masquerading]
+  ** xref:troubleshooting-blocks[Troubleshooting Blocks]
+
+- Document Attributes
+    ** Attribute Entries
+        *** Attribute Entry Names and Values
+        *** Wrap Attribute Entry Values
+        *** Attribute Entry Substitutions
+        *** Inline Attribute Entries
+    ** Declare Built-In Attributes
+        *** Set Boolean Attributes
+    ** Declare Custom Attributes
+    ** Unset Attributes
+    ** Reference Attributes
+        *** Handle Unresolved References
+    ** Attribute Assignment Precedence
+    ** Counters
+
+- Element Attributes
+- Document Header
+- Document Type
+- Sections
+- Paragraphs
+- Discrete Headings
+- Breaks
+- Text Formatting and Punctuation
+- Lists
+- Description Lists
+- Links
+- Cross References
+- Footnotes
+- Images
+- Audio and Video
+- Icons
+- Keyboard Macro
+- Button and Menu UI Macros
+- Admonitions
+- Sidebars
+- Example Blocks
+- Blockquotes
+- Verses
+- Verbatim and Source Blocks
+- Tables
+- Equations and Formulas (STEM)
+- Open Blocks
+- Collapsible Blocks
+- Comments
+- Automatic Table of Contents
+- Docinfo Files
+- Includes
+- Conditionals
+- Substitutions
+- Passthroughs
+- Reference
+
+
+
+== Introduction - Document Structure
+=== AsciiDoc 소개
+AsciiDoc은 주로 기술 문서 작성을 위해 설계된 경량의 시맨틱 마크업 언어입니다. 간결하고 사람이 읽기 쉬운 일반 텍스트 형식으로 인코딩된 콘텐츠에서 다양한 프레젠테이션이 풍부한 출력 형식을 생성할 수 있습니다.
+
+AsciiDoc 문법은 텍스트를 마크업하고 구조화하는 데 잘 확립된 일반 텍스트 규칙을 기반으로 하기 때문에 직관적입니다. AsciiDoc에 익숙하지 않은 사람도 아마도 구문 요소를 보기만 해도 그 목적을 추측할 수 있을 것입니다. 기술 업계에서 오랫동안 사용해 온 관행인, 구문 요소가 의미하는 바를 보이도록 신중하게 선택되었기 때문입니다.
+
+AsciiDoc 언어는 생성하는 출력 형식에 결합되지 않습니다. AsciiDoc 프로세서는 AsciiDoc 소스 문서를 파싱하고 이해한 다음, 파싱된 문서 구조를 HTML, PDF, EPUB3, man(ual) 페이지 또는 DocBook과 같은 하나 이상의 출력 형식으로 변환할 수 있습니다. 여러 출력 형식을 생성할 수 있는 기능은 AsciiDoc의 주요 장점 중 하나입니다. 이 기능 덕분에 정적 사이트 생성기, IDE, Git 도구 및 서비스, CI/CD 시스템 및 기타 소프트웨어에서 사용할 수 있습니다.
+
+AsciiDoc은 쉽게 작성할 수 있는 것과 기술 저작 및 출판의 엄격한 요구 사항 사이의 격차를 해소합니다. AsciiDoc은 읽거나 쓰는 데 텍스트 편집기만 필요하므로 시작하는 데 진입 장벽이 낮습니다.
+
+=== 이 문서에 대하여
+여러분은 Asciidoctor에서 구현된 대로 AsciiDoc 언어에 대한 사용자 중심 문서를 읽고 있습니다. 이 문서는 AsciiDoc 콘텐츠를 처리하기 위해 Asciidoctor를 설정하고 사용하는 방법을 다루지 않습니다. 해당 문서는 이 웹사이트의 Asciidoctor 섹션에서 찾을 수 있습니다.
+
+이 문서는 Eclipse의 AsciiDoc Language 프로젝트에 대한 초기 기여로 제출되었습니다. 해당 프로젝트는 이 문서를 바탕으로 AsciiDoc 언어 사양을 작성할 것입니다. 또한 AsciiDoc Language에 대한 사용자 가이드 초안으로 사용될 것이며, 해당 프로젝트에서도 유지 관리될 예정입니다.
+
+AsciiDoc Language 사양의 첫 번째 버전이 비준될 때까지 AsciiDoc은 Asciidoctor 구현에 의해 정의됩니다. 다른 공식적인 언어 정의는 없습니다.
+
+AsciiDoc Language 프로젝트가 AsciiDoc Language에 대한 자체 문서를 게시하기 시작할 때까지 AsciiDoc 문서는 이 사이트에 남아 있을 것입니다.
+
+그때까지, 시작해 보겠습니다!
+
+[[key-concepts]]
+== Introduction - Key Concepts
+이 페이지에서는 AsciiDoc 문서의 전체 구조에 대해 배웁니다. 지금 당장은 구문의 세부 사항에 대해 걱정하지 마세요. 해당 주제는 이후 문서에서 철저히 다룰 것입니다. 지금은 AsciiDoc 문서를 구성하는 것이 무엇인지 감을 잡는 것을 목표로 합니다.
+
+=== 문서
+AsciiDoc은 상용구나 프롤로그가 없는 일반 텍스트 작성 형식입니다. AsciiDoc 문서는 단 하나의 문장(또는 학술적으로는 단 하나의 문자)으로만 구성될 수 있습니다.
+
+다음 예는 하나의 문장을 포함하는 하나의 단락으로 구성된 유효한 AsciiDoc 문서입니다:
+
+[source,asciidoc]
+----
+This is a basic AsciiDoc document.
+----
+
+물론 단일 문장 이상의 내용을 가질 수 있습니다. 여기서 강조하고 싶은 점은 시작하기가 쉽다는 것입니다.
+
+AsciiDoc 문서는 서로 위에 쌓여 있는 일련의 블록(행 단위)입니다. 이러한 블록은 일반적으로 빈 행으로 서로 구분됩니다(특정 상황에서는 선택 사항일 수 있음).
+
+이전 문서를 하나의 단락에서 두 개의 단락으로 확장하려면 빈 행으로 두 단락을 구분하면 됩니다:
+
+[source,asciidoc]
+----
+This is a basic AsciiDoc document.
+
+This document contains two paragraphs.
+----
+
+AsciiDoc 문서는 문서 헤더로 시작할 수 있습니다. 문서 헤더는 선택 사항이지만 문서 제목을 지정하고 문서 전체 구성과 문서 속성 형태의 재사용 가능한 텍스트를 설정할 수 있으므로 자주 사용됩니다.
+
+[source,asciidoc]
+----
+= Document Title
+:reproducible:
+
+This is a basic AsciiDoc document by {author}.
+
+This document contains two paragraphs.
+It also has a header that specifies the document title.
+----
+
+거의 모든 블록의 조합이 유효한 AsciiDoc 문서를 구성합니다(문서 유형에 따라 일부 구조적 요구 사항이 있음). 문서는 단일 문장부터 여러 부분으로 구성된 책까지 다양할 수 있습니다.
+
+=== 행
+행은 AsciiDoc에서 중요한 구성 요소입니다. 행은 줄 바꿈 문자나 문서의 경계로 양쪽이 구분된 텍스트로 정의됩니다. 구문의 많은 측면이 전체 행을 차지해야 합니다. 그래서 AsciiDoc이 행 지향 언어라고 말하는 것입니다.
+
+예를 들어, 섹션 제목은 그 자체로 한 행에 있어야 합니다. 속성 항목, 블록 제목, 블록 속성 목록, 블록 매크로, 목록 항목, 블록 구분 기호 등에도 동일하게 적용됩니다.
+
+Example 1. 단일 행을 차지해야 하는 섹션 제목의 예
+[source,asciidoc]
+----
+== Section Title
+----
+
+Example 2. 적어도 하나의 행을 차지해야 하는 속성 항목의 예
+[source,asciidoc]
+----
+:name: value
+----
+
+Example 3. 두 행으로 확장되는 속성 항목의 예
+[source,asciidoc]
+----
+:name: value \
+more value
+----
+
+빈 행도 중요할 수 있습니다. 단일 빈 행은 헤더와 본문을 구분합니다. 앞서 두 단락 예제에서 보았듯이 많은 블록도 빈 행으로 구분됩니다.
+
+반대로 단락 내용 내의 행은 중요하지 않습니다. AsciiDoc 구문을 배우면서 이러한 점을 염두에 두세요.
+
+=== 블록
+AsciiDoc 문서의 블록은 문서 구조를 형성합니다. 일부 블록은 다른 블록을 포함할 수 있으므로 문서 구조는 본질적으로 계층적입니다(즉, 트리 구조). 예를 들어, 자동 목차를 활성화하여 이 섹션 구조를 미리 볼 수 있습니다. 블록의 예로는 단락, 섹션, 목록, 구분 블록, 표 및 블록 매크로가 있습니다.
+
+블록은 일반적으로 빈 행으로 다른 블록과 구분되기 때문에 식별하기 쉽습니다(항상 필요한 것은 아님). 블록은 항상 새 행에서 시작하고 행 끝에서 종료되며 왼쪽 여백에 맞춰집니다.
+
+모든 블록에는 하나 이상의 블록 메타데이터 행이 있을 수 있습니다. 이 메타데이터는 블록 속성, 블록 앵커 또는 블록 제목의 형태일 수 있습니다. 이러한 메타데이터 행은 블록 자체 위에 직접 인접해야 합니다.
+
+섹션, 비 verbatim 구분 블록 및 AsciiDoc 테이블 셀은 다른 블록을 포함할 수 있습니다. 블록이 계층을 형성함에도 불구하고 중첩된 블록조차도 왼쪽 여백에서 시작합니다. 블록이 왼쪽 여백에서 시작하도록 요구함으로써 들여쓰기 수준을 추적하고 유지 관리해야 하는 지루함을 피하고 내용을 더 재사용 가능하게 만듭니다.
+
+=== 텍스트와 인라인 요소
+마커, 구분 기호 및 메타데이터 행으로 둘러싸인 것은 텍스트입니다. 텍스트는 문서의 주요 초점이며 AsciiDoc 구문이 숨 쉴 공간을 많이 제공하는 이유입니다. 텍스트는 대부분 블록(예: 단락)의 행, 블록 제목(예: 섹션 제목) 및 목록 항목에서 찾을 수 있지만 다른 위치에도 존재할 수 있습니다.
+
+텍스트는 치환의 대상이 됩니다. 치환은 마크업을 텍스트 서식으로 해석하고, 매크로를 텍스트 또는 비텍스트 요소로 대체하고, 속성 참조를 확장하고, 기타 유형의 텍스트 대체를 수행합니다.
+
+달리 지정하지 않는 한 일반 텍스트는 모든 치환의 대상이 됩니다. verbatim 텍스트는 소스에 나타나는 대로 출력에 표시할 수 있도록 최소한의 치환 세트의 대상이 됩니다. 또한 모든 치환을 비활성화하여 텍스트를 수정하지 않고 출력에 전달할 수 있습니다(즉, raw). 텍스트 구문 분석은 인라인 요소와 기타 형태의 변환이 혼합된 것으로 끝납니다.
+
+=== 인코딩과 AsciiDoc 파일
+AsciiDoc 파일은 .adoc 파일 확장자를 가진 텍스트 파일입니다(예: document.adoc). 대부분의 AsciiDoc 프로세서는 파일의 텍스트가 UTF-8 인코딩을 사용한다고 가정합니다. UTF-16 인코딩은 파일이 BOM으로 시작하는 경우에만 지원됩니다.
+
+AsciiDoc 프로세서는 문자열(즉, 문자 시퀀스)에서 AsciiDoc을 처리할 수 있습니다. 그러나 대부분의 경우 AsciiDoc 문서를 파일로 저장합니다.
+
+[[document-processing]]
+== Introduction - Document Processing
+AsciiDoc은 특별히 출판 형식이 아닌 작성 형식입니다. 다시 말해, 워드 프로세서에서 작성할 때처럼 WYSIWYG 방식이 아닙니다. 대신 작성하는 것은 AsciiDoc 소스입니다. 그런 다음 Asciidoctor와 같은 AsciiDoc 프로세서를 사용하여 AsciiDoc 소스를 출판 가능한 형식으로 변환합니다. 출판하는 것은 이 출력물입니다.
+
+AsciiDoc 소스를 변환하는 것은 입력한 것보다 더 많은 것을 얻기 위해 내용을 해석하고 꾸미는 기회입니다. AsciiDoc 소스를 다른 형식으로 변환하는 작업은 변환기에 의해 처리됩니다. 언어와 변환기 사이에는 강력한 관계가 있지만 이 두 측면은 명시적으로 결합되지 않습니다.
+
+AsciiDoc 프로세서는 HTML 및 DocBook을 만드는 것을 포함하여 여러 내장 변환기를 제공합니다. 이러한 변환기 중 하나를 활성화하려면 문서에 백엔드를 설정합니다(기본값: html). 백엔드는 프로세서에게 원하는 출력 형식을 알려주는 키워드입니다. 그런 다음 프로세서는 해당 출력 형식을 만드는 변환기를 선택합니다. 예를 들어 HTML 변환기는 html 백엔드를 처리하여 HTML 출력을 만듭니다.
+
+AsciiDoc 프로세서는 실제로 두 단계로 작동합니다. 첫째, AsciiDoc 문서를 파싱합니다. 이 파싱은 작성된 구조를 반영하고 모든 의미 있는 마크업을 해석하는 구조화된 문서를 생성합니다. 그런 다음 프로세서는 이 구조화된 문서를 변환기에 전달하여 출력 형식으로 변환합니다.
+
+요약하면, 프로세서는 문자열(파일에서 읽을 수 있음)을 받아들이고, 이를 구조 문서로 파싱한 다음, 다른 문자열(파일에 쓸 수 있음)을 생성합니다.
+
+[[normalization]]
+== Introduction - Normalization
+
+AsciiDoc 프로세서가 AsciiDoc 소스를 읽을 때, 가장 먼저 하는 일은 행을 정규화하는 것입니다. (이 작업은 미리 수행하거나 각 행을 방문할 때 수행할 수 있습니다).
+
+정규화는 다음 작업으로 구성됩니다:
+
+- 인코딩을 UTF-8로 강제 설정 (AsciiDoc 프로세서는 항상 내용이 UTF-8로 인코딩되어 있다고 가정함)
+- 각 행에서 후행 공백 제거 (줄 바꿈 문자 포함)
+
+이 정규화는 구조화된 컨텍스트와 관계없이 수행됩니다. 행이 리터럴 블록의 일부인지 일반 단락의 일부인지는 중요하지 않습니다. 모든 행이 정규화됩니다.
+
+포함 파일의 행에는 특정 경우에만 정규화가 적용됩니다. 인식된 AsciiDoc 확장자를 가진 포함 파일만 위에서 설명한 대로 정규화됩니다. 다른 모든 파일의 경우 후행 줄 바꿈 문자만 제거됩니다. 포함 파일은 인코딩 속성을 사용하여 지정된 다른 인코딩을 가질 수도 있습니다. 인코딩 속성이 지정되지 않은 경우 UTF-8이 가정됩니다.
+
+AsciiDoc 프로세서가 렌더링된 문서(HTML, DocBook 등)를 생성하기 위해 행을 다시 결합할 때, 줄 바꿈 문자(\n)에서 행을 연결합니다.
+
+
+
+== Blocks
+[[blocks]]
+
+== Blocks - Delimited Blocks
+[[delimited-blocks]]
+
+== Blocks - Build a Basic Block
+[[basic-block]]
+
+== Blocks - Add a Title to a Block
+[[add-title]]
+
+== Blocks - Assign an ID
+[[assign-id]]
+
+== Blocks - Block Masquerading
+[[block-masquerading]]
+
+== Blocks - Troubleshooting Blocks
+[[troubleshooting-blocks]]
