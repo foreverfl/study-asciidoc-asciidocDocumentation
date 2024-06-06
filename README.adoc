@@ -1,15 +1,17 @@
 = AsciiDoc
+:source-highlighter: highlightjs
 
+== 개요
 - AsciiDoc을 공부하기 위한 문서입니다.
 - 번역은 GPT4o 및 Claude Sonet을 활용했으며, 어색한 부분은 직접 수정했습니다.
 
 == 목차
 
 - Introduction
-    ** xref:document-structure[Document Structure]
-    ** xref:key-concepts[Key Concepts]
-    ** xref:document-processing[Document Processing]
-    ** xref:normalization[Normalization]
+  ** xref:document-structure[Document Structure]
+  ** xref:key-concepts[Key Concepts]
+  ** xref:document-processing[Document Processing]
+  ** xref:normalization[Normalization]
 
 - xref:blocks[Blocks]
   ** xref:delimited-blocks[Delimited Blocks]
@@ -19,62 +21,245 @@
   ** xref:block-masquerading[Block Masquerading]
   ** xref:troubleshooting-blocks[Troubleshooting Blocks]
 
-- Document Attributes
-    ** Attribute Entries
-        *** Attribute Entry Names and Values
-        *** Wrap Attribute Entry Values
-        *** Attribute Entry Substitutions
-        *** Inline Attribute Entries
-    ** Declare Built-In Attributes
-        *** Set Boolean Attributes
-    ** Declare Custom Attributes
-    ** Unset Attributes
-    ** Reference Attributes
-        *** Handle Unresolved References
-    ** Attribute Assignment Precedence
-    ** Counters
+- xref:document-attributes[Document Attributes]
+  ** xref:attribute-entries[Attribute Entries]
+    *** xref:attribute-entry-names-and-values[Attribute Entry Names and Values]
+    *** xref:wrap-attribute-entry-values[Wrap Attribute Entry Values]
+    *** xref:attribute-entry-substitutions[Attribute Entry Substitutions]
+    *** xref:inline-attribute-entries[Inline Attribute Entries]
+  ** xref:declare-built-in-attributes[Declare Built-In Attributes]
+    *** xref:set-boolean-attributes[Set Boolean Attributes]
+  ** xref:declare-custom-attributes[Declare Custom Attributes]
+  ** xref:unset-attributes[Unset Attributes]
+  ** xref:reference-attributes[Reference Attributes]
+    *** xref:handle-unresolved-references[Handle Unresolved References]
+  ** xref:attribute-assignment-precedence[Attribute Assignment Precedence]
+  ** xref:counters[Counters]
 
-- Element Attributes
-- Document Header
-- Document Type
-- Sections
-- Paragraphs
-- Discrete Headings
-- Breaks
-- Text Formatting and Punctuation
-- Lists
-- Description Lists
-- Links
-- Cross References
-- Footnotes
-- Images
-- Audio and Video
-- Icons
-- Keyboard Macro
-- Button and Menu UI Macros
-- Admonitions
-- Sidebars
-- Example Blocks
-- Blockquotes
-- Verses
-- Verbatim and Source Blocks
-- Tables
-- Equations and Formulas (STEM)
-- Open Blocks
-- Collapsible Blocks
-- Comments
-- Automatic Table of Contents
-- Docinfo Files
-- Includes
-- Conditionals
-- Substitutions
-- Passthroughs
-- Reference
+- xref:element-attributes[Element Attributes]
+  ** xref:positional-and-named-attributes[Positional and Named Attributes]
+  ** xref:id-attribute[ID Attribute]
+  ** xref:role-attribute[Role Attribute]
+  ** xref:options-attribute[Options Attribute]
+
+- xref:document-header[Document Header]
+  ** xref:document-title[Document Title]
+    *** xref:subtitle[Subtitle]
+  ** xref:author-information[Author Information]
+    *** xref:using-the-author-line[Using the Author Line]
+    *** xref:add-multiple-authors-to-a-document[Add Multiple Authors to a Document]
+    *** xref:assign-author-and-email-with-attribute-entries[Assign Author and Email with Attribute Entries]
+    *** xref:reference-the-author-information[Reference the Author Information]
+    *** xref:compound-author-names[Compound Author Names]
+  ** xref:revision-information[Revision Information]
+    *** xref:using-the-revision-line[Using the Revision Line]
+    *** xref:assign-revision-attributes-with-attribute-entries[Assign Revision Attributes with Attribute Entries]
+    *** xref:version-label-attribute[Version Label Attribute]
+    *** xref:reference-the-revision-attributes[Reference the Revision Attributes]
+  ** xref:document-metadata[Document Metadata]
+  ** xref:document-header-reference[Document Header Reference]
+
+- xref:document-type[Document Type]
+
+- xref:sections[Sections]
+  ** xref:section-titles-and-levels[Section Titles and Levels]
+    *** xref:activate-section-title-links[Activate Section Title Links]
+
+  ** xref:autogenerate-section-ids[Autogenerate Section IDs]
+    *** xref:change-id-prefix-separator[Change the ID Prefix and Separator]
+
+  ** xref:assign-custom-ids-reference-text[Assign Custom IDs and Reference Text]
+  ** xref:section-numbers[Section Numbers]
+  ** xref:section-styles-articles-books[Section Styles for Articles and Books]
+    *** xref:hide-special-section-titles[Hide Special Section Titles]
+    *** xref:number-special-sections[Number Special Sections]
+    *** xref:colophon[Colophon]
+    *** xref:dedication[Dedication]
+    *** xref:abstract-section[Abstract (Section)]
+    *** xref:abstract-block[Abstract (Block)]
+    *** xref:preface[Preface]
+    *** xref:book-parts[Book Parts]
+      **** xref:part-numbers-signifier[Part Numbers and Signifier]
+    *** xref:chapters[Chapters]
+    *** xref:appendix[Appendix]
+    *** xref:glossary[Glossary]
+    *** xref:bibliography[Bibliography]
+    *** xref:index[Index]
+
+  ** xref:section-attributes-styles-reference[Section Attributes and Styles Reference]
+
+- xref:paragraphs[Paragraphs]
+  ** xref:hard-line-breaks[Hard Line Breaks]
+  ** xref:preamble-lead-style[Preamble and Lead Style]
+  ** xref:paragraph-alignment[Paragraph Alignment]
+
+- xref:discrete-headings[Discrete Headings]
+
+- xref:breaks[Breaks]
+
+- xref:text-formatting-punctuation[Text Formatting and Punctuation]
+  ** xref:bold[Bold]
+  ** xref:italic[Italic]
+  ** xref:monospace[Monospace]
+  ** xref:literal-monospace[Literal Monospace]
+  ** xref:text-span-built-in-roles[Text Span and Built-in Roles]
+  ** xref:highlight[Highlight]
+  ** xref:quotation-marks-apostrophes[Quotation Marks and Apostrophes]
+  ** xref:subscript-superscript[Subscript and Superscript]
+  ** xref:using-custom-inline-styles[Using Custom Inline Styles]
+  ** xref:troubleshoot-unconstrained-formatting-pairs[Troubleshoot Unconstrained Formatting Pairs]
+
+- xref:lists[Lists]
+  ** xref:unordered-lists[Unordered Lists]
+  ** xref:ordered-lists[Ordered Lists]
+  ** xref:checklists[Checklists]
+  ** xref:separating-lists[Separating Lists]
+  ** xref:complex-list-items[Complex List Items]
+
+- xref:description-lists[Description Lists]
+  ** xref:horizontal-description-list[Horizontal Description List]
+  ** xref:question-answer-lists[Question and Answer Lists]
+  ** xref:description-lists-with-marker[Description Lists With Marker]
+
+- xref:links[Links]
+  ** xref:autolinks[Autolinks]
+  ** xref:url-macro[URL Macro]
+  ** xref:link-macro[Link Macro]
+  ** xref:troubleshooting-complex-urls[Troubleshooting Complex URLs]
+  ** xref:link-url-macro-attribute-parsing[Link & URL Macro Attribute Parsing]
+  ** xref:mailto-macro[Mailto Macro]
+  ** xref:link-url-mailto-macro-attributes-reference[Link, URL, and Mailto Macro Attributes Reference]
+
+- xref:cross-references[Cross References]
+  ** xref:document-to-document-cross-references[Document to Document Cross References]
+  ** xref:cross-reference-text-styles[Cross Reference Text and Styles]
+  ** xref:validate-cross-references[Validate Cross References]
+
+- xref:footnotes[Footnotes]
+
+- xref:images[Images]
+  ** xref:set-the-images-directory[Set the Images Directory]
+  ** xref:insert-images-from-a-url[Insert Images from a URL]
+  ** xref:position-and-frame-images[Position and Frame Images]
+  ** xref:add-link-to-image[Add Link to Image]
+  ** xref:adjust-image-sizes[Adjust Image Sizes]
+  ** xref:specify-image-format[Specify Image Format]
+  ** xref:svg-images[SVG Images]
+  ** xref:images-reference[Images Reference]
+
+- xref:audio-and-video[Audio and Video]
+
+- xref:icons[Icons]
+  ** xref:image-icons-mode[Image Icons Mode]
+  ** xref:font-icons-mode[Font Icons Mode]
+  ** xref:icon-macro[Icon Macro]
+
+- xref:keyboard-macro[Keyboard Macro]
+
+- xref:button-menu-ui-macros[Button and Menu UI Macros]
+
+- xref:admonitions[Admonitions]
+
+- xref:sidebars[Sidebars]
+
+- xref:example-blocks[Example Blocks]
+
+- xref:blockquotes[Blockquotes]
+
+- xref:verses[Verses]
+
+- xref:verbatim-source-blocks[Verbatim and Source Blocks]
+  ** xref:source-code-blocks[Source Code Blocks]
+    *** xref:source-highlighting[Source Highlighting]
+    *** xref:highlight-select-lines[Highlight Select Lines]
+    *** xref:highlight-php-source-code[Highlight PHP Source Code]
+  ** xref:listing-blocks[Listing Blocks]
+  ** xref:literal-blocks[Literal Blocks]
+  ** xref:callouts[Callouts]
+
+- xref:tables[Tables]
+  ** xref:build-basic-table[Build a Basic Table]
+  ** xref:add-a-title[Add a Title]
+    *** xref:customize-title-label[Customize the Title Label]
+    *** xref:turn-off-title-label[Turn Off the Title Label]
+  ** xref:add-columns-table[Add Columns to a Table]
+    *** xref:adjust-column-widths[Adjust Column Widths]
+    *** xref:align-content-column[Align Content by Column]
+    *** xref:format-content-column[Format Content by Column]
+  ** xref:add-cells-rows-table[Add Cells and Rows to a Table]
+    *** xref:create-header-row[Create a Header Row]
+    *** xref:create-footer-row[Create a Footer Row]
+    *** xref:align-content-cell[Align Content by Cell]
+    *** xref:format-content-cell[Format Content by Cell]
+    *** xref:span-columns-rows[Span Columns and Rows]
+    *** xref:duplicate-cells[Duplicate Cells]
+  ** xref:table-width[Table Width]
+  ** xref:table-borders[Table Borders]
+  ** xref:table-striping[Table Striping]
+  ** xref:table-orientation[Table Orientation]
+  ** xref:assign-role-table[Assign a Role to a Table]
+  ** xref:nesting-tables[Nesting Tables]
+  ** xref:csv-tsv-dsv-data[CSV, TSV and DSV Data]
+  ** xref:table-reference[Table Reference]
+
+- xref:equations-formulas[Equations and Formulas (STEM)]
+
+- xref:open-blocks[Open Blocks]
+
+- xref:collapsible-blocks[Collapsible Blocks]
+
+- xref:comments[Comments]
+
+- xref:automatic-toc[Automatic Table of Contents]
+  ** xref:customize-toc-title[Customize the TOC Title]
+  ** xref:adjust-toc-depth[Adjust the TOC Depth]
+  ** xref:position-toc[Position the TOC]
+  ** xref:toc-attributes-reference[TOC Attributes Reference]
+
+- xref:docinfo-files[Docinfo Files]
+
+- xref:includes[Includes]
+  ** xref:offset-section-levels[Offset Section Levels]
+  ** xref:indent-included-content[Indent Included Content]
+  ** xref:use-include-file-multiple-times[Use an Include File Multiple Times]
+  ** xref:include-list-item-content[Include List Item Content]
+  ** xref:include-content-tagged-regions[Include Content by Tagged Regions]
+  ** xref:include-content-line-ranges[Include Content by Line Ranges]
+  ** xref:include-content-uri[Include Content by URI]
+
+- xref:conditionals[Conditionals]
+  ** xref:ifdef-directives[ifdef and ifndef Directives]
+  ** xref:ifeval-directive[ifeval Directive]
+
+- xref:substitutions[Substitutions]
+  ** xref:special-characters[Special Characters]
+  ** xref:quotes[Quotes]
+  ** xref:attribute-references[Attribute References]
+  ** xref:character-replacements[Character Replacements]
+  ** xref:macros[Macros]
+  ** xref:post-replacements[Post Replacements]
+  ** xref:customize-substitutions-blocks[Customize the Substitutions Applied to Blocks]
+  ** xref:customize-substitutions-text[Customize the Substitutions Applied to Text]
+  ** xref:escape-prevent-substitutions[Escape and Prevent Substitutions]
+
+- xref:passthroughs[Passthroughs]
+  ** xref:passthrough-blocks[Passthrough Blocks]
+  ** xref:inline-passthroughs[Inline Passthroughs]
+
+- xref:reference[Reference]
+  ** xref:syntax-quick-reference[Syntax Quick Reference]
+  ** xref:faq[Frequently Asked Questions (FAQ)]
+  ** xref:compare-asciidoc-markdown[Compare AsciiDoc to Markdown]
+  ** xref:document-attributes-reference[Document Attributes Reference]
+  ** xref:character-replacement-attributes-reference[Character Replacement Attributes Reference]
+  ** xref:glossary[Glossary of Terms]
 
 
 
 == Introduction - Document Structure
+
 === AsciiDoc 소개
+
 AsciiDoc은 주로 기술 문서 작성을 위해 설계된 경량의 시맨틱 마크업 언어입니다. 간결하고 사람이 읽기 쉬운 일반 텍스트 형식으로 인코딩된 콘텐츠에서 다양한 프레젠테이션이 풍부한 출력 형식을 생성할 수 있습니다.
 
 AsciiDoc 문법은 텍스트를 마크업하고 구조화하는 데 잘 확립된 일반 텍스트 규칙을 기반으로 하기 때문에 직관적입니다. AsciiDoc에 익숙하지 않은 사람도 아마도 구문 요소를 보기만 해도 그 목적을 추측할 수 있을 것입니다. 기술 업계에서 오랫동안 사용해 온 관행인, 구문 요소가 의미하는 바를 보이도록 신중하게 선택되었기 때문입니다.
@@ -84,6 +269,7 @@ AsciiDoc 언어는 생성하는 출력 형식에 결합되지 않습니다. Asci
 AsciiDoc은 쉽게 작성할 수 있는 것과 기술 저작 및 출판의 엄격한 요구 사항 사이의 격차를 해소합니다. AsciiDoc은 읽거나 쓰는 데 텍스트 편집기만 필요하므로 시작하는 데 진입 장벽이 낮습니다.
 
 === 이 문서에 대하여
+
 여러분은 Asciidoctor에서 구현된 대로 AsciiDoc 언어에 대한 사용자 중심 문서를 읽고 있습니다. 이 문서는 AsciiDoc 콘텐츠를 처리하기 위해 Asciidoctor를 설정하고 사용하는 방법을 다루지 않습니다. 해당 문서는 이 웹사이트의 Asciidoctor 섹션에서 찾을 수 있습니다.
 
 이 문서는 Eclipse의 AsciiDoc Language 프로젝트에 대한 초기 기여로 제출되었습니다. 해당 프로젝트는 이 문서를 바탕으로 AsciiDoc 언어 사양을 작성할 것입니다. 또한 AsciiDoc Language에 대한 사용자 가이드 초안으로 사용될 것이며, 해당 프로젝트에서도 유지 관리될 예정입니다.
@@ -96,9 +282,11 @@ AsciiDoc Language 프로젝트가 AsciiDoc Language에 대한 자체 문서를 �
 
 [[key-concepts]]
 == Introduction - Key Concepts
+
 이 페이지에서는 AsciiDoc 문서의 전체 구조에 대해 배웁니다. 지금 당장은 구문의 세부 사항에 대해 걱정하지 마세요. 해당 주제는 이후 문서에서 철저히 다룰 것입니다. 지금은 AsciiDoc 문서를 구성하는 것이 무엇인지 감을 잡는 것을 목표로 합니다.
 
 === 문서
+
 AsciiDoc은 상용구나 프롤로그가 없는 일반 텍스트 작성 형식입니다. AsciiDoc 문서는 단 하나의 문장(또는 학술적으로는 단 하나의 문자)으로만 구성될 수 있습니다.
 
 다음 예는 하나의 문장을 포함하는 하나의 단락으로 구성된 유효한 AsciiDoc 문서입니다:
@@ -137,6 +325,7 @@ It also has a header that specifies the document title.
 거의 모든 블록의 조합이 유효한 AsciiDoc 문서를 구성합니다(문서 유형에 따라 일부 구조적 요구 사항이 있음). 문서는 단일 문장부터 여러 부분으로 구성된 책까지 다양할 수 있습니다.
 
 === 행
+
 행은 AsciiDoc에서 중요한 구성 요소입니다. 행은 줄 바꿈 문자나 문서의 경계로 양쪽이 구분된 텍스트로 정의됩니다. 구문의 많은 측면이 전체 행을 차지해야 합니다. 그래서 AsciiDoc이 행 지향 언어라고 말하는 것입니다.
 
 예를 들어, 섹션 제목은 그 자체로 한 행에 있어야 합니다. 속성 항목, 블록 제목, 블록 속성 목록, 블록 매크로, 목록 항목, 블록 구분 기호 등에도 동일하게 적용됩니다.
@@ -165,6 +354,7 @@ more value
 반대로 단락 내용 내의 행은 중요하지 않습니다. AsciiDoc 구문을 배우면서 이러한 점을 염두에 두세요.
 
 === 블록
+
 AsciiDoc 문서의 블록은 문서 구조를 형성합니다. 일부 블록은 다른 블록을 포함할 수 있으므로 문서 구조는 본질적으로 계층적입니다(즉, 트리 구조). 예를 들어, 자동 목차를 활성화하여 이 섹션 구조를 미리 볼 수 있습니다. 블록의 예로는 단락, 섹션, 목록, 구분 블록, 표 및 블록 매크로가 있습니다.
 
 블록은 일반적으로 빈 행으로 다른 블록과 구분되기 때문에 식별하기 쉽습니다(항상 필요한 것은 아님). 블록은 항상 새 행에서 시작하고 행 끝에서 종료되며 왼쪽 여백에 맞춰집니다.
@@ -174,6 +364,7 @@ AsciiDoc 문서의 블록은 문서 구조를 형성합니다. 일부 블록은 
 섹션, 비 verbatim 구분 블록 및 AsciiDoc 테이블 셀은 다른 블록을 포함할 수 있습니다. 블록이 계층을 형성함에도 불구하고 중첩된 블록조차도 왼쪽 여백에서 시작합니다. 블록이 왼쪽 여백에서 시작하도록 요구함으로써 들여쓰기 수준을 추적하고 유지 관리해야 하는 지루함을 피하고 내용을 더 재사용 가능하게 만듭니다.
 
 === 텍스트와 인라인 요소
+
 마커, 구분 기호 및 메타데이터 행으로 둘러싸인 것은 텍스트입니다. 텍스트는 문서의 주요 초점이며 AsciiDoc 구문이 숨 쉴 공간을 많이 제공하는 이유입니다. 텍스트는 대부분 블록(예: 단락)의 행, 블록 제목(예: 섹션 제목) 및 목록 항목에서 찾을 수 있지만 다른 위치에도 존재할 수 있습니다.
 
 텍스트는 치환의 대상이 됩니다. 치환은 마크업을 텍스트 서식으로 해석하고, 매크로를 텍스트 또는 비텍스트 요소로 대체하고, 속성 참조를 확장하고, 기타 유형의 텍스트 대체를 수행합니다.
@@ -181,12 +372,14 @@ AsciiDoc 문서의 블록은 문서 구조를 형성합니다. 일부 블록은 
 달리 지정하지 않는 한 일반 텍스트는 모든 치환의 대상이 됩니다. verbatim 텍스트는 소스에 나타나는 대로 출력에 표시할 수 있도록 최소한의 치환 세트의 대상이 됩니다. 또한 모든 치환을 비활성화하여 텍스트를 수정하지 않고 출력에 전달할 수 있습니다(즉, raw). 텍스트 구문 분석은 인라인 요소와 기타 형태의 변환이 혼합된 것으로 끝납니다.
 
 === 인코딩과 AsciiDoc 파일
+
 AsciiDoc 파일은 .adoc 파일 확장자를 가진 텍스트 파일입니다(예: document.adoc). 대부분의 AsciiDoc 프로세서는 파일의 텍스트가 UTF-8 인코딩을 사용한다고 가정합니다. UTF-16 인코딩은 파일이 BOM으로 시작하는 경우에만 지원됩니다.
 
 AsciiDoc 프로세서는 문자열(즉, 문자 시퀀스)에서 AsciiDoc을 처리할 수 있습니다. 그러나 대부분의 경우 AsciiDoc 문서를 파일로 저장합니다.
 
 [[document-processing]]
 == Introduction - Document Processing
+
 AsciiDoc은 특별히 출판 형식이 아닌 작성 형식입니다. 다시 말해, 워드 프로세서에서 작성할 때처럼 WYSIWYG 방식이 아닙니다. 대신 작성하는 것은 AsciiDoc 소스입니다. 그런 다음 Asciidoctor와 같은 AsciiDoc 프로세서를 사용하여 AsciiDoc 소스를 출판 가능한 형식으로 변환합니다. 출판하는 것은 이 출력물입니다.
 
 AsciiDoc 소스를 변환하는 것은 입력한 것보다 더 많은 것을 얻기 위해 내용을 해석하고 꾸미는 기회입니다. AsciiDoc 소스를 다른 형식으로 변환하는 작업은 변환기에 의해 처리됩니다. 언어와 변환기 사이에는 강력한 관계가 있지만 이 두 측면은 명시적으로 결합되지 않습니다.
@@ -217,6 +410,159 @@ AsciiDoc 프로세서가 렌더링된 문서(HTML, DocBook 등)를 생성하기 
 
 == Blocks
 [[blocks]]
+=== 블록이란 무엇인가요?
+
+블록 요소(블록이라고도 함)는 AsciiDoc 문서에서 개별적이고 행 지향적인 콘텐츠 덩어리입니다. 일단 파싱되면, 그 콘텐츠 덩어리는 파싱된 문서 모델의 블록 요소가 됩니다. 특정 블록은 다른 블록을 포함할 수 있으므로 블록이 중첩될 수 있다고 말합니다. 변환기는 문서 순서대로 각 블록을 차례로 방문하여 해당하는 출력 덩어리로 변환합니다.
+
+=== 블록 형식
+
+AsciiDoc 구문에서 블록의 경계가 정의되는 방식은 다양합니다. 목록, 단락, 블록 매크로와 같은 일부 블록의 경계는 암시적입니다. 다른 블록은 구분 기호를 사용하여 명시적으로 표시된 경계를 가집니다(즉, 구분된 블록). 주된 공통점은 블록이 항상 행 지향적이라는 것입니다.
+
+단락 블록은 연속적인(비어 있지 않은) 행의 개별 집합으로 정의됩니다. 구분된 블록은 구분 기호 행으로 둘러싸여 있습니다. 섹션 블록(섹션이라고도 함)은 하나 이상의 등호로 시작하는 섹션 제목으로 정의됩니다. 섹션에는 섹션 제목 행 다음부터 다음 형제 또는 부모 섹션 제목이나 문서 경계까지의 모든 내용이 포함됩니다. 목록 블록은 마커로 표시된 형제 목록 항목 그룹으로 정의됩니다. 설명 목록 블록은 하나 이상의 용어로 표시된 형제 목록 항목 그룹으로 정의됩니다. 블록 매크로는 블록 매크로 구문과 일치하는 단일 행으로 정의됩니다. 그리고 문서 자체도 블록입니다.
+
+블록(메타데이터 행 포함)은 항상 양쪽에 빈 행이나 문서 경계로 둘러싸여야 합니다.
+
+블록이 중첩된 블록을 지원하는지 여부는 블록의 콘텐츠 모델(및 구문이 허용하는 내용)에 따라 달라집니다.
+
+=== 콘텐츠 모델
+
+블록의 콘텐츠 모델은 블록이 가질 수 있는 콘텐츠의 종류(있는 경우)와 해당 콘텐츠가 처리되는 방식을 결정합니다. AsciiDoc의 블록 콘텐츠 모델은 다음과 같습니다:
+
+- **복합(compound)**: 다른 블록만 포함할 수 있는 블록(예: 섹션)
+- **단순(simple)**: 단락 텍스트의 연속 행으로 처리되는 블록(및 일반 대체 적용)(예: 단락 블록)
+- **축어(verbatim)**: 축어적 텍스트를 포함하는 블록("있는 그대로" 표시)(및 축어적 대체 적용)(예: 목록 블록)
+- **원시(raw)**: 대체 없이 출력으로 직접 전달되는 처리되지 않은 콘텐츠를 포함하는 블록(예: 통과 블록)
+- **빈(empty)**: 콘텐츠가 없는 블록(예: 이미지 블록)
+- **표(table)**: 고정된 구조를 적용하는 표 전용 특수 콘텐츠 모델
+
+콘텐츠 모델은 모든 기본 제공 구문에 대해 유추되지만(컨텍스트에 의해 결정됨), 사용자 정의 블록에 대해서는 구성할 수 있습니다. 블록은 다른 상황에서 다른 콘텐츠 모델을 지원할 수도 있습니다. 상황은 컨텍스트와 스타일에 의해 결정되며, 구분된 블록의 경우 구조적 컨테이너에 의해서도 결정됩니다.
+
+=== 컨텍스트
+
+블록을 예제 블록, 사이드바 블록, 권고 블록 또는 섹션과 같은 이름으로 참조하는 경우가 많을 것입니다. 그 이름은 블록의 컨텍스트입니다.
+
+다음과 같은 일반 섹션을 고려해 보겠습니다:
+
+[source,asciidoc]
+----
+== Section Title
+
+Content of section.
+----
+
+이 블록의 컨텍스트는 섹션입니다. 우리는 종종 컨텍스트를 형용사로 사용하여 블록을 설명하는 섹션(또는 섹션 블록)이라고 말합니다. 이 경우 구문에 의해 컨텍스트가 암시되므로 작성자가 컨텍스트를 지정할 필요가 없습니다.
+모든 블록에는 컨텍스트가 있습니다. 컨텍스트는 종종 구문에 의해 암시되지만 특정 경우에는 명시적으로 선언할 수 있습니다. 컨텍스트는 한 종류의 블록을 다른 블록과 구별하는 요소입니다. 컨텍스트를 블록의 유형으로 생각할 수 있습니다.
+컨텍스트는 블록 스타일을 사용하여 공통 유형을 공유하는 블록 패밀리를 만들도록 추가로 수정할 수 있습니다. 이는 권고 블록 및 섹션의 경우와 같습니다. 우리는 곧 그 수정자에 대해 다룰 것입니다.
+블록의 경우 컨텍스트를 블록 이름이라고 하기도 합니다. 이는 특히 사용자 정의 블록에 대해 이야기할 때 나옵니다. 블록 이름은 추상화의 또 다른 계층일 뿐입니다. 모든 기본 제공 블록 이름은 정확히 하나의 컨텍스트에 매핑됩니다. 그러나 블록 확장은 임의의 블록 이름을 하나 이상의 컨텍스트에 매핑할 수 있습니다. 궁극적으로 사용되는 컨텍스트는 확장의 프로세스 메서드에서 반환되는 내용에 따라 달라집니다. 결국 블록이 변환되는 방식을 결정하는 것은 컨텍스트입니다.
+컨텍스트는 종종 콘텐츠 모델을 결정합니다. 예를 들어, 모든 섹션은 섹션이 다른 블록만 포함할 수 있기 때문에 암시적으로 복합 콘텐츠 모델을 가집니다. 모든 리터럴 블록은 이 블록의 목적이 축어적 출력을 제공하는 것이기 때문에 암시적으로 축어적 콘텐츠 모델을 가집니다.
+
+=== 기본 제공 컨텍스트 요약
+
+AsciiDoc에서 모든 기본 제공 블록의 컨텍스트 목록은 다음과 같습니다.
+Asciidoctor API에서 컨텍스트는 기호로 표현됩니다. Ruby에서 기호는 콜론 접두사가 붙은 이름입니다(예: :listing). 이 문서에서는 컨텍스트의 이름을 참조할 때 이 표기법을 사용하기도 합니다. 그러나 이 표기법은 보편적이지 않습니다. Asciidoctor.js와 같은 일부 프로세서는 대신 문자열로 컨텍스트를 저장합니다.
+
+
+=== 기본 제공 컨텍스트
+
+admonition: 다섯 가지 권고 블록 중 하나.
+audio: 오디오 블록.
+colist: 콜아웃 목록.
+dlist: 설명 목록.
+document: 최상위 문서 또는 AsciiDoc 표 셀의 문서
+example: 예제 블록.
+floating_title: 개별 제목.
+image: 이미지 블록.
+list_item: 정렬된 목록, 정렬되지 않은 목록 또는 설명 목록의 항목(목록 또는 설명 목록 블록 내에서만 관련됨). 설명 목록에서 이 블록은 용어와 설명을 나타내는 데 사용됩니다.
+listing: 목록 블록.
+literal: 리터럴 블록.
+olist: 정렬된 목록.
+open: 열린 블록.
+page_break: 페이지 나누기.
+paragraph: 단락.
+pass: 통과 블록.
+preamble: 문서의 서문.
+quote: 인용 블록(blockquote라고도 함).
+section: 섹션. 부분, 장 또는 특수 섹션일 수도 있습니다.
+sidebar: 사이드바 블록.
+table: 표 블록.
+table_cell: 표 셀(표 블록 내에서만 관련됨).
+thematic_break: 주제 구분선(수평 규칙이라고도 함).
+toc: 사용자 정의 TOC 배치를 지정하기 위한 TOC 블록.
+ulist: 정렬되지 않은 목록.
+verse: 시 블록.
+video: 비디오 블록.
+
+각 인라인 요소에도 컨텍스트가 있지만 해당 요소는 (아직) 파싱된 문서 모델에서 접근할 수 없습니다.
+block, block macro 또는 inline macro 확장 지점을 사용하여 추가 컨텍스트가 도입될 수 있습니다.
+
+변환기에서 사용되는 컨텍스트
+컨텍스트는 변환기가 convert 메서드로 전달하는 데 사용하는 것입니다. 그런 다음 스타일은 변환기가 같은 패밀리의 블록에 특수 동작을 적용하는 데 사용됩니다.
+두 가지 예외를 제외하고 컨텍스트와 변환기의 처리기 메서드 간에는 1대1 매핑이 있습니다. 이러한 예외는 list_item 및 table_cell 컨텍스트이며 처리기 메서드에 매핑되지 않습니다. 변환기에서 이러한 블록은 부모 블록에서 접근해야 합니다.
+
+
+블록 스타일
+컨텍스트가 항상 블록의 정체성에 대한 전체 이야기를 전달하는 것은 아닙니다. 일부 블록에는 특수화가 필요합니다. 여기서 블록 스타일이 작용합니다.
+일부 블록 위에서 블록 속성 목록의 시작 부분에 이름(예: [source] 또는 [verse])을 볼 수 있습니다. 블록 속성 목록의 첫 번째 위치 기반(명명되지 않은) 속성은 블록 스타일을 선언하는 데 사용됩니다.
+선언된 블록 스타일은 작성자가 제공하는 값입니다. 그런 다음 그 값은 해석되고 확인됩니다. 확인된 블록 스타일이 비어 있지 않으면 블록의 컨텍스트를 특수화합니다. (대신 또는 추가로 블록의 컨텍스트를 변경할 수도 있습니다).
+다음 소스 블록의 예를 고려해 보겠습니다:
+[source,antora]
+===
+[source,ruby]
+----
+puts "Hello, World!"
+----
+===
+
+소스 블록의 컨텍스트는 listing(블록 구분 기호에서 유추됨)이고 스타일은 source(작성자가 지정한 대로)입니다. 우리는 스타일이 블록을 소스 블록으로 특수화한다고 말합니다. (기술적으로 소스 언어가 있으면 소스 스타일이 이미 암시되지만 내부적으로 이렇게 처리됩니다). 블록의 컨텍스트는 여전히 동일하지만 특별한 처리가 필요함을 나타내는 추가 메타데이터가 있습니다.
+
+우리는 또한 다른 목적으로 블록 스타일이 사용되는 것을 볼 수 있습니다. 섹션 제목 위의 appendix 블록 스타일(예: [appendix])은 섹션을 부록(특수 섹션)으로 특수화하므로 특별한 의미와 동작을 갖습니다. 모델에서 섹션의 스타일은 sectname으로 이중 저장됩니다. 예제 블록 위의 다섯 가지 권고 스타일(예: [TIP]) 중 하나는 예제 블록을 해당 이름(즉, 레이블)의 권고 블록으로 변환합니다. 모델에서 소문자로 된 권고 스타일은 name 속성에 저장됩니다. 정렬되지 않은 목록 또는 정렬된 목록 위의 블록 스타일(예: [circle] 또는 [loweralpha])은 표시될 때 목록 항목 앞에 사용되는 마커를 변경합니다. 설명 목록 위의 블록 스타일(예: [qanda] 및 [horizontal])은 의미 또는 레이아웃을 변경할 수 있습니다.
+
+선언된 블록 스타일은 블록의 컨텍스트를 변경하는 데 사용될 수 있으며, 이를 블록 마스커레이딩이라고 합니다. 리터럴 블록 구분 기호를 사용하는 다음과 같은 목록 블록의 대체 구문을 고려해 보겠습니다.
+
+[source,antora]
+----
+[listing]
+....
+a > b
+....
+----
+
+선언된 블록 스타일이 컨텍스트의 이름과 일치하므로 블록의 컨텍스트는 listing이 되고 확인된 블록 스타일은 설정되지 않은 상태로 유지됩니다. 즉, 확인된 블록 스타일은 선언된 블록 스타일과 다릅니다. 선언된 블록 스타일을 사용하여 블록의 컨텍스트를 변경하는 방법에 대한 자세한 내용은 Block Masquerading을 참조하세요.
+블록의 정체성에 대한 완전한 그림을 얻으려면 컨텍스트와 스타일을 모두 고려해야 합니다. 확인된 스타일은 컨텍스트를 특수화하여 특별한 동작이나 의미를 부여합니다.
+
+는 추가 메타데이터가 있습니다.
+우리는 또한 다른 목적으로 블록 스타일이 사용되는 것을 볼 수 있습니다. 섹션 제목 위의 appendix 블록 스타일(예: [appendix])은 섹션을 부록(특수 섹션)으로 특수화하므로 특별한 의미와 동작을 갖습니다. 모델에서 섹션의 스타일은 sectname으로 이중 저장됩니다. 예제 블록 위의 다섯 가지 권고 스타일(예: [TIP]) 중 하나는 예제 블록을 해당 이름(즉, 레이블)의 권고 블록으로 변환합니다. 모델에서 소문자로 된 권고 스타일은 name 속성에 저장됩니다. 정렬되지 않은 목록 또는 정렬된 목록 위의 블록 스타일(예: [circle] 또는 [loweralpha])은 표시될 때 목록 항목 앞에 사용되는 마커를 변경합니다. 설명 목록 위의 블록 스타일(예: [qanda] 및 [horizontal])은 의미 또는 레이아웃을 변경할 수 있습니다.
+선언된 블록 스타일은 블록의 컨텍스트를 변경하는 데 사용될 수 있으며, 이를 블록 마스커레이딩이라고 합니다. 리터럴 블록 구분 기호를 사용하는 다음과 같은 목록 블록의 대체 구문을 고려해 보겠습니다.
+Copy code[listing]
+....
+a > b
+....
+선언된 블록 스타일이 컨텍스트의 이름과 일치하므로 블록의 컨텍스트는 listing이 되고 확인된 블록 스타일은 설정되지 않은 상태로 유지됩니다. 즉, 확인된 블록 스타일은 선언된 블록 스타일과 다릅니다. 선언된 블록 스타일을 사용하여 블록의 컨텍스트를 변경하는 방법에 대한 자세한 내용은 Block Masquerading을 참조하세요.
+블록의 정체성에 대한 완전한 그림을 얻으려면 컨텍스트와 스타일을 모두 고려해야 합니다. 확인된 스타일은 컨텍스트를 특수화하여 특별한 동작이나 의미를 부여합니다.
+블록의 공통점
+블록은 행 지향 구문의 일부 형식을 사용하여 정의됩니다. 섹션 블록은 섹션 제목 행으로 시작합니다. 구분된 블록은 일치하는 구분 기호 행 쌍으로 둘러싸여 있습니다. 단락 블록은 연속된 행이어야 합니다.
+모든 블록은 블록 바로 위에 행 방향으로 쌓인 0개 이상의 메타데이터 행을 수용합니다. 이러한 행은 ID, 제목, 옵션과 같은 블록의 속성을 채웁니다. 이러한 메타데이터 행은 다음과 같습니다:
+
+0개 이상의 블록 속성 행(블록의 속성을 채움)
+선택적 블록 앵커 행
+선택적 블록 제목 행(많은 블록이 해당하는 캡션도 지원함)
+선택적 ID
+선택적 역할 집합
+선택적 옵션 집합
+
+예를 들어 제목과 ID가 있는 사이드바 블록을 고려해 보겠습니다:
+[source,asciidoc]
+----
+.Styles of music
+[#music-styles]
+****
+Go off on a tangent to describe what a style of music is.
+****
+----
+
+콘텐츠 처리와 관련하여 블록은 서로 다른 그룹으로 분리됩니다. 이러한 그룹은 주로 블록의 콘텐츠 모델과 연관되어 있습니다.
+단락 블록과 축어적 블록에는 암시적이고 수정 가능한 대체 집합이 있습니다. 대체는 복합 블록(즉, 중첩된 블록을 포함할 수 있는 블록)에는 적용되지 않습니다.
+
 
 == Blocks - Delimited Blocks
 [[delimited-blocks]]
@@ -235,3 +581,722 @@ AsciiDoc 프로세서가 렌더링된 문서(HTML, DocBook 등)를 생성하기 
 
 == Blocks - Troubleshooting Blocks
 [[troubleshooting-blocks]]
+
+
+[[document-attributes]]
+== Document Attributes
+
+각 문서에는 문서 속성이라고 하는 이름-값 쌍 집합이 있습니다. 이러한 속성은 AsciiDoc 프로세서를 구성하고, 문서 메타데이터를 선언하며, 재사용 가능한 내용을 정의하는 수단을 제공합니다. 이 페이지에서는 문서 속성을 소개하고 이를 참조할 때 사용되는 용어에 대한 몇 가지 질문에 답합니다.
+
+=== 문서 속성이란 무엇인가요?
+문서 속성은 AsciiDoc 언어에 대한 문서 범위의 변수입니다. AsciiDoc 언어는 기본 제공 속성 집합을 정의하고, 작성자(또는 확장)가 허용될 때 기본 제공 속성을 대체할 수 있는 추가 문서 속성을 정의할 수 있도록 합니다.
+
+기본 제공 속성은 문서 및 환경에 대한 읽기 전용 정보에 대한 액세스를 제공하거나 작성자가 전체 문서 또는 선택한 영역에 대해 AsciiDoc 프로세서의 동작을 구성할 수 있도록 합니다. 기본 제공 속성은 효과적으로 정렬되지 않습니다. 사용자 정의 속성은 강력한 텍스트 대체 도구 역할을 합니다. 사용자 정의 속성은 정의된 순서대로 저장됩니다.
+
+다음은 문서 속성이 사용되는 몇 가지 사항에 대한 요약입니다:
+
+- 문서 정보에 대한 액세스 제공
+- 문서 메타데이터 정의
+- 기본 제공 기능 켜기 또는 끄기
+- 기본 제공 기능 구성
+- 이미지와 같은 자산의 위치 선언
+- 문서 전체에서 재사용할 내용 저장
+
+다양한 유형의 문서 속성을 자세히 살펴보겠습니다.
+
+=== 문서 속성의 유형
+
+문서 속성은 다음 그룹으로 분류됩니다.
+
+==== 기본 제공 속성
+
+기본 제공 속성은 문서에서 일반적인 기능을 추가, 구성 및 제어합니다. 많은 기본 제공 속성은 문서 헤더의 속성 항목으로 정의된 경우에만 적용됩니다.
+
+부울 속성은 기본 제공 속성의 하위 그룹입니다. 부울 속성이 정의되었지만 값이 주어지지 않은 경우(즉, 설정된 경우), "on" 상태입니다. 속성이 정의되지 않은 경우(즉, 설정되지 않은 경우), "off" 상태입니다. 이러한 측면에서 이러한 속성은 스위치 역할을 합니다. 이들의 유일한 기능은 기능을 켜거나 끄는 것입니다.
+
+==== 사용자 정의 속성
+
+사용자 정의 속성은 AsciiDoc 언어나 확장에서 예약되지 않은 작성자가 설정하는 모든 속성입니다. 대부분의 경우 사용자 정의 속성은 텍스트 대체 도구로 사용됩니다. 이러한 속성을 사용하면 작성자가 명명된 재사용 가능한 내용을 정의할 수 있습니다. 따라서 제품 이름과 같은 텍스트를 문서 전체에서 반복하는 대신 해당 텍스트를 속성으로 정의하고 대신 이름으로 참조할 수 있습니다. 이 기법은 문서를 DRY(반복하지 마세요)하게 유지하는 데 도움이 됩니다.
+
+=== 속성을 정의한다는 것은 무엇을 의미하나요?
+
+- 기본 제공 속성의 경우 기본값을 가집니다.
+- 부울 속성 및 기본값이 있는 기본 제공 속성의 경우 값이 없습니다.
+- 단일 행 값을 가집니다.
+- 여러 연속 행에 걸쳐 있는 값을 가집니다.
+- 다음과 같은 기본 인라인 AsciiDoc 구문을 포함하는 값을 가집니다:
+  ** 속성 참조
+  ** 텍스트 서식(pass 매크로로 래핑된 경우)
+  ** 인라인 매크로(pass 매크로로 래핑된 경우)
+
+그러나 알아야 할 특정 제한 사항이 있습니다. 문서 속성은 다음과 같은 AsciiDoc 블록 내용을 포함하는 값을 가질 수 없습니다:
+
+- 목록
+- 여러 단락
+- 블록(테이블, 사이드바, 예제 등)
+- 기타 공백에 의존하는 마크업
+
+=== 문서 속성을 설정한다는 것은 무엇을 의미하나요?
+
+설정(켜짐)됩니다.
+
+=== 문서 속성을 설정 해제한다는 것은 무엇을 의미하나요?
+
+이름 앞에 선행(선호) 또는 후행 !를 추가하여 설정 해제(꺼짐)합니다.
+
+=== 문서 속성은 어디에서 정의, 설정 및 설정 해제되나요?
+
+문서 속성은 다음에서 선언할 수 있습니다:
+- 문서 헤더의 속성 항목
+- 문서 본문의 속성 항목
+- :attributes 옵션을 통한 API
+- -a 옵션을 통한 CLI
+- 명령줄에서 할당된 잠긴 속성 재정의
+
+=== 문서 속성을 참조한다는 것은 무엇을 의미하나요?
+
+문서 속성을 참조한다는 것은 속성 이름을 해당 속성의 값으로 대체하는 것을 의미합니다. 문서 속성은 문서에서 {name} 구문을 사용하여 참조할 수 있습니다. 여기서 name은 속성의 이름입니다.
+
+=== 문서 속성은 어디에서 참조될 수 있나요?
+
+문서 속성은 속성 대체가 적용되는 문서의 어디에서나 참조될 수 있습니다. 일반적으로 속성 대체는 속성 항목의 값, 제목, 단락 텍스트, 목록 텍스트, 요소 속성의 값 및 매크로의 대상에 적용됩니다.
+문서 속성은 정의된 후에만 참조할 수 있습니다.
+
+[[attribute-entries]]
+== Document Attributes - Attribute Entries
+
+=== 속성 항목이란 무엇인가요?
+
+문서에서 문서 속성을 사용하려면 먼저 선언해야 합니다. 속성 항목은 AsciiDoc 문서에서 문서 속성을 정의하는 주요 메커니즘입니다. 속성 항목을 AsciiDoc의 전역 변수 할당으로 생각할 수 있습니다. 생성된 문서 속성은 문서의 해당 지점부터 사용할 수 있게 됩니다. 속성 항목은 또한 기능을 토글하는 데 자주 사용됩니다.
+
+속성 항목은 속성 이름과 속성 값의 두 부분으로 구성됩니다. 속성 이름이 먼저 나오고 그 다음에 선택적 값이 나옵니다. 각 속성 항목은 자체 행에 입력해야 합니다. 속성 항목은 여는 콜론(:)으로 시작하고, 바로 뒤에 속성의 이름이 오고, 그 다음에 닫는 콜론(:)이 옵니다. 이렇게 하면 문서 속성이 설정되어(즉, 켜져) 문서에서 사용할 수 있습니다.
+
+[source,asciidoc]
+----
+:name-of-an-attribute: [1]
+----
+[1] 속성의 이름 바로 앞에는 여는 콜론(:)이, 바로 뒤에는 닫는 콜론(:)이 옵니다.
+
+대부분의 경우, 속성 항목에서 이름 뒤에 정보를 입력하여 문서 속성에 값을 명시적으로 할당합니다. 값은 닫는 콜론(:)과 최소한 하나의 공백으로 구분되어야 합니다.
+
+[source,asciidoc]
+----
+:name-of-an-attribute: value of the attribute [1]
+----
+[1] 명시적으로 할당된 값은 닫는 콜론(:)과 최소한 하나의 공백으로 구분됩니다. 값의 끝에서 Enter를 누릅니다.
+
+기본적으로 헤더 대체가 값에 자동으로 적용된다는 점에 유의하세요. 즉, HTML 태그와 같은 특수 문자를 이스케이프할 필요가 없습니다. 또한 속성의 값을 정의할 때 이미 정의된 속성의 값을 참조할 수 있습니다. 속성 항목 값의 속성 참조는 즉시 해결됩니다.
+
+[source,asciidoc]
+----
+:url-org: https://example.org/projects
+:url-project: {url-org}/project-name [1]
+----
+[1] 속성 참조를 사용하여 값에서 이미 설정된 속성의 값을 재사용할 수 있습니다.
+
+일부 기본 제공 속성은 부울 속성이거나 암시적 값을 가지므로 속성 항목에서 값을 명시적으로 할당할 필요가 없습니다.
+
+[source,asciidoc]
+----
+:name-of-an-attribute: [1]
+----
+
+[1] 속성에 값을 명시적으로 할당하지 않으려면 닫는 콜론(:) 뒤에서 Enter를 누릅니다.
+
+설정되면 기본 제공 부울 속성의 값은 항상 비어 있습니다(즉, 빈 문자열). 기본 제공 속성을 설정하고 값을 비워 두면 AsciiDoc 프로세서가 처리 시점에 값을 유추할 수 있습니다.
+
+=== 속성 항목은 어디에서 선언할 수 있나요?
+
+속성 항목은 대개 문서 헤더에 선언됩니다. 허용하는 속성의 경우(범용 속성 포함), 속성 항목은 대신 문서 본문(즉, 헤더 아래의 문서 부분)의 블록 사이에 선언할 수 있습니다.
+
+[WARNING]
+====
+속성 항목은 구분된 블록의 경계 내에서 선언하지 않아야 합니다. 속성 항목이 구분된 블록 내에서 선언되면 동작이 정의되지 않습니다.
+====
+
+속성 항목을 사용하여 문서 헤더에서 속성이 정의되면 헤더 속성이라고 합니다. 헤더 속성은 설정 해제될 때까지 전체 문서에서 사용할 수 있습니다. 헤더 속성은 기본 제공 동작, 확장 및 값을 참조해야 하는 기타 애플리케이션(예: source-highlighter)에서 사용하기 위해 문서 메타데이터에서도 액세스할 수 있습니다.
+
+속성 항목을 사용하여 문서 본문에서 속성이 정의되면 단순히 문서 속성이라고 합니다. 본문에 정의된 모든 속성의 경우, 속성은 설정된 시점부터 설정 해제될 때까지 사용할 수 있습니다. 본문에 정의된 속성은 문서 메타데이터를 통해 사용할 수 없습니다.
+
+속성이 잠겨 있지 않으면 문서 헤더나 본문에서 설정을 해제하거나 새 값을 할당할 수 있습니다. 그러나 문서 본문의 동작을 제어하는 헤더 속성을 설정 해제하거나 재정의해도 보통 영향을 미치지 않습니다. 문서의 어느 위치에서 각 속성을 설정할 수 있는지는 문서 속성 참조를 참조하세요.
+
+=== 속성 항목 없이 문서 속성 정의하기
+
+문서 속성은 CLI 및 API를 통해 문서 외부에서 선언할 수도 있습니다(선택적 값으로 설정 또는 설정 해제). 이러한 경우에는 속성 항목 구문이 사용되지 않습니다. 오히려 제공된 옵션을 사용하여 선언됩니다. API의 경우 :attributes 옵션을 사용하여 속성이 선언됩니다(다양한 항목 형식 지원). CLI의 경우 -a 옵션을 사용하여 속성이 선언됩니다.
+
+속성에 문서 외부에서 값이 할당되면 값이 있는 그대로 저장됩니다. 즉, 대체가 적용되지 않습니다. 또한 문서에서 해당 속성을 참조할 때 특수 문자 및 따옴표 대체가 해당 속성의 값에 적용되지 않습니다. 그러나 매크로 대체와 같은 후속 대체는 적용됩니다. 이 동작은 특수 문자 및 따옴표 대체 후에 속성 대체가 적용된다는 사실 때문입니다. 이러한 대체가 속성의 값에 적용되도록 하려면 참조 시점에 대체 순서를 변경해야 합니다. 다음은 인라인 pass 매크로를 사용한 예입니다.
+
+[source,asciidoc]
+----
+pass:a,q[{attribute-with-formatted-text}]
+----
+
+속성이 명령줄이나 API에서 선언되면 암시적으로 문서 헤더 속성이 됩니다. 기본적으로 속성은 잠기게 되어(즉, 하드 설정 또는 설정 해제됨) 문서에 의해 변경될 수 없습니다. 이 동작은 속성 이름이나 값 끝에 @를 추가하여 변경할 수 있습니다(즉, 소프트 설정 수정자). 자세한 내용은 문서 속성 할당 우선순위를 참조하세요.
+
+이 규칙의 유일한 예외는 항상 변경할 수 있는 sectnums 속성입니다.
+
+
+[[attribute-entry-names-and-values]]
+== Document Attributes - Reference Attributes - Attribute Entry Names and Values
+
+[[wrap-attribute-entry-values]]
+== Document Attributes - Reference Attributes - Wrap Attribute Entry Values
+
+[[attribute-entry-substitutions]]
+== Document Attributes - Reference Attributes - Attribute Entry Substitutions
+
+[[inline-attribute-entries]]
+== Document Attributes - Reference Attributes - Inline Attribute Entries
+
+[[declare-built-in-attributes]]
+== Document Attributes - Declare Built-In Attributes
+
+[[set-boolean-attributes]]
+== Document Attributes - Reference Attributes - Set Boolean Attributes
+
+[[declare-custom-attributes]]
+== Document Attributes - Declare Custom Attributes
+
+[[unset-attributes]]
+== Document Attributes - Unset Attributes
+
+[[reference-attributes]]
+== Document Attributes - Reference Attributes
+
+[[handle-unresolved-references]]
+== Document Attributes - Reference Attributes - Handle Unresolved References
+
+[[attribute-assignment-precedence]]
+== Document Attributes - Attribute Assignment Precedence
+
+[[counters]]
+== Document Attributes - Counters
+
+---
+
+[[element-attributes]]
+== Element Attributes
+[[positional-and-named-attributes]]
+=== Element Attributes - Positional and Named Attributes
+[[id-attribute]]
+=== Element Attributes - ID Attribute
+[[role-attribute]]
+=== Element Attributes - Role Attribute
+[[options-attribute]]
+=== Element Attributes - Options Attribute
+
+---
+
+[[document-header]]
+== Document Header
+[[document-title]]
+== Document Header - Document Title
+[[subtitle]]
+== Document Header - Document Title - Subtitle
+[[author-information]]
+== Document Header - Author Information
+[[using-the-author-line]]
+== Document Header - Author Information - Using the Author Line
+[[add-multiple-authors-to-a-document]]
+== Document Header - Author Information - Add Multiple Authors to a Document
+[[assign-author-and-email-with-attribute-entries]]
+== Document Header - Author Information - Assign Author and Email with Attribute Entries
+[[reference-the-author-information]]
+== Document Header - Author Information - Reference the Author Information
+[[compound-author-names]]
+== Document Header - Author Information - Compound Author Names
+[[revision-information]]
+== Document Header - Revision Information
+[[using-the-revision-line]]
+== Document Header - Revision Information - Using the Revision Line
+[[assign-revision-attributes-with-attribute-entries]]
+== Document Header - Revision Information - Assign Revision Attributes with Attribute Entries
+[[version-label-attribute]]
+== Document Header - Revision Information - Version Label Attribute
+[[reference-the-revision-attributes]]
+== Document Header - Revision Information - Reference the Revision Attributes
+[[document-metadata]]
+== Document Header - Document Metadata
+[[document-header-reference]]
+== Document Header - Document Header Reference
+
+---
+
+[[document-type]]
+== Document Type
+
+[[sections]]
+== Sections
+[[section-titles-and-levels]]
+=== Section Titles and Levels
+[[activate-section-title-links]]
+==== Activate Section Title Links
+[[autogenerate-section-ids]]
+=== Autogenerate Section IDs
+[[change-id-prefix-separator]]
+==== Change the ID Prefix and Separator
+[[assign-custom-ids-reference-text]]
+=== Assign Custom IDs and Reference Text
+[[section-numbers]]
+=== Section Numbers
+[[section-styles-articles-books]]
+=== Section Styles for Articles and Books
+[[hide-special-section-titles]]
+==== Hide Special Section Titles
+[[number-special-sections]]
+==== Number Special Sections
+[[colophon]]
+==== Colophon
+[[dedication]]
+==== Dedication
+[[abstract-section]]
+==== Abstract (Section)
+[[abstract-block]]
+==== Abstract (Block)
+[[preface]]
+==== Preface
+[[book-parts]]
+==== Book Parts
+[[part-numbers-signifier]]
+===== Part Numbers and Signifier
+[[chapters]]
+==== Chapters
+[[appendix]]
+==== Appendix
+[[glossary]]
+==== Glossary
+[[bibliography]]
+==== Bibliography
+[[index]]
+==== Index
+[[section-attributes-styles-reference]]
+=== Section Attributes and Styles Reference
+
+[[paragraphs]]
+== Paragraphs
+[[hard-line-breaks]]
+=== Hard Line Breaks
+[[preamble-lead-style]]
+=== Preamble and Lead Style
+[[paragraph-alignment]]
+=== Paragraph Alignment
+
+[[discrete-headings]]
+== Discrete Headings
+
+[[breaks]]
+== Breaks
+
+[[text-formatting-punctuation]]
+== Text Formatting and Punctuation
+[[bold]]
+=== Bold
+[[italic]]
+=== Italic
+[[monospace]]
+=== Monospace
+[[literal-monospace]]
+=== Literal Monospace
+[[text-span-built-in-roles]]
+=== Text Span and Built-in Roles
+[[highlight]]
+=== Highlight
+[[quotation-marks-apostrophes]]
+=== Quotation Marks and Apostrophes
+[[subscript-superscript]]
+=== Subscript and Superscript
+[[using-custom-inline-styles]]
+=== Using Custom Inline Styles
+[[troubleshoot-unconstrained-formatting-pairs]]
+=== Troubleshoot Unconstrained Formatting Pairs
+
+[[lists]]
+== Lists
+[[unordered-lists]]
+=== Unordered Lists
+[[ordered-lists]]
+=== Ordered Lists
+[[checklists]]
+=== Checklists
+[[separating-lists]]
+=== Separating Lists
+[[complex-list-items]]
+=== Complex List Items
+
+[[description-lists]]
+== Description Lists
+[[horizontal-description-list]]
+=== Horizontal Description List
+[[question-answer-lists]]
+=== Question and Answer Lists
+[[description-lists-with-marker]]
+=== Description Lists With Marker
+
+[[links]]
+== Links
+[[autolinks]]
+=== Autolinks
+[[url-macro]]
+=== URL Macro
+[[link-macro]]
+=== Link Macro
+[[troubleshooting-complex-urls]]
+=== Troubleshooting Complex URLs
+[[link-url-macro-attribute-parsing]]
+=== Link & URL Macro Attribute Parsing
+[[mailto-macro]]
+=== Mailto Macro
+[[link-url-mailto-macro-attributes-reference]]
+=== Link, URL, and Mailto Macro Attributes Reference
+
+[[cross-references]]
+== Cross References
+[[document-to-document-cross-references]]
+=== Document to Document Cross References
+[[cross-reference-text-styles]]
+=== Cross Reference Text and Styles
+[[validate-cross-references]]
+=== Validate Cross References
+
+---
+
+[[footnotes]]
+== Footnotes
+
+AsciiDoc은 문서에 각주를 추가하기 위한 footnote 매크로를 제공합니다. 각주는 각주 목록의 항목에 대한 참조입니다. 각주는 참조 위치에서 AsciiDoc으로 정의되지만 텍스트는 각주 목록의 항목으로 추출됩니다. 첫 번째 발생 위치에 ID를 할당하고 후속 발생 위치에서 해당 ID를 참조하여 여러 위치에서 동일한 각주를 참조할 수 있습니다.
+
+[NOTE]
+====
+Asciidoctor를 포함한 모든 AsciiDoc 프로세서는 현재 각주를 미주로 구현합니다. 각주의 배치와 번호 매김은 사용자 정의 변환기를 사용하여 사용자 지정할 수 있습니다.
+====
+
+=== 각주 매크로 문법
+
+각주 매크로를 사용하여 문서에 각주를 삽입할 수 있습니다. 각주의 텍스트는 각주 매크로의 대괄호 사이에 정의됩니다(footnote\:[text]). 각주 매크로는 매크로의 대상을 사용하여 선택적 ID를 허용합니다(`footnote:id[text]`). ID를 지정하면 문서의 여러 위치에서 동일한 각주를 참조할 수 있습니다. 이전에 정의된 각주를 참조하려면 텍스트를 지정하지 않고 대상에 ID를 지정합니다(`footnote:id[]`).
+
+_Example 1. 각주 문법_
+
+[source,ASCIIDOC]
+----
+[source]
+The hail-and-rainbow protocol can be initiated at five levels:
+. doublefootnote:[The double hail-and-rainbow level makes my toes tingle.] [1][2]
+. tertiary
+. supernumerary
+. supermassive
+. apocalyptic
+A bold statement!footnote:disclaimer[Opinions are my own.] [3]
+Another outrageous statement.footnote:disclaimer[] [4]
+----
+
+[1] 각주 매크로를 직접 구두점 뒤에 삽입하세요. 각주 매크로는 단일 콜론(:)만 사용합니다.
+[2] 각주의 내용을 대괄호([]) 안에 삽입하세요. 텍스트는 여러 줄에 걸쳐 있을 수 있습니다.
+[3] 각주를 재사용할 계획이라면 대상 위치에 고유한 ID를 지정하세요.
+[4] 기존 각주를 참조하려면 대상 슬롯에 각주의 ID만 지정하면 됩니다. 대괄호 사이의 텍스트는 비어 있어야 합니다. ID와 텍스트가 모두 지정되고 ID가 이전 각주에 의해 이미 정의된 경우 텍스트는 무시됩니다.
+
+[TIP]
+====
+각주 매크로를 단어에 직접 인접하게 넣어야 하는 것이 읽기 어렵다는 것을 발견하면 빈 문자열로 해석되는 속성 참조를 사이에 삽입할 수 있습니다(예: `word{empty}footnote:[text]`).
+====
+
+각주는 문서 전체에서 연속적으로 번호가 매겨집니다.
+
+Example 1의 결과는 아래에 표시됩니다.
+
+====
+The hail-and-rainbow protocol can be initiated at five levels
+double[1]
+tertiary
+supernumerary
+supermassive
+apocalyptic
+A bold statement![2]
+Another outrageous statement.[2]
+
+The double hail-and-rainbow level makes my toes tingle.
+Opinions are my own.
+====
+
+일반 단락 텍스트와 마찬가지로 각주의 텍스트에서 텍스트 서식 마크업을 사용할 수 있습니다.
+
+=== 각주 외부화
+
+각주는 인라인 매크로를 사용하여 정의되므로 각주 내용은 주석을 달고 있는 텍스트와 함께 삽입되어야 합니다. 이 요구 사항은 텍스트를 읽기 더 어렵게 만들 수 있습니다. 문서 속성을 사용하여 각주를 외부화하면 이 문제를 해결할 수 있습니다.
+
+각주를 포함하는 문서 속성을 정의할 때 원하는 대로 문서 속성의 이름을 지정할 수 있습니다. 일반적인 관행은 fn- 접두사를 사용하여 속성의 이름을 지정하는 것입니다. 속성의 이름은 fn-disclaimer처럼 자세할 수도 있고 fn-1처럼 간결할 수도 있습니다.
+
+다음은 각주를 문서 속성으로 정의하고 속성 참조를 사용하여 삽입한 이전 예제입니다.
+
+_Example 2. 외부화된 각주_
+[source,ASCIIDOC]
+----
+:fn-hail-and-rainbow: footnote:[The double hail-and-rainbow level makes my toes tingle.]
+:fn-disclaimer: footnote:disclaimer[Opinions are my own.]
+The hail-and-rainbow protocol can be initiated at five levels:
+. double{fn-hail-and-rainbow}
+. tertiary
+. supernumerary
+. supermassive
+. apocalyptic
+A bold statement!{fn-disclaimer}
+Another outrageous statement.{fn-disclaimer}
+----
+
+각주가 배치된 위치를 볼 수 있는 이점은 여전히 얻을 수 있지만 모든 잡음은 없습니다. 그리고 각주가 이제 문서 헤더에 정의되었으므로 include 파일로 더 외부화될 수 있습니다.
+
+이 접근 방식은 속성 참조가 각주가 파싱되기 전에 확장되기 때문에 작동합니다. 그러나 각주의 텍스트에 텍스트 서식 마크업(예: *bold*)이 있는 경우에는 이 기법이 작동하지 않습니다. 해당 마크업은 해석되지 않습니다. 그 이유는 속성 대체(속성 참조 대체)가 인용구 대체(텍스트 서식 마크업 해석) 후에 적용되기 때문입니다. 각주의 텍스트에서 텍스트 서식 마크업을 사용하려면 pass:[] 매크로를 사용하여 속성 항목의 값에 대한 대체를 구성해야 합니다.
+
+다음 예제는 텍스트 서식 마크업이 허용되도록 외부화된 각주의 텍스트에 적용되는 대체를 구성하는 방법을 보여줍니다.
+
+_Example 3. 텍스트 서식이 있는 외부화된 각주_
+
+[source,ASCIIDOC]
+----
+:fn-disclaimer: pass:c,q[footnote:disclaimer[Opinions are mine, and mine alone.]]
+A bold statement!{fn-disclaimer}
+Another outrageous statement.{fn-disclaimer}
+----
+
+pass 매크로의 c,q 대상은 프로세서에게 특수 문자 대체 후 인용구 대체를 적용하도록 지시합니다. 즉, 속성 참조를 사용하여 각주를 삽입할 때 각주 텍스트의 텍스트 서식이 이미 적용됩니다.
+
+
+=== 제목의 각주
+spec 이전 AsciiDoc에서는 제목(섹션 제목 및 개별 제목)의 각주가 공식적으로 지원되지 않습니다. 각주가 파싱되지만 제대로 작동한다는 보장은 없으며 해결 방법이 필요할 수 있습니다. 이 제한은 AsciiDoc 언어가 사양에 의해 정의되면 해제될 수 있습니다.
+
+제목에 각주를 사용하면 각주 색인이 잘못되었다는 것을 알 수 있습니다(증분되지 않거나 순서가 맞지 않음). 그 이유는 제목(섹션 제목 및 개별 제목)이 ID 생성, 상호 참조 채우기 및 속성 참조의 즉각적인 해결을 위해 문서 순서에서 벗어나 변환되기 때문입니다.
+
+이 문제를 해결하는 한 가지 방법은 각주를 포함하는 모든 제목에 명시적 ID와 reftext를 할당하는 것입니다. 예를 들면 다음과 같습니다:
+
+[source,asciidoc]
+----
+See <<heading>>.
+[[heading,Heading]]
+== Headingfootnote:[This is a heading with a footnote]
+----
+
+제목에 명시적 ID와 reftext를 할당하면 제목이 렌더링되기 전에 대체가 적용되는 것을 방지하여 각주 매크로가 문서 순서대로 처리될 수 있습니다. 이 해결 방법은 또한 각주 번호가 xref의 텍스트에 다시 나타나는 것을 방지합니다. 그러나 제목에서 속성 참조를 사용하지 않도록 해야 합니다. 이는 대체가 즉시 적용되도록 하므로 각주가 문서 순서에서 벗어나 처리될 수 있기 때문입니다.
+
+[[images]]
+== Images
+[[set-the-images-directory]]
+== Set the Images Directory
+[[insert-images-from-a-url]]
+== Insert Images from a URL
+[[position-and-frame-images]]
+== Position and Frame Images
+[[add-link-to-image]]
+== Add Link to Image
+[[adjust-image-sizes]]
+== Adjust Image Sizes
+[[specify-image-format]]
+== Specify Image Format
+[[svg-images]]
+== SVG Images
+[[images-reference]]
+== Images Reference
+
+---
+
+[[audio-and-video]]
+== Audio and Video
+
+===
+[[icons]]
+== Icons
+[[image-icons-mode]]
+== Image Icons Mode
+[[font-icons-mode]]
+== Font Icons Mode
+[[icon-macro]]
+== Icon Macro
+
+
+[[keyboard-macro]]
+== Keyboard Macro
+
+[[button-menu-ui-macros]]
+== Button and Menu UI Macros
+
+[[admonitions]]
+== Admonitions
+
+[[sidebars]]
+== Sidebars
+
+[[example-blocks]]
+== Example Blocks
+
+[[blockquotes]]
+== Blockquotes
+
+[[verses]]
+== Verses
+
+[[verbatim-source-blocks]]
+== Verbatim and Source Blocks
+[[source-code-blocks]]
+=== Source Code Blocks
+[[source-highlighting]]
+==== Source Highlighting
+[[highlight-select-lines]]
+==== Highlight Select Lines
+[[highlight-php-source-code]]
+==== Highlight PHP Source Code
+[[listing-blocks]]
+=== Listing Blocks
+
+[[literal-blocks]]
+=== Literal Blocks
+
+[[callouts]]
+=== Callouts
+
+[[tables]]
+== Tables
+[[build-basic-table]]
+=== Build a Basic Table
+[[add-a-title]]
+=== Add a Title
+[[customize-title-label]]
+==== Customize the Title Label
+[[turn-off-title-label]]
+==== Turn Off the Title Label
+[[add-columns-table]]
+=== Add Columns to a Table
+[[adjust-column-widths]]
+==== Adjust Column Widths
+[[align-content-column]]
+==== Align Content by Column
+[[format-content-column]]
+==== Format Content by Column
+[[add-cells-rows-table]]
+=== Add Cells and Rows to a Table
+[[create-header-row]]
+==== Create a Header Row
+[[create-footer-row]]
+==== Create a Footer Row
+[[align-content-cell]]
+==== Align Content by Cell
+[[format-content-cell]]
+==== Format Content by Cell
+[[span-columns-rows]]
+==== Span Columns and Rows
+[[duplicate-cells]]
+==== Duplicate Cells
+[[table-width]]
+=== Table Width
+[[table-borders]]
+=== Table Borders
+[[table-striping]]
+=== Table Striping
+[[table-orientation]]
+=== Table Orientation
+[[assign-role-table]]
+=== Assign a Role to a Table
+[[nesting-tables]]
+=== Nesting Tables
+[[csv-tsv-dsv-data]]
+=== CSV, TSV and DSV Data
+[[table-reference]]
+=== Table Reference
+
+[[equations-formulas]]
+== Equations and Formulas (STEM)
+
+[[open-blocks]]
+== Open Blocks
+
+[[collapsible-blocks]]
+== Collapsible Blocks
+
+[[comments]]
+== Comments
+
+[[automatic-toc]]
+== Automatic Table of Contents
+[[customize-toc-title]]
+=== Customize the TOC Title
+[[adjust-toc-depth]]
+=== Adjust the TOC Depth
+[[position-toc]]
+=== Position the TOC
+[[toc-attributes-reference]]
+=== TOC Attributes Reference
+
+[[docinfo-files]]
+== Docinfo Files
+
+[[includes]]
+== Includes
+[[offset-section-levels]]
+=== Offset Section Levels
+[[indent-included-content]]
+=== Indent Included Content
+[[use-include-file-multiple-times]]
+=== Use an Include File Multiple Times
+[[include-list-item-content]]
+=== Include List Item Content
+[[include-content-tagged-regions]]
+=== Include Content by Tagged Regions
+[[include-content-line-ranges]]
+=== Include Content by Line Ranges
+[[include-content-uri]]
+=== Include Content by URI
+
+[[conditionals]]
+== Conditionals
+[[ifdef-directives]]
+=== ifdef and ifndef Directives
+[[ifeval-directive]]
+=== ifeval Directive
+
+
+---
+
+
+[[substitutions]]
+== Substitutions
+[[special-characters]]
+=== Substitutions - Special Characters
+[[quotes]]
+=== Substitutions - Quotes
+[[attribute-references]]
+=== Substitutions - Attribute References
+[[character-replacements]]
+=== Substitutions - Character Replacements
+[[macros]]
+=== Substitutions - Macros
+[[post-replacements]]
+=== Substitutions - Post Replacements
+[[customize-substitutions-blocks]]
+=== Substitutions - Customize the Substitutions Applied to Blocks
+[[customize-substitutions-text]]
+=== Substitutions - Customize the Substitutions Applied to Text
+[[escape-prevent-substitutions]]
+=== Substitutions - Escape and Prevent Substitutions
+
+
+
+[[passthroughs]]
+== Passthroughs
+[[passthrough-blocks]]
+=== Passthroughs - Passthrough Blocks
+[[inline-passthroughs]]
+=== Passthroughs - Inline Passthroughs
+
+
+
+[[reference]]
+== Reference
+[[syntax-quick-reference]]
+=== Reference - Syntax Quick Reference
+[[faq]]
+=== Reference - Frequently Asked Questions (FAQ)
+[[compare-asciidoc-markdown]]
+=== Reference - Compare AsciiDoc to Markdown
+[[document-attributes-reference]]
+=== Reference - Document Attributes Reference
+[[character-replacement-attributes-reference]]
+=== Reference - Character Replacement Attributes Reference
+[[glossary]]
+=== Reference - Glossary of Terms

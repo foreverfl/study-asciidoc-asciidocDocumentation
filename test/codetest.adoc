@@ -1,0 +1,9 @@
+= Setup
+:source-highlighter: highlightjs
+
+[source,java]
+----
+public static void main(Sring[] args) {
+    System.out.println();
+}
+----
