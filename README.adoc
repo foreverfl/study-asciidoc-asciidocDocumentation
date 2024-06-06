@@ -109,7 +109,7 @@
   ** xref:using-custom-inline-styles[Using Custom Inline Styles]
   ** xref:troubleshoot-unconstrained-formatting-pairs[Troubleshoot Unconstrained Formatting Pairs]
 
-- xref:lists[Lists]
+- Lists
   ** xref:unordered-lists[Unordered Lists]
   ** xref:ordered-lists[Ordered Lists]
   ** xref:checklists[Checklists]
@@ -252,10 +252,10 @@
   ** xref:compare-asciidoc-markdown[Compare AsciiDoc to Markdown]
   ** xref:document-attributes-reference[Document Attributes Reference]
   ** xref:character-replacement-attributes-reference[Character Replacement Attributes Reference]
-  ** xref:glossary[Glossary of Terms]
+  ** xref:reference-glossary-of-terms[Glossary of Terms]
 
 
-
+[[document-structure]]
 == Introduction - Document Structure
 
 === AsciiDoc 소개
@@ -910,18 +910,649 @@ pass:a,q[{attribute-with-formatted-text}]
 [[troubleshoot-unconstrained-formatting-pairs]]
 === Troubleshoot Unconstrained Formatting Pairs
 
-[[lists]]
+---
 == Lists
+
+
+
 [[unordered-lists]]
-=== Unordered Lists
+== Lists - Unordered Lists
+
+AsciiDoc에서는 지정된 마커로 시작하는 행을 사용하여 정렬되지 않은 목록을 만들 수 있습니다. 정렬되지 않은 목록은 디스크(별칭 글머리 기호)와 같은 기호가 접두사로 붙은 항목 목록입니다.
+
+AsciiDoc은 별표 또는 하이픈을 사용하여 목록 항목을 식별하는 잘 정립된 규칙을 기반으로 합니다. 인접한 목록 항목은 단일 목록으로 결합됩니다. 정렬되지 않은 목록은 마커 문자 또는 길이(별표만 해당)를 변경하여 중첩될 수 있습니다. 목록 항목에는 첨부된 블록이 포함될 수 있습니다. 또한 다른 유형의 목록과 교차될 수도 있습니다.
+
+=== 기본 정렬되지 않은 목록
+
+아래 예제에서 각 목록 항목은 정렬되지 않은 목록 항목을 지정하는 AsciiDoc 구문인 별표(*)를 사용하여 표시됩니다.
+
+[source,ASCIIDOC]
+----
+* Edgar Allan Poe
+* Sheri S. Tepper
+* Bill Bryson
+----
+
+목록 항목의 첫 번째 텍스트 행은 마커(*)에서 최소한 하나의 공백으로 오프셋되어야 합니다. 목록 앞뒤에는 빈 줄이 필요합니다. 또한 목록 항목 사이에 빈 줄이 허용되지만 필수는 아닙니다.
+
+.렌더링된 정렬되지 않은 목록
+====
+* Edgar Allan Poe
+* Sheri S. Tepper
+* Bill Bryson
+====
+
+마침표(.)를 제목 앞에 붙여 목록에 제목을 추가할 수 있습니다.
+
+[source,ASCIIDOC]
+----
+.Kizmet's Favorite Authors
+Edgar Allan Poe
+Sheri S. Tepper
+Bill Bryson
+----
+
+.렌더링된 제목이 있는 정렬되지 않은 목록
+====
+.Kizmet's Favorite Authors
+* Edgar Allan Poe
+* Sheri S. Tepper
+* Bill Bryson
+==== 
+
+별표 대신 하이픈(-)을 사용하여 목록 항목을 표시하려는 것이 본능이었나요? 어떻게 될까요? 그것도 작동합니다!
+
+
+[source,ASCIIDOC]
+----
+- Edgar Allan Poe
+- Sheri S. Tepper
+- Bill Bryson
+----
+
+하이픈 마커(-)는 중첩 목록에 사용할 수 없으므로 한 수준만 있는 목록에 하이픈을 사용해야 합니다. 이제 중첩 목록에 대해 언급했으니 다음 섹션으로 넘어가서 여러 수준의 목록을 만드는 방법을 배워보겠습니다.
+
+====
+[.text-center]
+*목록 강제 분리*
+
+인접한 목록이 있는 경우 서로 융합하려는 경향이 있습니다. 목록을 강제로 분리하려면 두 목록 사이에 빈 줄로 둘러싸인 행 주석(//)을 삽입하세요. 다음은 행 주석의 - 텍스트가 "목록 끝" 마커 역할을 하는 예입니다:
+
+[source,ASCIIDOC]
+----
+Apples
+Oranges
+
+//-
+
+Walnuts
+Almonds
+----
+
+이 기법은 모든 목록 유형에 적용됩니다. 자세한 내용은 목록 분리를 참조하세요.
+
+====
+
+=== 중첩된 정렬되지 않은 목록
+
+항목을 중첩하려면 마커에 별표(*)를 추가하기만 하면 됩니다. 각 후속 수준에 대해 이 작업을 계속 수행하세요.
+
+[source,ASCIIDOC]
+----
+.Possible DefOps manual locations
+* West wood maze
+** Maze heart
+*** Reflection pool
+** Secret exit
+* Untracked file in git repository
+----
+
+.렌더링된 중첩된 정렬되지 않은 목록
+====
+.Possible DefOps manual locations
+* West wood maze
+** Maze heart
+*** Reflection pool
+** Secret exit
+* Untracked file in git repository
+====
+
+원하는 경우 마커를 왼쪽 여백에서 임의의 공백 수만큼 들여쓸 수 있습니다. 들여쓰기는 중요하지 않으며 중첩 수준을 시각화하는 데 도움이 될 수 있습니다.
+
+정렬되지 않은 목록은 원하는 깊이까지 중첩할 수 있습니다. 그러나 일부 인터페이스는 특정 깊이 이후에 목록을 평평하게 만들기 시작한다는 점에 유의하세요. 예를 들어 GitHub은 중첩 수준이 10 이상이면 목록을 평평하게 만들기 시작합니다.
+
+[source,ASCIIDOC]
+----
+* Level 1 list item
+** Level 2 list item
+*** Level 3 list item
+**** Level 4 list item
+***** Level 5 list item
+****** etc.
+* Level 1 list item
+----
+
+
+.정렬되지 않은 목록은 원하는 깊이까지 중첩될 수 있습니다
+====
+* Level 1 list item
+** Level 2 list item
+*** Level 3 list item
+**** Level 4 list item
+***** Level 5 list item
+****** etc.
+* Level 1 list item
+====
+
+==== 목록 깊이 결정
+
+별표 수가 중첩 수준을 나타내는 것처럼 보일 수 있지만 깊이가 결정되는 방식은 아닙니다. 새 수준은 발견된 각 고유 마커에 대해 생성됩니다. 예를 들어 두 개의 별표 대신 하이픈 마커를 사용하여 두 번째 수준을 만들 수 있습니다.
+
+.Example 1. 하이픈을 사용하여 두 번째 수준을 표시하는 것은 권장되지 않습니다.
+[source,ASCIIDOC]
+----
+* Level 1 list item
+- Level 2 list item
+* Level 1 list item
+----
+
+그러나 마커 길이(즉, 별표 수)가 중첩 수준과 같다는 규칙을 따르는 것이 훨씬 더 직관적입니다. 하이픈은 첫 번째 수준의 마커로만 사용해야 합니다.
+
+*마커 길이 = 중첩 수준*
+
+결국 우리는 있는 그대로 읽을 수 있는 일반 텍스트 마크업을 목표로 하고 있습니다.
+
+=== 마커
+
+렌더링될 때 정렬되지 않은 목록 항목은 선행 마커(글머리 기호)로 지정됩니다(목록을 정의하는 데 사용되는 마커와 혼동하지 마세요). 이 마커는 목록 스타일을 사용하여 제어할 수 있습니다. 마커를 지정하지 않으면 렌더러에서 기본 마커를 선택합니다.
+
+==== 기본 마커
+
+기본적으로 AsciiDoc은 정렬되지 않은 목록의 첫 번째 세 수준이 렌더링될 때 디스크, 원, 사각형 마커를 사용하여 스타일이 지정된다고 가정합니다. 다음 목록을 고려해 보세요:
+
+[source,ASCIIDOC]
+----
+* disc
+** circle
+*** square
+----
+
+.중첩된 목록에 대한 기본 교체 마커
+====
+* disc
+** circle
+*** square
+====
+
+첫 번째 수준의 마커는 디스크(채워진 원), 두 번째 수준은 원(윤곽선), 세 번째 수준은 사각형(채워짐)인 것을 확인하세요. AsciiDoc 프로세서는 모델이나 변환된 출력에서 이러한 마커를 명시적으로 지정하지 않습니다. 오히려 이러한 기본값은 HTML에서 확립된 규칙을 준수하는 렌더러(예: CSS)에 의해 추가됩니다.
+
+세 번째 중첩 수준을 넘어서는 마커 선택은 지정되지 않습니다. 일반적으로 렌더러는 앞의 예제에 표시된 대로 사각형 마커를 계속 사용합니다.
+
+==== 사용자 정의 마커
+
+AsciiDoc은 목록에 대해 다양한 마커 스타일을 제공합니다. 목록 마커는 목록의 블록 스타일을 사용하여 지정할 수 있습니다.
+
+정렬되지 않은 목록 마커는 다음 블록 스타일 중 하나를 사용하여 설정할 수 있습니다:
+
+- square
+- circle
+- disc
+- none 또는 no-bullet(들여쓰기되었지만 글머리 기호 없음)
+- unstyled(들여쓰기나 글머리 기호 없음)(DocBook 출력에서는 지원되지 않음)
+
+[NOTE]
+====
+이러한 스타일은 기본 Asciidoctor 스타일시트에서 지원됩니다.
+====
+
+스타일 이름이 있는 경우 다음과 같이 정렬되지 않은 목록 요소에 할당됩니다:
+
+*HTML의 경우*
+스타일 이름이 <ul> 요소의 class 속성에 할당됩니다.
+
+*DocBook의 경우*
+스타일 이름이 <itemizedlist> 요소의 mark 속성에 할당됩니다.
+
+사각형 마커가 있는 정렬되지 않은 목록은 다음과 같습니다:
+[source,ASCIIDOC]
+----
+[square]
+* one
+* two
+* three
+----
+
+.사각형 마커가 있는 목록
+====
+[square]
+* one
+* two
+* three
+====
+
+목록 스타일이 설정되면 다시 설정될 때까지 해당 스타일이 모든 중첩 목록에 사용됩니다. 교체를 더 이상 유추할 수 없으므로 중단된다고 가정합니다. 상속된 스타일은 모델에 지정되지 않지만 렌더러(예: CSS)에 의해 적용됩니다. 예를 들어 최상위 목록에서 목록 스타일을 circle로 설정하면 모든 수준에 사용됩니다.
+
+[source,ASCIIDOC]
+----
+[circle]
+* circles
+** all
+*** the
+**** way
+***** down
+----
+
+.일단 설정되면 목록 스타일이 상속됩니다
+====
+[circle]
+* circles
+** all
+*** the
+**** way
+***** down
+====
+
+상속된 스타일은 모든 수준에서 설정하거나 재설정할 수 있습니다.
+[source,ASCIIDOC]
+----
+[square]
+* squares
+** up top
+
+[circle]
+*** circles
+**** down below
+----
+
+.목록 스타일을 재설정할 수 있습니다
+====
+[square]
+* squares
+** up top
+[circle]
+*** circles
+**** down below
+====
+
+
+
 [[ordered-lists]]
-=== Ordered Lists
+== Lists - Ordered Lists
+
+=== 기본 정렬된 목록
+
+때로는 목록의 항목에 번호를 매겨야 합니다. 본능적으로 다음 목록과 같이 각 항목 앞에 숫자를 붙일 수 있습니다:
+
+[source,ASCIIDOC]
+----
+1. Protons
+2. Electrons
+3. Neutrons
+----
+
+위의 방법도 작동하지만 번호 매기기가 명확하므로 AsciiDoc 프로세서는 번호를 생략하면 자동으로 삽입합니다:
+
+[source,ASCIIDOC]
+----
+. Protons
+. Electrons
+. Neutrons
+----
+
+====
+1. Protons
+2. Electrons
+3. Neutrons
+====
+
+정렬된 목록을 명시적으로 번호 매기면 목록 번호를 수동으로 순차적으로 유지해야 합니다. 그렇지 않으면 경고가 표시됩니다. 이는 다른 경량 마크업 언어와 다릅니다. 하지만 그렇게 하는 데는 이유가 있습니다.
+
+명시적 번호 매기기는 목록의 번호 오프셋을 조정하는 한 가지 방법입니다. 예를 들어 다음과 같이 입력할 수 있습니다:
+
+
+[source,ASCIIDOC]
+----
+Step four
+Step five
+Step six
+----
+
+그러나 수동 작업 없이 동일한 결과를 얻을 수 있는 더 간단한 방법이 있습니다. 목록의 start 속성을 사용하여 번호를 시작할 숫자를 정의할 수 있습니다.
+[source,ASCIIDOC]
+----
+[start=4]
+. Step four
+. Step five
+. Step six
+----
+
+start 값은 loweralpha와 같은 다른 번호 매기기 스타일을 사용할 때에도 항상 양의 정수 값입니다.
+
+====
+[.text-center]
+*start 속성을 사용하지 말아야 할 때*
+
+정렬된 목록 항목에 이미지, 소스 블록 또는 테이블과 같은 블록 내용이 포함된 경우 목록의 다음 항목 번호가 1로 재설정되는 것을 관찰할 수 있습니다. 실제로 목록 연속이 누락되어 번호가 재설정되는 새 목록이 시작되었습니다.
+
+이러한 경우에는 start 속성을 사용하여 번호 매기기를 수정하려고 해서는 안 됩니다. 목록에 항목이 추가될 때 수동 조정이 필요할 뿐만 아니라 깨지는 원인이 되는 기본 의미론적 문제를 해결하지 못합니다. 대신 목록 항목에 첨부하려는 각 블록 요소 사이에 목록 연속을 사용하여 목록 항목이 연속되도록 하세요. 목록 연속은 주어진 항목 내의 블록을 함께 붙이고 동일한 수준의 들여쓰기를 유지합니다.
+
+- 목록 연속을 사용하는 방법에 대한 자세한 내용은 복잡한 목록 항목 페이지를 참조하세요.
+- 복잡한 정렬된 목록에서 사용되는 목록 연속의 예는 GitHub의 이 .adoc 파일에 있는 시작 단계를 참조하세요.
+- 생성된 배포 가이드의 빠른 시작 시작 섹션에서 해당 시작 단계가 최종 출력에서 어떻게 보이는지 확인하세요. 목록 연속은 단계 2가 1로 재설정되는 것을 방지합니다. 또한 별도의 AsciiDoc 파일에서 가져온 단계 5가 1로 재설정되는 것을 방지합니다.
+====
+
+목록 항목을 역순으로 표시하려면 reversed 옵션을 추가하세요:
+[source,asciidoc]
+----
+[%reversed]
+.Parts of an atom
+. Protons
+. Electrons
+. Neutrons
+----
+
+====
+[%reversed]
+.Parts of an atom
+. Protons
+. Electrons
+. Neutrons
+====
+
+점 바로 뒤에 텍스트를 붙여 행 앞에 점을 붙여 목록에 제목을 지정할 수 있습니다(점 뒤에 공백을 두지 않음).
+
+다음은 제목이 있는 목록의 예입니다:
+
+[source,asciidoc]
+----
+.Parts of an atom
+. Protons
+. Electrons
+. Neutrons
+----
+
+====
+.Parts of an atom
+. Protons
+. Electrons
+. Neutrons
+====
+
+=== 중첩된 정렬된 목록
+
+각 항목 앞에 하나 이상의 점을 사용하여 중첩된 항목을 만듭니다.
+
+[source,asciidoc]
+----
+. Step 1
+. Step 2
+.. Step 2a
+.. Step 2b
+. Step 3
+----
+
+AsciiDoc은 중첩 수준마다 다른 번호 체계를 선택합니다. 이전 목록이 렌더링되는 방식은 다음과 같습니다:
+
+.중첩된 정렬된 목록
+====
+. Step 1
+. Step 2
+.. Step 2a
+.. Step 2b
+. Step 3
+====
+
+[TIP]
+====
+정렬되지 않은 목록의 별표와 마찬가지로 정렬된 목록의 점 수는 중첩 수준을 나타내지 않습니다. 그러나 점 수가 중첩 수준과 같다는 규칙을 따르는 것이 훨씬 더 직관적입니다.
+
+*점 수 = 중첩 수준*
+
+다시 말하지만, 우리는 있는 그대로 읽을 수 있는 일반 텍스트 마크업을 목표로 합니다.
+
+====
+
+정렬된 목록, 정렬되지 않은 목록, 설명 목록의 세 가지 목록 유형을 단일 하이브리드 목록 내에서 혼합하고 일치시킬 수 있습니다. AsciiDoc 구문은 우리 인간에게 가장 직관적인 항목 간의 관계를 유추하기 위해 노력합니다.
+
+다음은 정렬된 목록 내부에 정렬되지 않은 목록을 중첩하는 예입니다:
+
+[source,asciidoc]
+----
+. Linux
+* Fedora
+* Ubuntu
+* Slackware
+. BSD
+* FreeBSD
+* NetBSD
+----
+
+====
+. Linux
+* Fedora
+* Ubuntu
+* Slackware
+. BSD
+* FreeBSD
+* NetBSD
+====
+
+항목을 펼치고 중첩된 목록을 들여쓰면 더 읽기 쉽습니다:
+
+[source,asciidoc]
+----
+. Linux
+
+  * Fedora
+  * Ubuntu
+  * Slackware
+
+. BSD
+
+  * FreeBSD
+  * NetBSD
+----
+
+설명 목록 페이지에서는 세 가지 목록 유형을 모두 결합하는 방법을 보여줍니다.
+
+=== 번호 스타일
+
+정렬된 목록의 경우 AsciiDoc은 lowergreek 및 decimal-leading-zero와 같은 번호 매기기 스타일을 지원합니다. 정렬된 목록에 적용할 수 있는 번호 매기기 스타일의 전체 목록은 다음과 같습니다:
+
+[cols="1,2"]
+|===
+|*스타일* |*설명*
+|arabic |decimal
+|decimal^[1]^ |decimal-leading-zero
+|loweralpha |lower-alpha
+|upperalpha |upper-alpha
+|lowerroman |lower-roman
+|upperroman |upper-roman
+|lowergreek^[1]^ |lower-greek
+|===
+
+^[1]^이 스타일은 HTML 변환기에서만 지원되는 스타일입니다.
+
+
+다음은 헤더 행에 표시된 블록 스타일에 의해 정의된 다양한 번호 매기기 스타일을 보여주는 몇 가지 예입니다:
+
+[cols="1,1,1,1",options="header"]
+|===
+| *[arabic]*^[2]^ | *[decimal]* | *[loweralpha]* | *[lowergreek]*
+
+| 1. one | 01. one | a. one | α. one
+| 2. two | 02. two | b. two | β. two
+| 3. three | 03. three | c. three | γ. three
+|===
+^[2]^ 블록 스타일이 지정되지 않은 경우 기본 번호 매기기
+
+[TIP]
+====
+사용자 정의 번호 매기기 스타일은 사용자 정의 역할을 사용하여 구현할 수 있습니다. 스타일시트에서 list-style-type 속성을 원하는 값으로 설정하는 새 클래스 선택기(예: .custom)를 정의하세요. 그런 다음 해당 번호 매기기를 적용하려는 모든 목록에 해당 클래스의 이름을 역할로 할당하세요.
+====
+
+역할 단축키(.custom)가 정렬된 목록에 사용되면 번호 매기기 스타일이 더 이상 생략되지 않습니다.
+
+스타일을 설정하여 모든 수준의 번호 체계를 재정의할 수 있습니다(블록 속성 목록의 첫 번째 위치 항목). start 속성을 사용하여 시작 번호를 설정할 수도 있습니다:
+
+[source,asciidoc]
+----
+[lowerroman,start=5]
+. Five
+. Six
+[loweralpha]
+.. a
+.. b
+.. c
+. Seven
+----
+
+====
+[lowerroman,start=5]
+. Five
+. Six
+[loweralpha]
+.. a
+.. b
+.. c
+. Seven
+====
+
+[IMPORTANT]
+====
+start 속성은 다른 번호 매기기 스타일을 사용할 때에도 숫자여야 합니다. 예를 들어 알파벳 목록을 문자 "c"로 시작하려면 번호 매기기 스타일을 loweralpha로 설정하고 start 속성을 3으로 설정하세요.
+====
+
+=== 목록 마커 이스케이프하기
+
+목록 마커로 시작하는 단락 텍스트가 있지만 목록 항목이 되도록 의도하지 않은 경우 속성 참조를 사용하여 패턴을 중단하여 해당 마커를 이스케이프해야 합니다.
+
+행이 P.O. 상자 참조로 시작할 때의 경우를 고려해 보세요:
+
+[source,asciidoc]
+----
+P. O. Box
+이 단락이 정렬된 목록으로 파싱되는 것을 방지하려면 첫 번째 공백을 {empty}로 바꿔야 합니다.
+----
+
+[source,asciidoc]
+----
+P.{empty}O. Box
+----
+
+이제 단락은 단락으로 유지됩니다.
+
+앞으로는 백슬래시를 사용하여 정렬된 목록 마커를 이스케이프할 수 있겠지만 현재는 불가능합니다.
+
+
+
 [[checklists]]
-=== Checklists
+== Lists - Checklists
+
+체크리스트를 사용하여 목록 항목을 완료로 표시할 수 있습니다.
+
+체크리스트(즉, 작업 목록)는 항목이 선택됨([*] 또는 [x]) 또는 선택되지 않음([ ])으로 표시된 정렬되지 않은 목록입니다. 다음은 예제입니다:
+
+.Example 1. 체크리스트 구문
+[source,asciidoc]
+----
+* [*] checked
+* [x] also checked
+* [ ] not checked
+* normal list item
+----
+
+Example 1의 결과는 아래에 표시됩니다.
+====
+* [*] checked
+* [x] also checked
+* [ ] not checked
+* normal list item
+====
+
+[TIP]
+====
+Example 1에서 볼 수 있듯이 목록의 모든 항목이 체크리스트 항목일 필요는 없습니다.
+====
+
+체크리스트가 HTML로 변환되면 체크박스 마크업은 적절한 선택 상태를 가진 HTML 체크박스로 변환됩니다. 항목이 선택되면 체크박스의 data-item-complete 속성이 1로 설정되고, 그렇지 않으면 0으로 설정됩니다. 체크박스는 항목의 글머리 기호 대신 사용됩니다.
+
+AsciiDoc에서 생성된 HTML은 일반적으로 정적이므로 체크박스가 비활성화되어 간단한 표시로 나타납니다. 체크박스를 대화형(즉, 클릭 가능)으로 만들려면 체크리스트에 interactive 옵션을 추가하세요(여기에서는 Options Attribute에 대한 단축 구문을 사용하여 표시됨):
+
+.Example 2. 대화형 체크박스가 있는 체크리스트
+[source,asciidoc]
+----
+[%interactive]
+* [*] checked
+* [x] also checked
+* [ ] not checked
+* normal list item
+----
+
+Example 2의 결과는 아래에 표시됩니다.
+====
+[%interactive]
+* [*] checked
+* [x] also checked
+* [ ] not checked
+* normal list item
+====
+
+
+
 [[separating-lists]]
-=== Separating Lists
+== Lists - Separating Lists
+
+AsciiDoc에서 목록 항목은 서로 자연스럽게 끌어당깁니다. 인접한 행이 같은 목록 마커로 시작하면 빈 행으로 구분되더라도 같은 목록으로 결합됩니다. 인접한 행이 다른 목록 마커로 시작하면 빈 행으로 오프셋되더라도 중첩된 목록에 배치됩니다.
+
+이러한 규칙은 목록 항목을 단일 목록으로 유지하기 쉽게 만듭니다. 그러나 별도의 목록을 만들고 싶다면 문제가 될 수 있습니다. 다행히도 이 동작을 강제로 변경하는 방법이 있습니다. 이 페이지에 설명된 기법은 모든 목록 유형에 적용됩니다.
+
+=== 행 주석 사용하기
+
+목록을 강제로 분리하려면 두 목록 사이에 양쪽에 빈 행으로 둘러싸인 행 주석(//)을 삽입할 수 있습니다.
+
+다음은 인접한 두 개의 정렬되지 않은 목록을 분리하기 위해 행 주석을 배치할 위치를 보여주는 예제입니다. 행 주석 접두사 다음에 오는 -는 작성자에게 주석 행이 "목록 끝" 마커 역할을 한다는 힌트입니다:
+
+[source,asciidoc]
+----
+* Apples
+* Oranges
+
+//-
+
+* Walnuts
+* Almonds
+----
+
+이 기법은 모든 유형의 목록을 분리하는 데 사용할 수 있습니다.
+
+=== 블록 속성 행 사용하기
+
+새 목록을 시작하는 또 다른 방법은 빈 행으로 오프셋된 두 번째 목록 위에 블록 속성 행(비어 있더라도)을 배치하는 것입니다.
+
+다음은 인접한 정렬되지 않은 목록과 정렬된 목록을 분리하기 위해 블록 속성 행을 배치할 위치를 보여주는 예제입니다.
+
+[source,asciidoc]
+----
+* Apples
+* Oranges
+
+[]
+. Wash
+. Slice
+----
+
+앞의 빈 행이 중요합니다. 해당 행이 없으면 정렬된 목록은 여전히 정렬된 목록 내부에 중첩됩니다. 두 번째 목록에 블록 속성이 필요한 경우 블록 속성 행에 추가할 수 있습니다.
+
+이 기법은 모든 유형의 목록을 분리하는 데 사용할 수 있습니다.
+
+
+
 [[complex-list-items]]
-=== Complex List Items
+== Lists - Complex List Items
+
+
+---
 
 [[description-lists]]
 == Description Lists
@@ -1298,5 +1929,6 @@ See <<heading>>.
 === Reference - Document Attributes Reference
 [[character-replacement-attributes-reference]]
 === Reference - Character Replacement Attributes Reference
-[[glossary]]
+[[reference-glossary-of-terms]]
 === Reference - Glossary of Terms
+

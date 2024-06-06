@@ -1,0 +1,6 @@
+* Apples
+* Oranges
+
+[]
+. Wash
+. Slice
