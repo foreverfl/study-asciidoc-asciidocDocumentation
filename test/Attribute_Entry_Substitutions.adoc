@@ -1,0 +1,17 @@
+= Attribute Entry Substitutions
+
+====
+:cols: pass:[.>2,.>4]
+====
+
+====
+:app-name: pass:quotes[MyApp^2^]
+[subs=attributes+]
+------
+{app-name}
+------
+====
+
+====
+:app-name: pass:q[MyApp^2^]
+====
