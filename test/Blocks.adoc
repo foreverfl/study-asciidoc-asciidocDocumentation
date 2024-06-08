@@ -1,0 +1,18 @@
+****
+This is a sidebar block.
+****
+
+====
+몰루
+====
+
+[verse]
+----
+verse test
+verse test
+----
+
+[listing]
+....
+a > b
+....
