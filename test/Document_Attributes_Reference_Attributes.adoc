@@ -1,0 +1,26 @@
+= 링크 예제 문서
+저자 이름
+:revdate: 2024-06-09
+
+== 소개
+이 문서에서는 여러 가지 링크 생성 방법을 보여줍니다.
+
+== 기본 링크
+URL을 직접 지정하여 링크를 생성할 수 있습니다.
+
+https://www.google.com[구글]
+
+== 속성 기반 링크
+속성을 사용하여 링크를 생성할 수도 있습니다.
+
+:url-repo: https://github.com/asciidoctor/asciidoctor
+
+Asciidoctor는 {url-repo}[오픈 소스]입니다.
+
+== 경로 추가 링크
+기본 URL에 경로를 추가하여 링크를 생성할 수도 있습니다.
+
+{url-repo}/issues[Asciidoctor 이슈 트래커]
+
+== 경고
+WARNING: Don't pet the wild Wolpertingers. We're not responsible for any loss of hair, chocolate, or purple socks.

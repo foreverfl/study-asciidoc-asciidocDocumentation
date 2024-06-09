@@ -1,0 +1,23 @@
+= Title of Document
+Author Name
+:revdate: 2024-06-09
+:toc:
+:doctype: book
+:imagesdir: ./images
+:iconsdir: ./icons
+:stylesdir: ./styles
+:scriptsdir: ./js
+
+== 목차
+
+* 목차는 기본적으로 auto 값이 할당되어 활성화됩니다.
+* 문서 유형은 기본적으로 article 값이지만, 여기서는 book 값으로 설정됩니다.
+
+== 이미지, 아이콘, 스타일, 스크립트 디렉토리
+
+* 이미지 디렉토리: {imagesdir}
+* 아이콘 디렉토리: {iconsdir}
+* 스타일 디렉토리: {stylesdir}
+* 스크립트 디렉토리: {scriptsdir}
+
+이 문서에서는 다양한 내장 속성의 기본값을 재정의하는 방법을 보여줍니다.

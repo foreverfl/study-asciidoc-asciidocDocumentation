@@ -1,0 +1,14 @@
+= 속성 처리 예제
+저자 이름
+:revdate: 2024-06-09
+
+:attribute-missing: skip
+:attribute-undefined: drop-line
+
+== 속성 참조 예제
+
+정의되지 않은 속성 참조: {kaga}
+
+속성 정의 해제: {set:attribute-no-more!}
+
+attribute-missing 및 attribute-undefined 속성 사용으로 인해 문서에서 이 줄은 삭제됩니다.

@@ -1,0 +1,16 @@
+= Example Document
+Author Name
+:revdate: 2024-06-09
+:sectanchors:
+
+== Introduction
+Introduction content.
+
+== Installation
+Installation instructions.
+
+== Usage
+Usage guidelines.
+
+== Conclusion
+Conclusion content.

@@ -1,0 +1,22 @@
+= Example Document
+:author: Your Name
+:revdate: 2024-06-09
+
+== 인라인 속성 예제
+
+이 문서에서는 인라인 속성 설정의 예제를 보여줍니다.
+
+=== 속성 설정
+표준 속성 설정:
+:sourcedir: src/main/java
+
+인라인 속성 설정:
+{set:sourcedir:src/main/java}
+
+소스 디렉토리는 다음과 같이 설정됩니다: {sourcedir}
+
+=== 속성 해제
+인라인 속성 해제:
+{set:sourcedir!}
+
+소스 디렉토리는 이제 비어 있습니다: {sourcedir}
