@@ -985,6 +985,7 @@ Never do today what you can put off `'til tomorrow.
 
 [[add-title]]
 == Blocks - Add a Title to a Block
+
 스타일 이름 또는 구분 기호를 사용하여 스타일을 지정하는 것과 관계없이 블록에 제목을 할당할 수 있습니다.
 
 === 블록 제목 구문
@@ -1024,11 +1025,11 @@ Already up to date.
 예제 2의 결과는 아래에 표시되어 있습니다.
 
 .Terminal Output
-====
+....
 From github.com:asciidoctor/asciidoctor
  * branch        main   -> FETCH_HEAD
 Already up to date.
-====
+....
 
 다음 섹션에서는 속성 목록이 있는 블록에 제목이 어떻게 배치되는지 볼 수 있습니다.
 
@@ -1038,23 +1039,26 @@ Already up to date.
 
 .예제 3. 구분된 소스 코드 블록에 제목 추가
 [source,asciidoc]
-----
+--
 .Specify GitLab CI stages [1]
 [source,yaml] [2]
+----
 image: node:16-buster
 stages: [ init, verify, deploy ]
 ----
+--
 
 [1] 블록 제목은 새 줄에 입력됩니다.
 [2] 블록의 속성 목록은 제목 바로 다음 줄에 입력됩니다.
 
 예제 3의 결과는 아래에 표시되어 있습니다.
 
-.Specify GitLab CI stages
-====
-image: node:16-buster +
+.Specify GitLab CI stages [1]
+[source,yaml] [2]
+----
+image: node:16-buster
 stages: [ init, verify, deploy ]
-====
+----
 
 예제 4에 표시된 것처럼 블록이 구분되지 않은 경우 블록의 제목은 속성 목록 위에 배치됩니다.
 
@@ -1085,27 +1089,28 @@ If you don't plant it in a container, it will take over your garden.
 
 다음 표는 캡션 제목을 지원하는 블록과 변환기가 이를 생성하고 제어하는 데 사용하는 속성을 나열합니다.
 
+.캡션 제목을 지원하는 블록
 [cols="1,1,1", options="header"]
 |===
-|Block context |Caption attribute |Counter attribute
+|블록 컨텍스트 |캡션 속성 |카운터 속성
 
-|appendix
+|부록
 |appendix-caption
 |appendix-number
 
-|example
+|예제
 |example-caption
 |example-number
 
-|image
+|이미지
 |figure-caption
 |figure-number
 
-|listing, source
+|목록, 소스
 |listing-caption
 |listing-number
 
-|table
+|테이블
 |table-caption
 |table-number
 |===
@@ -1124,15 +1129,14 @@ Block content
 
 블록 제목은 다음과 같이 캡션 레이블과 번호와 함께 표시됩니다:
 
-.Example 1. Block that supports captioned title
-
+.Block that supports captioned title
 ====
 Block content
 ====
 
 example-caption 속성을 해제하면 캡션이 제목 앞에 추가되지 않습니다.
 
-.Block that supports captioned title
+_Block that supports captioned title_
 ====
 Block content
 ====
@@ -1170,103 +1174,172 @@ caption 속성의 값에 카운터 속성을 사용하여 사용자 지정 번�
 == Blocks - Assign an ID
 
 속성 목록을 사용하여 모든 블록에 ID를 할당할 수 있습니다. 블록에 ID를 할당하면 교차 참조를 사용하여 해당 ID를 사용해 링크할 수 있습니다.
+
 === 블록 ID 구문
+
 ID 값 앞에 해시(#)를 접두사로 붙이고 블록의 속성 목록에 배치하여 블록에 ID가 할당됩니다.
+
+[source,asciidoc]
+----
 [#the-id-of-this-block]
 Content of delimited example block
+----
+
 여러 속성, 제목 및 구분 기호가 있는 블록에 ID를 할당하는 몇 가지 예를 살펴보겠습니다.
 
 === 속성이 있는 블록에 ID 할당
 
 이 섹션에서는 다음 인용구에 ID를 할당하겠습니다:
+
+[quote#roads,Dr. Emmett Brown,Back to the Future]
 Roads? Where we're going, we don't need roads.
-— Dr. Emmett Brown Back to the Future
+
 스타일 속성이 블록에 명시적으로 할당되면 스타일 이름은 항상 속성 목록의 첫 번째 위치에 배치됩니다. 그런 다음 ID는 스타일 이름의 끝에 직접 연결됩니다.
+
 예제 1의 할당된 스타일과 ID가 있는 인용구는 이 속성 순서를 보여줍니다.
-예제 1. 블록에 스타일과 ID 할당
+
+.예제 1. 블록에 스타일과 ID 할당
+[source,asciidoc]
+----
 [quote#roads]
 Roads? Where we're going, we don't need roads.
-예제 1은 인용구이므로 화자와 원래 맥락에 대한 정보가 있어야 합니다. 예제 2에서는 quote 스타일에 내장된 위치 기반 속성을 사용하여 이 인용구를 화자와 원래 맥락에 속성을 부여해 보겠습니다.
-예제 2. 블록에 스타일, ID 및 위치 기반 속성 할당
+----
 
-[quote#roads1,Dr. Emmett Brown,Back to the Future]
+예제 1은 인용구이므로 화자와 원래 맥락에 대한 정보가 있어야 합니다. 예제 2에서는 quote 스타일에 내장된 위치 기반 속성을 사용하여 이 인용구를 화자와 원래 맥락에 속성을 부여해 보겠습니다.
+
+.예제 2. 블록에 스타일, ID 및 위치 기반 속성 할당
+[source,asciidoc]
+----
+[quote#roads,Dr. Emmett Brown,Back to the Future]
 Roads? Where we're going, we don't need roads.
+----
+
 role과 options 속성에 각각 단축 구문(.과 %)을 사용하여 값을 할당하는 경우를 제외하고, 다른 모든 블록 속성은 일반적으로 쉼표(,)로 구분됩니다.
 
 
-== Blocks - Block Masquerading
 [[block-masquerading]]
+== Blocks - Block Masquerading
+
 선언된 블록 스타일(즉, 블록 속성 목록의 첫 번째 위치 기반 속성)은 모든 단락 및 대부분의 구조적 컨테이너의 컨텍스트를 수정하는 데 사용할 수 있습니다. 이 방법은 블록 마스커레이딩(한 블록을 다른 블록으로 위장하는 것을 의미)으로 알려져 있습니다.
+
 선언된 블록 스타일을 사용하여 단락의 컨텍스트를 변경하면 블록은 단순한 콘텐츠 모델을 유지합니다. 구조적 컨테이너의 컨텍스트를 마스커레이딩할 때는 예상되는 콘텐츠 모델을 보존하는 컨텍스트만 허용됩니다.
+
 === 작동 방식
+
 블록에 선언된 블록 스타일이 컨텍스트의 이름과 일치하면 블록의 컨텍스트를 해당 값으로 설정하고 해결된 블록 스타일은 설정되지 않은 상태로 남습니다. 선언된 블록 스타일이 컨텍스트의 이름과 일치하지 않으면 컨텍스트를 특수화하거나 컨텍스트를 암시적으로 설정하고 해당 컨텍스트도 특수화합니다. 사용자 지정 블록에 대해 선언된 블록 스타일이 처리되는 방식은 확장에 따라 다르지만 유사한 프로세스가 발생합니다.
+
 선언된 블록 스타일을 사용하여 구조적 컨테이너의 컨텍스트를 변경하는 경우를 살펴보겠습니다. 이 경우 선언된 블록 스타일을 사용하여 리터럴 블록을 목록 블록으로 변경합니다.
+
+[source,asciidoc]
+----
 [listing]
 ....
 a > b
 ....
+----
+
 구조적 컨테이너의 기본 컨텍스트가 :literal이지만 선언된 블록 스타일은 이를 :listing으로 변경합니다. 블록의 해결된 블록 스타일은 설정되지 않은 상태로 유지됩니다.
+
 선언된 블록 스타일은 단락을 다른 종류의 블록으로 변환하는 데에도 사용할 수 있습니다. 블록은 여전히 단순한 콘텐츠 모델을 유지합니다. 일반 단락을 사이드바로 바꾸는 경우를 살펴보겠습니다.
+
+[source,asciidoc]
+----
 [sidebar]
 This sidebar is short, so a styled paragraph will do.
+----
+
 마지막으로 경고 블록을 살펴보겠습니다. 예제 구조적 컨테이너에 NOTE 블록 스타일을 선언하면 경고 블록으로 변환되고 블록의 스타일도 NOTE로 설정됩니다.
+
+[source,asciidoc]
+----
 [NOTE]
+====
 Remember the milk.
+====
+----
+
 이 기술은 단락을 경고 블록으로 변환하는 데에도 사용할 수 있습니다.
+
+[source,asciidoc]
+----
 [NOTE]
 Remember the milk.
+----
+
 허용되는 경우 선언된 블록 스타일을 사용하여 블록의 컨텍스트를 특수화하거나 블록의 컨텍스트를 변경하거나 둘 다 수행할 수 있습니다.
+
 === 내장 순열
+
 아래 표는 선언된 블록 스타일을 사용하여 컨텍스트를 변경할 수 있는 구조적 컨테이너와 유효한 컨텍스트를 나열합니다.
-[cols="1,1,1", options="header"]
+
+[cols="1,1,4", options="header"]
 |===
 |Type |Default context |Masquerading contexts
-|example
+
+|예제
 |:example
-|admonition (NOTE, TIP, WARNING, CAUTION 또는 IMPORTANT 스타일로 지정)
-|listing
+|경고 (NOTE, TIP, WARNING, CAUTION 또는 IMPORTANT 스타일로 지정)
+
+|목록
 |:listing
-|literal
-|literal
+|리터럴
+
+|리터럴
 |:literal
-|listing (source 스타일을 사용하여 지정 가능)
-|open
+|목록 (source 스타일을 사용하여 지정 가능)
+
+|열기
 |:open
-|abstract, admonition (NOTE, TIP, WARNING, CAUTION 또는 IMPORTANT 스타일로 지정), comment, example, literal, listing (source 스타일을 사용하여 지정 가능), partintro, pass, quote, sidebar, verse
-|pass
+|추상, 경고 (NOTE, TIP, WARNING, CAUTION 또는 IMPORTANT 스타일로 지정), 주석, 예제, 리터럴, 목록 (source 스타일을 사용하여 지정 가능), 파트 인트로, 패스, 인용, 사이드바, 시
+
+|패스
 |:pass
 |stem, latexmath, asciimath
-|sidebar
+
+|사이드바
 |:sidebar
-|n/a
-|quote
+|해당 없음
+
+|인용
 |:quote
-|verse
+|시
 |===
+
 열린 블록에 적용할 수 있는 모든 컨텍스트는 단락에도 적용할 수 있습니다. 단락은 normal 스타일에도 액세스할 수 있으며, 이는 리터럴 단락을 일반 단락으로 되돌리는 데 사용할 수 있습니다.
 
 
 
-== Blocks - Troubleshooting Blocks
 [[troubleshooting-blocks]]
+== Blocks - Troubleshooting Blocks
+
 === 열고 닫는 구분 기호
+
++++
 구분된 블록의 열고 닫는 구분 기호는 길이가 같아야 합니다. 예를 들어, 사이드바는 네 개의 별표(****)로 된 여는 구분 기호로 지정됩니다. 닫는 구분 기호도 네 개의 별표(****)여야 합니다.
++++
 
 다음은 유효한 구분 기호 길이를 사용하는 사이드바입니다:
 
+[source,asciidoc]
+----
+****
 This is a valid delimited block.
 It will be styled as a sidebar.
+****
+----
 
 그러나 다음 구분된 블록의 구분 기호 길이는 같지 않으므로 유효하지 않습니다:
 
+[source,asciidoc]
+----
+********
 This is an invalid sidebar block because the delimiter lines are different lengths.
+****
+----
 
 AsciiDoc 프로세서가 이전 예제를 만나면 문서의 나머지 내용을 구분된 블록 안에 넣습니다. 프로세서에 관한 한 닫는 구분 기호는 내용의 한 줄일 뿐입니다. 그러나 일치하는 닫는 구분 기호가 발견되지 않으면 프로세서가 경고를 발행합니다.
 
 프로세서가 닫는 구분 기호를 인식하게 하려면 여는 구분 기호와 길이가 같아야 합니다.
-
-Copy
-Retr
 
 
 
@@ -1349,6 +1422,8 @@ Retr
 
 문서 속성은 속성 대체가 적용되는 문서의 어디에서나 참조될 수 있습니다. 일반적으로 속성 대체는 속성 항목의 값, 제목, 단락 텍스트, 목록 텍스트, 요소 속성의 값 및 매크로의 대상에 적용됩니다.
 문서 속성은 정의된 후에만 참조할 수 있습니다.
+
+
 
 [[attribute-entries]]
 == Document Attributes - Attribute Entries
