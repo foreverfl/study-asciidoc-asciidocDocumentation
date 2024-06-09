@@ -1,0 +1,52 @@
+= 요소 속성 예제
+저자 이름
+:revdate: 2024-06-09
+
+== 요소 속성
+
+요소 속성은 개별 블록 및 인라인 요소의 설정을 제어하거나 추가 정보를 제공하는 데 사용됩니다.
+
+=== 예제 1: 속성 목록의 해부학
+
+속성 목록을 사용하여 여러 속성을 정의할 수 있습니다.
+
+[source,asciidoc]
+----
+first-positional,second-positional,named="value of named"
+----
+
+위의 속성 목록은 세 개의 속성을 정의합니다.
+
+=== 예제 2: 블록 속성 라인
+
+블록 요소에 속성 목록을 추가할 수 있습니다.
+
+[source,asciidoc]
+----
+[style,second-positional,named="value of named"]
+이 블록은 지정된 속성을 가지고 있습니다.
+----
+
+이 블록은 `style`, `second-positional`, `named` 속성을 가지고 있습니다.
+
+=== 예제 3: 속성 목록이 있는 블록 매크로
+
+// 블록 매크로에 속성 목록을 추가할 수 있습니다.
+
+// [source,asciidoc]
+// ----
+// include::example.adoc[first-positional,second-positional,named="value of named"]
+// ----
+
+이 매크로는 `example.adoc` 파일을 포함하고 지정된 속성을 가지고 있습니다.
+
+=== 예제 4: 속성 목록이 있는 서식 있는 텍스트
+
+서식 있는 텍스트에 속성 목록을 추가할 수 있습니다.
+
+[source,asciidoc]
+----
+[#idname.rolename]*text with id and role*
+----
+
+위의 텍스트는 `idname` ID와 `rolename` 역할을 가지고 있습니다.
