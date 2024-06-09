@@ -61,7 +61,7 @@
 
 - xref:document-type[Document Type]
 
-- Sections
+- xref:section[Sections]
   ** xref:section-titles-and-levels[Section Titles and Levels]
     *** xref:activate-section-title-links[Activate Section Title Links]
 
@@ -109,7 +109,7 @@
   ** xref:using-custom-inline-styles[Using Custom Inline Styles]
   ** xref:troubleshoot-unconstrained-formatting-pairs[Troubleshoot Unconstrained Formatting Pairs]
 
-- Lists
+- xref:lists[Lists]
   ** xref:unordered-lists[Unordered Lists]
   ** xref:ordered-lists[Ordered Lists]
   ** xref:checklists[Checklists]
@@ -3148,9 +3148,17 @@ doctype=inline과 backend=html5 옵션으로 처리하면 다음과 같이 생�
 인라인 doctype을 사용하면 AsciiDoc 프로세서가 비구조화된(인라인) 텍스트부터 완전한 독립 문서까지 전체 범위의 애플리케이션을 다룰 수 있습니다!
 
 
+
+[[section]]
+=== Sections
+
+
+
 [[section-titles-and-levels]]
 === Section Titles and Levels
+
 섹션은 문서를 콘텐츠 계층 구조로 분할합니다. 섹션은 암시적 인클로저입니다. 각 섹션은 제목으로 시작하여 다음 형제 섹션, 조상 섹션 또는 문서 끝에서 끝납니다. 중첩된 섹션 레벨은 순차적이어야 합니다.
+
 === 섹션 레벨 구문
 섹션 제목은 섹션의 시작을 표시하며 해당 섹션의 제목 역할도 합니다. 섹션 제목 앞에는 섹션 레벨을 나타내는 섹션 마커를 접두사로 붙여야 합니다. 마커의 등호 개수는 0부터 시작하는 색인을 사용하여 섹션 레벨을 나타냅니다(예: 등호 두 개는 레벨 1을 나타냄). 섹션 마커는 등호 두 개에서 여섯 개까지 가능하며 뒤에 공백이 있어야 합니다.
 HTML 출력에서 섹션 제목은 제목 태그로 표현됩니다. 제목 태그의 숫자는 섹션 레벨보다 하나 더 큽니다(예: 섹션 레벨 1은 h2 태그가 됨). 섹션 레벨의 범위는 0-5입니다. 이 제한은 주로 HTML에서 h1부터 h6까지의 제목 태그만 제공하기 때문에 설정되었습니다(레벨 5가 상한).
@@ -3212,6 +3220,7 @@ Content of second section
 섹션 제목을 정의하는 데 사용되는 등호 마커 외에도 Asciidoctor는 Markdown의 해시 기호(#)를 인식합니다. 즉, Markdown 문서의 개요는 AsciiDoc 문서로 잘 변환됩니다.
 === HTML 제목으로서의 제목
 문서가 HTML 5로 변환되면(내장 html5 백엔드 사용) 각 섹션 제목은 제목 레벨이 등호 개수와 일치하는 제목 요소가 됩니다. 예를 들어 레벨 1 섹션(==)은 <h2> 요소에 매핑됩니다.
+
 
 
 [[activate-section-title-links]]
@@ -3407,65 +3416,648 @@ sectnumlevels 속성에 2라는 값이 할당되면 레벨 3부터 5까지의 �
 doctype이 book일 때 레벨 1 섹션은 장이 됩니다. 따라서 sectnumlevels가 4이면 각 장 내에 번호가 매겨진 3개의 섹션 레벨로 변환됩니다.
 sectnumlevels에 0 값을 할당하는 것은 섹션 번호 매기기를 비활성화하는 것과 효과적으로 동일합니다(sectnums!). 그러나 문서가 부분 번호 매기기가 활성화된 다중 부분 책인 경우 부분 번호 매기기도 비활성화하려면 sectnumlevels를 -1로 설정해야 합니다(partnums!와 동일).
 
+
+
 [[section-styles-articles-books]]
-=== Section Styles for Articles and Books
+== Section Styles for Articles and Books
+
+AsciiDoc은 학술 논문, 학술 논문 및 책에서 찾을 수 있는 특수한 front matter와 back matter 섹션에 대한 기본 제공 스타일을 제공합니다. 이러한 스타일 섹션을 특수 섹션이라고 합니다. 문서 유형 article 또는 book은 사용할 수 있는 섹션 스타일을 결정합니다.
+
+=== 책 섹션 스타일
+
+다음 섹션 스타일은 book 문서 유형에서 허용됩니다:
+
+- abstract (장이 됨)
+- colophon
+- dedication
+- acknowledgments
+- preface
+- partintro (파트의 첫 번째 자식이어야 함)
+- appendix
+- glossary
+- bibliography
+- index
+
+다음 스타일은 문서에서 섹션의 위치에 의해 암시되므로 특수 섹션이 아닙니다.
+
+- part
+- chapter
+
+=== 기사 섹션 스타일
+
+다음 섹션 스타일은 article 문서 유형에서 허용됩니다:
+
+- abstract
+- appendix
+- glossary
+- bibliography
+- index
+
+
 
 [[hide-special-section-titles]]
-==== Hide Special Section Titles
+== Hide Special Section Titles
+
+변환기에서 지원하는 경우 Dedication과 같은 특수 섹션의 제목은 섹션에 notitle 옵션(예: %notitle 또는 opts=notitle)을 설정하여 끌 수 있습니다(이전에는 untitled).
+
+[source,asciidoc]
+----
+[dedication%notitle]
+== Dedication
+
+For S.S.T.--
+
+thank you for the plague of archetypes.
+----
+
+출력 문서에서 제목이 숨겨져 있더라도 참조 목적으로 AsciiDoc 소스에 여전히 지정되어야 합니다. 제목은 다른 섹션과 마찬가지로 상호 참조의 reftext로 사용됩니다.
+
+
 
 [[number-special-sections]]
-==== Number Special Sections
+== Number Special Sections
+
+=== 특수 섹션 번호 매기기
+
+내장된 특수 스타일이 할당된 섹션은 기본적으로 번호가 매겨지지 않습니다. 일반 섹션과 특수 섹션에 번호를 매기려면 sectnums를 설정하고 값을 all로 할당하세요.
+
+[source,asciidoc]
+----
+= Title
+:sectnums: all
+----
+
+부록 번호의 할당은 섹션 제목 접두사가 appendix-caption 속성에 의해 제어되므로 sectnums의 영향을 받지 않습니다. 책 부분도 sectnums에 의해 번호가 매겨지지 않습니다. 대신 partnums에 의해 제어됩니다.
+
 
 [[colophon]]
-==== Colophon
+== Colophon
+
+판권 페이지(colophon)는 특히 제작과 관련하여 책에 대한 사실적인 정보를 포함합니다. 여기에는 ISBN, 출판사, 판 및 저작권 날짜, 법적 고지 및 면책 조항, 타이포그래피 스타일, 사용된 글꼴 및 용지, 표지 아트 및 레이아웃 크레딧, 제본 방법 및 기타 중요한 제작 정보가 포함될 수 있습니다.
+
+판권 페이지는 거의 항상 책의 맨 앞(front matter) 또는 맨 뒤(back matter)에 나타납니다. 그러나 AsciiDoc 원고의 최상위 섹션으로 어디에나 배치할 수 있습니다. 인쇄된 책에서 판권 페이지는 종종 표제지 뒷면에서 볼 수 있습니다.
+
+=== 판권 페이지 섹션 구문
+
+colophon 섹션 스타일을 사용하려면 문서 유형이 book이어야 합니다. 책에 부분이 없으면 판권 페이지는 레벨 1 섹션(==)이어야 합니다.
+
+[source,asciidoc]
+----
+[colophon]
+== Colophon
+The Asciidoctor Press, Ceres and Denver.
+(C) 2020 by The Asciidoctor Press
+Published in the Milky Way Galaxy.
+This book is designed by Dagger Flush, Denver, Colorado.
+The types are handset Volcano Dust and Papaya, designed by Leeloo.
+Leeloo created the typefaces to soften the bluntness of documentation.
+Built with Asciidoctor on Fedora 33.
+Printing and binding by Ceres Lithographing, Inc., Ceres, Milky Way.
+----
+
+책에 부분이 있으면 판권 페이지는 레벨 0 섹션(=)이어야 합니다.
+
+[source,asciidoc]
+----
+[colophon]
+[colophon]
+= Colophon
+
+The Asciidoctor Press, Ceres and Denver.
+
+(C) 2020 by The Asciidoctor Press
+
+Published in the Milky Way Galaxy.
+
+This book is designed by Dagger Flush, Denver, Colorado.
+The types are handset Volcano Dust and Papaya, designed by Leeloo.
+Leeloo created the typefaces to soften the bluntness of documentation.
+
+Built with Asciidoctor on Fedora 33.
+
+Printing and binding by Ceres Lithographing, Inc., Ceres, Milky Way.
+----
+
+sectnums 속성 값이 all인 경우에만 판권 페이지에 번호가 매겨집니다.
+
+
 
 [[dedication]]
-==== Dedication
+== Dedication
+헌정 페이지는 감사의 마음을 표현하는 데 사용됩니다.
+
+=== 헌정 섹션 구문
+
+dedication 섹션 스타일을 사용하려면 문서 유형이 book이어야 합니다. 책에 부분이 없다면 헌정 섹션은 레벨 1 섹션(==)이어야 합니다.
+
+[source,asciidoc]
+----
+[dedication]
+== Dedication
+For S.S.T.--
+thank you for the plague of archetypes.
+----
+
+책에 부분이 있다면 헌정 섹션은 레벨 0 섹션(=)이어야 합니다.
+
+[source,asciidoc]
+----
+[dedication]
+= Dedication
+For S.S.T.--
+thank you for the plague of archetypes.
+----
+
+
 
 [[abstract-section]]
-==== Abstract (Section)
+== Abstract (Section)
+
+초록은 기사의 간결한 개요입니다. 초록 섹션 스타일은 article 문서 유형에서 사용할 수 있습니다.
+
+=== 초록 섹션 구문
+abstract 섹션 스타일은 아래 예제와 같이 기사의 첫 번째 섹션에 설정해야 합니다:
+
+[source,asciidoc]
+----
+= Article Title
+
+[abstract]
+== Abstract
+
+Documentation is a distillation of many long adventures.
+
+== Section Title
+----
+
+섹션 전체가 아닌 단락이나 오픈 블록을 초록으로 스타일링하려면 추상 블록 스타일 문서를 참조하세요.
+
+
+
 
 [[abstract-block]]
-==== Abstract (Block)
+== Abstract (Block)
+초록은 문서의 간결한 개요입니다. abstract 블록 스타일은 오픈 블록이나 단락에 배치할 수 있습니다. 다음은 단락에 설정된 추상 블록 스타일의 예입니다:
+
+[source,asciidoc]
+----
+= Document Title
+[abstract]
+.Abstract
+Documentation is a distillation of many long adventures.
+== First Section
+----
+
+추상 블록 스타일은 오픈 블록이나 단락에 제목이 필요하지 않으며, 종료하기 위해 후속 섹션에 의존하지 않습니다.
+
+[source,asciidoc]
+----
+= Document Title
+[abstract]
+This article will take you on a wonderful adventure of knowledge.
+You'll start with the basics.
+Beyond that, where you go is up to you.
+Your journey begins here.
+----
+
+[TIP]
+====
+책의 장 시작 부분에 인용구를 포함시키려면 추상 블록 내에 인용 블록을 래핑하세요.
+====
+
+추상 섹션 스타일도 있습니다.
+
+
 
 [[preface]]
-==== Preface
+== Preface
+서문은 책 또는 책의 부분의 첫 번째 장 앞에 오는 특별한 섹션입니다.
+
+=== 책의 서문
+
+preface 섹션 스타일은 문서 유형이 book일 때만 사용할 수 있습니다. 서문에는 하위 섹션이 포함될 수 있습니다. 책에 부분이 포함되지 않은 경우 서문은 레벨 1 섹션(==)으로 정의되어야 하며 모든 서문 하위 섹션은 레벨 2(===)에서 시작해야 합니다.
+
+[source,asciidoc]
+----
+= Book Title
+:doctype: book
+
+[preface]
+== Our Preface
+
+I awoke one morning and was confronted by the dark and stormy eyes of the chinchilla.
+She had conquered the mountain of government reports that had eroded into several minor foothills and a creeping alluvial plain of loose papers.
+
+=== Preface Subsection
+
+Chinchillas rule the world.
+
+== Chapter 1
+
+...
+----
+
+=== 책 부분의 서문
+책 부분의 서문을 만들려면 서문을 레벨 1 섹션(==)으로 정의해야 하며 하위 섹션은 레벨 2(===)에서 시작해야 합니다. 서문은 부분의 첫 번째 섹션이어야 합니다.
+
+[source,asciidoc]
+----
+= Book Title
+:doctype: book
+
+= Part 1
+
+[preface]
+== Part 1 Preface
+
+The preface for part 1.
+
+=== Preface Subsection
+
+More part 1 prefacing.
+
+== Chapter 1
+
+...
+----
+
+
 
 [[book-parts]]
-==== Book Parts
+== Book Parts
+
+문서 유형이 book일 때만 부분을 사용할 수 있습니다. 적어도 하나의 부분이 존재한다는 것은 문서가 다중 부분 책임을 의미합니다. (단일 장으로만 구성된 책과 구별되는 다중 부분 책을 위한 전용 doctype은 없습니다).
+
+=== 부분의 구조
+
+부분은 레벨 0 섹션입니다. 부분에는 적어도 하나의 레벨 1 섹션이 포함되어야 합니다. 첫 번째 부분은 문서 제목 다음에 오는 문서의 첫 번째 레벨 0 섹션입니다. 문서 제목과 마찬가지로 부분은 레벨 0 섹션 제목(=)으로 지정됩니다.
+
+[source,asciidoc]
+----
+= Book Title
+:doctype: book
+= Part I
+...
+----
+
+부분에는 선택적인 소개(문서의 서문과 유사)가 있을 수 있으며, 이를 부분 소개(part intro)라고 합니다. 부분 소개는 부분 제목과 부분의 첫 번째 섹션 사이의 내용입니다. 부분 소개는 단락 또는 오픈 블록에 partintro 스타일을 명시적으로 표시할 수 있습니다.
+
+AsciiDoc는 부분의 번호 매기기와 레이블을 제어하기 위한 문서 속성을 제공합니다.
+
+=== 부분 소개
+
+부분 제목과 부분의 첫 번째 섹션 사이의 내용이 부분 소개입니다. 일반적으로 부분 소개는 다음과 같이 추론됩니다:
+
+[source,asciidoc]
+----
+= Book Title
+:doctype: book
+= Part I
+This is the implicit partintro.
+== Chapter A
+첫 번째 섹션 앞의 유일한 블록에 partintro 스타일을 추가하여 부분 소개를 명시적으로 표시할 수 있습니다.
+----
+
+[source,asciidoc]
+----
+= Book Title
+:doctype: book
+= Part I
+[partintro]
+This is the implicit partintro.
+== Chapter A
+----
+
+=== 부분을 위한 특수 섹션
+부분에는 고유한 서문, 참고문헌, 용어집 및 색인이 있을 수 있습니다.
+
+[source,asciidoc]
+----
+= Multi-Part Book with Parts that Have Special Sections
+Author Name author@example.com
+:doctype: book
+[preface]
+= Book Preface
+This is the preface for the whole book.
+=== Preface Subsection
+Chinchillas rule the world.
+= Part 1
+This is the introduction to the first part of our mud-encrusted journey.
+== Chapter 1
+There was mud...
+== Chapter 2
+Great gobs of mud...
+[glossary]
+== Part 1 Glossary
+[glossary]
+mud:: wet, cold dirt
+= Part 2
+[preface]
+== Part 2 Preface
+This is a preface just for part 2.
+== Chapter 3
+The mud had turned to cement...
+----
+
+특수 섹션은 부분 형제로서 책과 직접 연관될 수도 있습니다. 이전 예제의 책 서문은 첫 번째 부분 앞에 오므로 원하는 경우 레벨 1 섹션으로 작성할 수 있습니다.
+
+[source,asciidoc]
+----
+[preface]
+== Book Preface
+This is the preface for the whole book.
+=== Preface Subsection
+Chinchillas rule the world.
+----
+
+계속 읽어보면 특수 섹션을 부분 형제로 사용하는 방법을 알 수 있습니다.
+
+=== 부분 형제로서의 특수 섹션
+다중 부분 책에서 부분은 계층 구조의 최상위 레벨을 차지합니다. 다중 부분 책에서 부분 다음에 레벨 1에서 특수 섹션을 정의하면 해당 부분의 자식이 됩니다. 특수 섹션을 책이 소유하게 하려면 부분의 형제로서 최상위 레벨에서도 정의되어야 합니다.
+
+AsciiDoc 구문은 다중 부분 책의 특수 섹션을 레벨 0 섹션 제목(즉, =)을 사용하여 정의할 수 있습니다. 문서가 구문 분석되면 특수 섹션의 레벨이 모델에서 자동으로 레벨 1 섹션으로 조정됩니다. 이러한 레벨 변경에도 불구하고 특수 섹션은 계층 구조에서 부분의 형제로 유지됩니다. 오프셋의 한 레벨(레벨 1 대신 레벨 0)은 특수 섹션을 부분의 형제로 만들기 위한 파서에 대한 힌트일 뿐입니다.
+
+다음 예제의 부록에 이 구문이 사용된 것을 볼 수 있습니다.
+
+[source,asciidoc]
+----
+= Multi-Part Book
+:doctype: book
+= Part Title
+== Chapter Title
+[appendix]
+= Appendix Title
+----
+
+일관성을 위해 첫 번째 부분 앞에 오는 특수 섹션을 부분과 유사하게 만드는 것이 가장 좋습니다. 하지만 기술적으로 구문은 이를 요구하지 않습니다.
+
+[source,asciidoc]
+----
+= Multi-Part Book
+:doctype: book
+[preface]
+= Book Preface
+= Part Title
+== Chapter Title
+----
+
+특수 섹션이 중첩 섹션을 지원하는 경우 특수 섹션 자체가 레벨 1을 가지므로 다음 레벨은 레벨 2(즉, ===)여야 합니다. 다음은 부분 앞에 특수 섹션이 있고 부분 뒤에 하위 섹션이 있는 특수 섹션이 있는 다중 부분 책의 예입니다.
+
+[source,asciidoc]
+----
+= Multi-Part Book with Special Sections
+Author Name author@example.com
+:doctype: book
+:toc:
+[colophon]
+= The Colophon
+Text at the beginning of a book describing facts about its production.
+= The First Part
+== The First Chapter
+Chapters can be grouped by preceding them with a level 0 Book Part title.
+[appendix]
+= The Appendix
+=== Basics
+A multipart book can have appendixes, which should be defined at section level 0.
+=== Subsections
+Subsections of an appendix in a multipart book should start at level 2.
+----
+
+이 문서를 변환할 때 목차에서 특수 섹션이 부분의 형제임을 확인하십시오.
+
+image::img/multipart-toc-with-special-sections.png[]
+
+특수 섹션의 하위 섹션은 상위 섹션 아래 두 레벨이 아니라 한 레벨 아래에 있음을 확인하십시오.
+
+
+
 
 [[part-numbers-signifier]]
-===== Part Numbers and Signifier
+== Part Numbers and Signifier
+
+=== 책 부분 번호 매기기
+책 부분 번호는 sectnums가 아니라 partnums 속성에 의해 제어됩니다. 부분 번호를 자동으로 생성하려면 책 헤더에서 partnums 속성을 설정하세요.
+
+[source,asciidoc]
+----
+= The Secret Manual
+:doctype: book
+:sectnums:
+:partnums:
+= Defensive Operations
+== An Introduction to DefenseOps
+= Managing Werewolves
+----
+
+렌더링되면 부분 번호는 로마 숫자로 표시됩니다.
+
+[source]
+----
+Part I. Defensive Operations
+
+An Introduction to DefenseOps
+Part II. Managing Werewolves
+----
+
+=== 부분 기호 사용자 정의
+partnums 속성이 설정되면 기호(즉, 접두사) Part가 자동으로 부분 제목의 시작 부분에 추가됩니다. 기호는 자동 생성된 부분 번호와 공백으로 구분됩니다. 책의 헤더에 part-signifier 속성을 정의하여 기호를 수정할 수 있습니다.
+
+[source,asciidoc]
+----
+:part-signifier: Component
+----
+
+접두사를 제거하려면 문서 헤더에서 part-signifier 속성을 설정 해제하세요:
+
+[source,asciidoc]
+----
+:!part-signifier:
+----
+
+
 
 [[chapters]]
-==== Chapters
+== Chapters
+
+=== 장 기호 사용자 정의
+
+chapter-signifier(즉, 접두사)가 설정되면 sectnums 속성도 설정된 경우 이 속성의 값이 자동으로 책의 장 제목 시작 부분에 추가됩니다. 기호는 자동 생성된 장 번호와 공백으로 구분됩니다. 예를 들어 출력 문서에 다음과 같이 장 제목이 나타날 수 있습니다:
+
+[source]
+----
+Chapter 1. Title
+----
+
+장은 문서 유형이 책일 때 블록 스타일이 없는 레벨 1 섹션으로 정의됩니다. 책의 헤더에 chapter-signifier 속성을 정의하여 기호를 수정할 수 있습니다.
+[source,asciidoc]
+----
+:chapter-signifier: Peatükk
+----
+
+접두사를 제거하려면 문서 헤더에서 chapter-signifier 속성을 설정 해제하세요:
+
+[source,asciidoc]
+----
+:!chapter-signifier:
+----
+
+
 
 [[appendix]]
-==== Appendix
+== Appendix
+
+appendix 섹션 스타일은 책과 기사에서 사용할 수 있으며 하위 섹션을 가질 수 있습니다. AsciiDoc 구조는 부록을 어디에나 배치할 수 있지만 문서 끝 부분에 배치하는 것이 일반적입니다.
+
+=== 부록 섹션 구문
+
+기사의 경우 부록은 레벨 1 섹션(==)으로 정의되어야 합니다. 예를 들면:
+
+[source,asciidoc]
+----
+= Article Title
+:appendix-caption: Exhibit
+:sectnums:
+:toc:
+== Section
+=== Subsection
+[appendix]
+== First Appendix
+=== First Subsection
+=== Second Subsection
+[appendix]
+== Second Appendix
+----
+목차는 다음과 같이 나타납니다:
+
+[source,asciidoc]
+----
+Section
+1.1. Subsection
+Exhibit A: First Appendix
+A.1. First Subsection
+A.2. Second Subsection
+Exhibit B: Second Appendix
+----
+
+책의 경우 부록을 장과 인접하게 만들려면 부록을 레벨 1 섹션(==)으로 정의해야 합니다. 다중 부분 책에서 부록을 다른 부분과 인접하게 만들려면 부록을 레벨 0 섹션(=)으로 정의해야 합니다. 어느 경우든 부록의 첫 번째 하위 섹션은 레벨 2 섹션(===)이어야 합니다.
+다음 예제는 다중 부분 책에 대한 부록을 정의하는 방법을 보여줍니다.
+
+[source,asciidoc]
+----
+= Book Title
+:doctype: book
+:sectnums:
+:toc:
+= First Part
+== Chapter
+=== Subsection
+== Second Part
+== Chapter
+[appendix]
+= First Appendix
+=== First Subsection
+=== Second Subsection
+[appendix]
+= Second Appendix
+----
+
+목차는 다음과 같이 나타납니다:
+[source,asciidoc]
+----
+First Part
+
+Chapter
+1.1. Subsection
+Second Part
+Chapter
+Appendix A: First Appendix
+A.1. First Subsection
+A.2. Second Subsection
+Appendix B: Second Appendix
+----
+
+=== 부록 레이블
+렌더링되면 appendix로 표시된 섹션의 제목에는 다음이 포함됩니다:
+
+appendix-caption 속성의 값에서 가져온 레이블로, 기본값은 "Appendix"입니다.
+부록 시퀀스 내에서 부록의 순서를 나타내는 문자(A, B, …)
+콜론
+섹션 제목
+
+예를 들면:
+[source]
+----
+Appendix A: Data Access Matrix
+----
+
+appendix-caption 속성을 설정하고 기본값을 사용자 정의 값으로 재정의하여 접두사를 수정할 수 있습니다.
+[source,asciidoc]
+----
+:appendix-caption: Exhibit
+----
+
+접두사를 제거하려면 속성을 설정 해제하세요.
+
+[source,asciidoc]
+----
+:appendix-caption!:
+----
 
 [[glossary]]
-==== Glossary
+== Glossary
+
+섹션에 glossary 스타일을 설정하여 기사, 책 및 책 부분에 용어집을 포함할 수 있습니다.
+
+=== 용어집 섹션 구문
+
+용어집 섹션은 다음과 같은 경우 레벨 1 섹션(==)으로 정의됩니다:
+
+doctype이 article인 경우
+doctype이 book이고 책에 부분이 포함되지 않은 경우
+용어집이 책 부분에 대한 것인 경우
+
+[source,asciidoc]
+----
+[glossary]
+== Terminology
+책에 부분이 있고 용어집이 책 전체에 대한 것인 경우 섹션은 레벨 0 섹션(=)으로 정의됩니다.
+[source,asciidoc]
+[glossary]
+= Glossary
+----
+
+=== 용어집 설명 목록 스타일 구문
+섹션에 glossary를 설정하는 것 외에도 섹션의 설명 목록에 블록 스타일 glossary를 설정해야 합니다.
+[source,asciidoc]
+----
+[glossary]
+== Glossary
+[glossary]
+mud:: wet, cold dirt
+rain::
+water falling from the sky
+----
 
 [[bibliography]]
-==== Bibliography
+== Bibliography
 
 [[index]]
-==== Index
+== Index
 
 [[section-attributes-styles-reference]]
-=== Section Attributes and Styles Reference
+== Section Attributes and Styles Reference
 
 [[paragraphs]]
 == Paragraphs
 
 [[hard-line-breaks]]
-=== Hard Line Breaks
+== Hard Line Breaks
 
 [[preamble-lead-style]]
-=== Preamble and Lead Style
+== Preamble and Lead Style
 
 [[paragraph-alignment]]
-=== Paragraph Alignment
+== Paragraph Alignment
 
 [[discrete-headings]]
 == Discrete Headings
@@ -3477,36 +4069,38 @@ sectnumlevels에 0 값을 할당하는 것은 섹션 번호 매기기를 비활�
 == Text Formatting and Punctuation
 
 [[bold]]
-=== Bold
+== Bold
 
 [[italic]]
-=== Italic
+== Italic
 
 [[monospace]]
-=== Monospace
+== Monospace
 
 [[literal-monospace]]
-=== Literal Monospace
+== Literal Monospace
 
 [[text-span-built-in-roles]]
-=== Text Span and Built-in Roles
+== Text Span and Built-in Roles
 
 [[highlight]]
-=== Highlight
+== Highlight
 
 [[quotation-marks-apostrophes]]
-=== Quotation Marks and Apostrophes
+== Quotation Marks and Apostrophes
 
 [[subscript-superscript]]
-=== Subscript and Superscript
+== Subscript and Superscript
 
 [[using-custom-inline-styles]]
-=== Using Custom Inline Styles
+== Using Custom Inline Styles
 
 [[troubleshoot-unconstrained-formatting-pairs]]
-=== Troubleshoot Unconstrained Formatting Pairs
+== Troubleshoot Unconstrained Formatting Pairs
 
----
+
+
+[[lists]]
 == Lists
 
 
@@ -4310,7 +4904,7 @@ grandparent list item
 
 
 
---
+// --
 ** parent list item
 *** child list item
 
