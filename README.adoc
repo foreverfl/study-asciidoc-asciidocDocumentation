@@ -3374,9 +3374,9 @@ doctype=inline과 backend=html5 옵션으로 처리하면 다음과 같이 생�
 
 
 
-=== Sections
+== Sections
 
-=== Section Titles and Levels
+== Sections - Section Titles and Levels
 
 섹션은 문서를 콘텐츠 계층 구조로 분할합니다. 섹션은 암시적 인클로저입니다. 각 섹션은 제목으로 시작하여 다음 형제 섹션, 조상 섹션 또는 문서 끝에서 끝납니다. 중첩된 섹션 레벨은 순차적이어야 합니다.
 
@@ -3444,16 +3444,16 @@ Content of second section
 
 
 
-==== Activate Section Title Links
+== Sections - Section Titles and Levels - Activate Section Title Links
 
-===== 섹션 제목을 링크로 변환
+=== 섹션 제목을 링크로 변환
 섹션 제목을 링크로 변환하려면 sectlinks 속성을 활성화하세요. 기본 Asciidoctor 스타일시트는 링크된 섹션 제목을 링크되지 않은 섹션 제목과 동일한 색상과 스타일로 표시합니다.
 
-===== 섹션 제목에 § 추가
+=== 섹션 제목에 § 추가
 문서에서 sectanchors 속성이 활성화되면 섹션 제목 앞에 앵커(빈 링크)가 추가됩니다. 기본 Asciidoctor 스타일시트는 앵커를 섹션 제목의 왼쪽에 떠 있는 섹션 엔티티(§)로 렌더링합니다.
 
 
-=== Autogenerate Section IDs
+== Sections - Autogenerate Section IDs
 섹션과 개별 제목은 자동 ID 생성을 지원합니다. 이러한 블록 중 하나에 사용자 정의 ID를 할당하지 않았거나 sectids 문서 속성을 설정 해제하지 않은 경우 AsciiDoc 프로세서는 제목을 사용하여 해당 블록에 대한 ID를 자동으로 생성하고 할당합니다. 이 페이지에서는 ID가 파생되는 방식과 이 동작을 제어하는 방법을 설명합니다.
 === 섹션 ID 계산 방법
 AsciiDoc 프로세서는 다음 순서의 이벤트와 규칙을 사용하여 제목에서 ID를 작성합니다:
@@ -3503,7 +3503,7 @@ sectids를 사용하여 ID 자동 생성을 켜고 끌 수 있으며 ID 접두�
 
 
 
-==== Change the ID Prefix and Separator
+== Sections - Autogenerate Section IDs -Change the ID Prefix and Separator
 AsciiDoc 프로세서가 섹션 ID를 자동 생성할 때 값을 밑줄로 시작하고 각 단어 사이에 하이픈을 사용합니다. 이러한 문자는 idprefix 및 idseparator 속성으로 사용자 정의할 수 있습니다.
 === ID 접두사 변경
 기본적으로 AsciiDoc 프로세서는 자동 생성된 섹션 ID를 밑줄(_)로 시작합니다. 이 기본값은 xref에서 ID를 참조할 때(동일한 파일 내에서든 다른 파일에 대한 딥 링크든) 문제를 일으킬 수 있습니다. 선행 밑줄이 단락의 다른 곳에 있는 밑줄과 쌍을 이룰 수 있으므로 예기치 않은 텍스트 서식이 발생할 수 있습니다. 한 가지 해결 방법은 ID 앞에 {empty}를 접두사로 추가하거나(예: {empty}_section_title) 속성을 사용하여 대상을 참조하여 일치를 방해하는 것입니다. 대신 ID 접두사를 사용자 정의하는 것이 좋습니다.
@@ -3533,7 +3533,7 @@ idprefix를 비워 놓으면 DocBook 출력에서 잘못된 ID(예: 숫자로 �
 
 
 
-=== Assign Custom IDs and Reference Text
+== Sections - Assign Custom IDs and Reference Text
 섹션에 사용자 정의 ID와 선택적 참조 텍스트(즉, 레이블)를 할당할 수 있습니다(앵커 참조). 사용자 정의 ID는 자동 생성된 ID 대신 사용됩니다. 이는 상호 참조를 사용하여 섹션에 연결할 수 있는 안정적인 앵커를 정의하려는 경우에 유용할 수 있습니다. 명시적 텍스트를 지정하지 않고 ID를 참조할 때 참조 텍스트가 사용됩니다. 이는 섹션을 참조하는 데 사용되는 자동 참조 텍스트를 중앙에서 관리하는 좋은 방법입니다.
 사용자 정의 ID를 가진 섹션의 예는 다음과 같습니다:
 [source,asciidoc]
@@ -3551,9 +3551,10 @@ reftext 속성의 값에 공백이나 쉼표가 포함된 경우 따옴표로 �
 ID와 참조 텍스트는 레거시 블록 앵커 구문을 사용하여 정의할 수도 있습니다:
 [source,asciidoc]
 ----
-
-=== Subspecies of Tiger
+== Subspecies of Tiger
 ----
+
+
 블록 앵커 구문을 사용할 때 ID는 XML Name 규칙을 준수해야 합니다. 즉, ID는 문자, 밑줄 또는 콜론으로 시작해야 합니다.
 === 보조 ID 할당
 섹션 제목은 하나의 기본 ID만 가질 수 있습니다. 그러나 인라인 앵커를 사용하여 URL에서 참조할 수 있도록 섹션 제목에 보조 ID를 등록할 수 있습니다. 이 기능은 명시적(기본) ID를 할당하는지 여부에 관계없이 작동합니다.
@@ -3580,7 +3581,7 @@ ID와 참조 텍스트는 레거시 블록 앵커 구문을 사용하여 정의�
 이러한 보조 ID는 참조 시스템에 등록되지 않습니다. 즉, 문서 내에서 섹션 제목을 참조하는 데 사용할 수 없습니다. 이들은 URL 조각(별칭 딥 링킹)을 사용하여 URL에서 참조할 수 있도록 섹션 제목에 보조 조각 식별자를 할당하기 위한 것입니다. 문서 내에서 섹션 제목을 참조하는 데는 기본 ID만 사용할 수 있습니다.
 
 
-=== Section Numbers
+== Sections - Section Numbers
 === 섹션 번호 켜기
 기본적으로 섹션에는 번호가 매겨지지 않습니다. 그러나 sectnums 속성을 설정하여 이 기능을 활성화할 수 있습니다.
 [source,asciidoc]
@@ -3633,8 +3634,7 @@ doctype이 book일 때 레벨 1 섹션은 장이 됩니다. 따라서 sectnumlev
 sectnumlevels에 0 값을 할당하는 것은 섹션 번호 매기기를 비활성화하는 것과 효과적으로 동일합니다(sectnums!). 그러나 문서가 부분 번호 매기기가 활성화된 다중 부분 책인 경우 부분 번호 매기기도 비활성화하려면 sectnumlevels를 -1로 설정해야 합니다(partnums!와 동일).
 
 
-
-== Section Styles for Articles and Books
+== Sections - Section Styles for Articles and Books
 
 AsciiDoc은 학술 논문, 학술 논문 및 책에서 찾을 수 있는 특수한 front matter와 back matter 섹션에 대한 기본 제공 스타일을 제공합니다. 이러한 스타일 섹션을 특수 섹션이라고 합니다. 문서 유형 article 또는 book은 사용할 수 있는 섹션 스타일을 결정합니다.
 
@@ -3670,7 +3670,7 @@ AsciiDoc은 학술 논문, 학술 논문 및 책에서 찾을 수 있는 특수�
 
 
 
-== Hide Special Section Titles
+== Sections - Section Styles for Articles and Books - NHide Special Section Titles
 
 변환기에서 지원하는 경우 Dedication과 같은 특수 섹션의 제목은 섹션에 notitle 옵션(예: %notitle 또는 opts=notitle)을 설정하여 끌 수 있습니다(이전에는 untitled).
 
@@ -3688,7 +3688,7 @@ thank you for the plague of archetypes.
 
 
 
-== Number Special Sections
+== Sections - Section Styles for Articles and Books - Number Special Sections
 
 === 특수 섹션 번호 매기기
 
@@ -3703,7 +3703,7 @@ thank you for the plague of archetypes.
 부록 번호의 할당은 섹션 제목 접두사가 appendix-caption 속성에 의해 제어되므로 sectnums의 영향을 받지 않습니다. 책 부분도 sectnums에 의해 번호가 매겨지지 않습니다. 대신 partnums에 의해 제어됩니다.
 
 
-== Colophon
+== Sections - Section Styles for Articles and Books - Colophon
 
 판권 페이지(colophon)는 특히 제작과 관련하여 책에 대한 사실적인 정보를 포함합니다. 여기에는 ISBN, 출판사, 판 및 저작권 날짜, 법적 고지 및 면책 조항, 타이포그래피 스타일, 사용된 글꼴 및 용지, 표지 아트 및 레이아웃 크레딧, 제본 방법 및 기타 중요한 제작 정보가 포함될 수 있습니다.
 
@@ -3754,7 +3754,7 @@ sectnums 속성 값이 all인 경우에만 판권 페이지에 번호가 매겨�
 
 
 
-== Dedication
+== Sections - Section Styles for Articles and Books - Dedication
 헌정 페이지는 감사의 마음을 표현하는 데 사용됩니다.
 
 === 헌정 섹션 구문
@@ -3781,7 +3781,7 @@ thank you for the plague of archetypes.
 
 
 
-== Abstract (Section)
+== Sections - Section Styles for Articles and Books - Abstract (Section)
 
 초록은 기사의 간결한 개요입니다. 초록 섹션 스타일은 article 문서 유형에서 사용할 수 있습니다.
 
@@ -3805,7 +3805,7 @@ Documentation is a distillation of many long adventures.
 
 
 
-== Abstract (Block)
+== Sections - Section Styles for Articles and Books - Abstract (Block)
 초록은 문서의 간결한 개요입니다. abstract 블록 스타일은 오픈 블록이나 단락에 배치할 수 있습니다. 다음은 단락에 설정된 추상 블록 스타일의 예입니다:
 
 [source,asciidoc]
@@ -3838,7 +3838,7 @@ Your journey begins here.
 
 
 
-== Preface
+== Sections - Section Styles for Articles and Books - Preface
 서문은 책 또는 책의 부분의 첫 번째 장 앞에 오는 특별한 섹션입니다.
 
 === 책의 서문
@@ -3891,7 +3891,7 @@ More part 1 prefacing.
 
 
 
-== Book Parts
+== Sections - Section Styles for Articles and Books - Book Parts
 
 문서 유형이 book일 때만 부분을 사용할 수 있습니다. 적어도 하나의 부분이 존재한다는 것은 문서가 다중 부분 책임을 의미합니다. (단일 장으로만 구성된 책과 구별되는 다중 부분 책을 위한 전용 doctype은 없습니다).
 
@@ -4039,7 +4039,7 @@ image::img/multipart-toc-with-special-sections.png[]
 
 
 
-== Part Numbers and Signifier
+== Sections - Section Styles for Articles and Books - Book Parts - Part Numbers and Signifier
 
 === 책 부분 번호 매기기
 책 부분 번호는 sectnums가 아니라 partnums 속성에 의해 제어됩니다. 부분 번호를 자동으로 생성하려면 책 헤더에서 partnums 속성을 설정하세요.
@@ -4082,7 +4082,7 @@ partnums 속성이 설정되면 기호(즉, 접두사) Part가 자동으로 부�
 
 
 
-== Chapters
+== Sections - Section Styles for Articles and Books - Chapters
 
 === 장 기호 사용자 정의
 
@@ -4108,7 +4108,7 @@ Chapter 1. Title
 
 
 
-== Appendix
+== Sections - Section Styles for Articles and Books - Appendix
 
 appendix 섹션 스타일은 책과 기사에서 사용할 수 있으며 하위 섹션을 가질 수 있습니다. AsciiDoc 구조는 부록을 어디에나 배치할 수 있지만 문서 끝 부분에 배치하는 것이 일반적입니다.
 
@@ -4207,7 +4207,7 @@ appendix-caption 속성을 설정하고 기본값을 사용자 정의 값으로 
 :appendix-caption!:
 ----
 
-== Glossary
+== Sections - Section Styles for Articles and Books - Glossary
 
 섹션에 glossary 스타일을 설정하여 기사, 책 및 책 부분에 용어집을 포함할 수 있습니다.
 
@@ -4243,7 +4243,7 @@ water falling from the sky
 
 
 
-== Bibliography
+== Sections - Section Styles for Articles and Books - Bibliography
 AsciiDoc은 참고문헌에 대한 기본적인 지원을 제공합니다. AsciiDoc은 참고문헌 항목 자체의 구조에는 신경 쓰지 않으며, 이는 완전히 자유로운 형식입니다. AsciiDoc이 하는 일은 동일한 문서에서 항목을 참조할 수 있는 방법을 제공하고 다른 도구 체인(예: DocBook)에서 처리할 수 있도록 적절한 의미론과 함께 참고문헌을 출력하는 것입니다.
 
 === 참고문헌 섹션 구문
@@ -4317,12 +4317,14 @@ Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley. 
 
 
 
-== Index
+== Sections - Section Styles for Articles and Books - Index
 === 색인 카탈로그
 색인 용어는 항상 처리되지만 Asciidoctor PDF와 DocBook 도구 체인만 색인 카탈로그를 자동으로 생성할 수 있습니다. 색인을 생성하려면 문서 끝에 index 스타일로 표시된 레벨 1 섹션(==)을 정의하세요.
 [source,asciidoc]
+----
 [index]
 == Index
+----
 Asciidoctor PDF와 DocBook 도구 체인 모두 이 시드 섹션에 색인을 자동으로 채웁니다.
 Asciidoctor에 내장된 HTML5 변환기는 색인을 생성하지 않습니다.
 === 색인 용어
@@ -4383,7 +4385,7 @@ To create a new git repository,
 
 
 
-== Section Attributes and Styles Reference
+== Sections - Section Attributes and Styles Reference
 === 섹션 속성
 === Section attributes
 
@@ -6288,37 +6290,37 @@ paragraph attached to grandparent list item
 ---
 
 
-== Description Lists
+== Description Lists - Description Lists
 
-== Horizontal Description List
+== Description Lists - Horizontal Description List
 
-== Question and Answer Lists
+== Description Lists - Question and Answer Lists
 
-== Description Lists With Marker
+== Description Lists - Description Lists With Marker
 
 == Links
 
-== Autolinks
+== Links - Autolinks
 
-== URL Macro
+== Links - URL Macro
 
-== Link Macro
+== Links - Link Macro
 
-== Troubleshooting Complex URLs
+== Links - Troubleshooting Complex URLs
 
-== Link & URL Macro Attribute Parsing
+== Links - Link & URL Macro Attribute Parsing
 
-== Mailto Macro
+== Links - Mailto Macro
 
-== Link, URL, and Mailto Macro Attributes Reference
+== Links - Link, URL, and Mailto Macro Attributes Reference
 
 == Cross References
 
-=== Document to Document Cross References
+== Cross References - Document to Document Cross References
 
-=== Cross Reference Text and Styles
+== Cross References - Cross Reference Text and Styles
 
-=== Validate Cross References
+== Cross References - Validate Cross References
 
 == Footnotes
 
@@ -6438,31 +6440,31 @@ See <<heading>>.
 
 == Images
 
-== Set the Images Directory
+== Images - Set the Images Directory
 
-== Insert Images from a URL
+== Images - Insert Images from a URL
 
-== Position and Frame Images
+== Images - Position and Frame Images
 
-== Add Link to Image
+== Images - Add Link to Image
 
-== Adjust Image Sizes
+== Images - Adjust Image Sizes
 
-== Specify Image Format
+== Images - Specify Image Format
 
-== SVG Images
+== Images - SVG Images
 
-== Images Reference
+== Images - Images Reference
 
 == Audio and Video
 
-== Icons
+== Icons - Icons
 
-== Image Icons Mode
+== Icons - Image Icons Mode
 
-== Font Icons Mode
+== Icons - Font Icons Mode
 
-== Icon Macro
+== Icons - Icon Macro
 
 == Keyboard Macro
 
@@ -6480,68 +6482,67 @@ See <<heading>>.
 
 == Verbatim and Source Blocks
 
-== Source Code Blocks
+== Verbatim and Source Blocks - Source Code Blocks
 
-== Source Highlighting
+== Verbatim and Source Blocks - Source Code Blocks - Source Highlighting
 
-== Highlight Select Lines
+== Verbatim and Source Blocks - Source Code Blocks - Highlight Select Lines
 
-== Highlight PHP Source Code
+== Verbatim and Source Blocks - Source Code Blocks - Highlight PHP Source Code
 
-== Listing Blocks
+== Verbatim and Source Blocks - Listing Blocks
 
-== Literal Blocks
+== Verbatim and Source Blocks - Literal Blocks
 
-== Callouts
+== Verbatim and Source Blocks - Callouts
 
 == Tables
 
+== Tables - Build a Basic Table
 
-== Build a Basic Table
+== Tables - Add a Title
 
-== Add a Title
+== Tables - Add a Title - Customize the Title Label
 
-== Customize the Title Label
+== Tables - Add a Title - Turn Off the Title Label
 
-== Turn Off the Title Label
+== Tables - Add Columns to a Table
 
-== Add Columns to a Table
+== Tables - Add Columns to a Table - Adjust Column Widths
 
-== Adjust Column Widths
+== Tables - Add Columns to a Table - Align Content by Column
 
-== Align Content by Column
+== Tables - Add Columns to a Table - Format Content by Column
 
-== Format Content by Column
+== Tables - Add Cells and Rows to a Table
 
-== Add Cells and Rows to a Table
+== Tables - Add Cells and Rows to a Table - Create a Header Row
 
-== Create a Header Row
+== Tables - Add Cells and Rows to a Table - Create a Footer Row
 
-== Create a Footer Row
+== Tables - Add Cells and Rows to a Table - Align Content by Cell
 
-== Align Content by Cell
+== Tables - Add Cells and Rows to a Table - Format Content by Cell
 
-== Format Content by Cell
+== Tables - Add Cells and Rows to a Table - Span Columns and Rows
 
-== Span Columns and Rows
+== Tables - Add Cells and Rows to a Table - Duplicate Cells
 
-== Duplicate Cells
+== Tables - Table Width
 
-== Table Width
+== Tables - Table Borders
 
-== Table Borders
+== Tables - Table Striping
 
-== Table Striping
+== Tables - Table Orientation
 
-== Table Orientation
+== Tables - Assign a Role to a Table
 
-== Assign a Role to a Table
+== Tables - Nesting Tables
 
-== Nesting Tables
+== Tables - CSV, TSV and DSV Data
 
-== CSV, TSV and DSV Data
-
-== Table Reference
+== Tables - Table Reference
 
 == Equations and Formulas (STEM)
 
@@ -6553,41 +6554,42 @@ See <<heading>>.
 
 == Automatic Table of Contents
 
-== Customize the TOC Title
+== Automatic Table of Contents - Customize the TOC Title
 
-== Adjust the TOC Depth
+== Automatic Table of Contents - Adjust the TOC Depth
 
-== Position the TOC
+== Automatic Table of Contents -  Position the TOC
 
-== TOC Attributes Reference
+== Automatic Table of Contents - TOC Attributes Reference
 
 == Docinfo Files
 
 == Includes
 
-== Offset Section Levels
+== Includes - Offset Section Levels
 
-== Indent Included Content
+== Includes - Indent Included Content
 
-== Use an Include File Multiple Times
+== Includes - Use an Include File Multiple Times
 
-== Include List Item Content
+== Includes - Include List Item Content
 
-== Include Content by Tagged Regions
+== Includes - Include Content by Tagged Regions
 
-== Include Content by Line Ranges
+== Includes - Include Content by Line Ranges
 
-== Include Content by URI
+== Includes - Include Content by URI
 
 == Conditionals
 
-== ifdef and ifndef Directives
+== Conditionals - ifdef and ifndef Directives
 
-== ifeval Directive
+== Conditionals - ifeval Directive
 
 == Substitutions
 
 == Substitutions - Special Characters
+
 == Substitutions - Quotes
 
 == Substitutions - Attribute References
@@ -6595,6 +6597,7 @@ See <<heading>>.
 == Substitutions - Character Replacements
 
 == Substitutions - Macros
+
 == Substitutions - Post Replacements
 
 == Substitutions - Customize the Substitutions Applied to Blocks
