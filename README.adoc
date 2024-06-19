@@ -6292,35 +6292,860 @@ paragraph attached to grandparent list item
 
 == Description Lists - Description Lists
 
+설명 목록 (AsciiDoc에서는 종종 dlist로 약칭됨)은 하나 이상의 용어 (또는 용어 집합)와 각각에 대한 설명으로 구성된 연관 목록입니다. 이 목록 유형은 강조하고 설명하고 싶은 용어 목록이 있을 때 유용합니다.
+이 목록 변형을 예전에는 정의 목록이라는 용어로 알고 있었을 것입니다. 선호되는 용어는 이제 HTML 사양에서 사용되는 용어와 일치하는 설명 목록입니다.
+=== 구조
+설명 목록 항목은 설명 목록의 시작을 표시합니다. 설명 목록의 각 항목은 다음으로 구성됩니다:
+
+하나 이상의 용어, 각각 용어 구분 기호가 뒤따릅니다 (일반적으로 이중 콜론 ::, 목록이 중첩되지 않은 경우).
+하나의 공백 또는 줄 바꿈 문자
+텍스트, 첨부된 블록 또는 둘 다의 형태로 된 설명
+
+용어에 앵커가 있는 경우 앵커는 용어와 동일한 줄의 시작 부분에 정의되어야 합니다.
+첫 번째 용어는 설명 목록에 사용되는 용어 구분 기호를 정의합니다. 해당 수준의 나머지 항목에 대한 용어는 동일한 구분 기호를 사용해야 합니다.
+유효한 용어 구분 기호 집합은 고정되어 있습니다. 용어 구분 기호가 변경되면 해당 용어는 새로운 중첩된 설명 목록을 시작합니다 (순서가 지정된 목록과 순서가 지정되지 않은 목록의 작동 방식과 유사). 이 목적으로 사용할 수 있는 사용 가능한 용어 구분 기호는 다음과 같습니다:
+[source,text]
+::
+:::
+::::
+;;
+구분 기호의 문자 수와 중첩 수준 사이에는 직접적인 상관 관계가 없습니다. 구분 기호 (이 집합에서 선택)를 변경할 때마다 새로운 중첩 수준이 도입됩니다. 이것이 왼쪽 정렬 구문을 가진 언어에서 목록 깊이가 암시되는 방식입니다. 위에 표시된 순서대로 구분 기호를 사용하여 목록이 특정 수준에서 중첩되어 있음을 나타내는 것이 일반적입니다.
+=== 기본 설명 목록
+컴퓨터의 부품을 식별하는 설명 목록의 예제입니다:
+[source,text]
+CPU:: 컴퓨터의 두뇌.
+하드 드라이브:: 운영 체제 및/또는 사용자 파일의 영구 저장소.
+RAM:: CPU가 작동 중에 사용하는 정보를 일시적으로 저장합니다.
+키보드:: 텍스트를 입력하거나 화면의 항목을 제어하는 데 사용됩니다.
+마우스:: 컴퓨터 화면에서 항목을 가리키고 선택하는 데 사용됩니다.
+모니터:: 텍스트와 그래픽을 사용하여 시각적 형태로 정보를 표시합니다.
+기본적으로 각 항목의 내용은 렌더링될 때 레이블 아래에 표시됩니다. 이 목록이 어떻게 렌더링되는지 미리 보기:
+CPU::
+컴퓨터의 두뇌.
+하드 드라이브::
+운영 체제 및/또는 사용자 파일의 영구 저장소.
+RAM::
+CPU가 작동 중에 사용하는 정보를 일시적으로 저장합니다.
+키보드::
+텍스트를 입력하거나 화면의 항목을 제어하는 데 사용됩니다.
+마우스::
+컴퓨터 화면에서 항목을 가리키고 선택하는 데 사용됩니다.
+모니터::
+텍스트와 그래픽을 사용하여 시각적 형태로 정보를 표시합니다.
+=== 목록 혼합
+설명 목록의 내용은 모든 AsciiDoc 요소가 될 수 있습니다. 예를 들어, 위의 식료품 목록을 각 통로가 부모 개요 목록 항목이 아닌 레이블이 되도록 다시 작성할 수 있습니다.
+[source,asciidoc]
+유제품::
+
+우유
+계란
+베이커리::
+빵
+농산물::
+바나나
+
+
+유제품::
+
+우유
+계란
+
+베이커리::
+
+빵
+
+농산물::
+
+바나나
+
+설명 목록은 공백에 관해 매우 관대하므로 항목을 펼치고 더 읽기 쉽다면 내용을 들여쓸 수도 있습니다:
+[source,asciidoc]
+유제품::
+
+우유
+계란
+
+베이커리::
+
+빵
+
+농산물::
+
+바나나
+
+
+=== 중첩된 설명 목록
+마지막으로, 단일 하이브리드 목록 내에서 세 가지 목록 유형을 혼합하고 일치시킬 수 있습니다. AsciiDoc 구문은 우리 인간에게 가장 직관적인 항목 간의 관계를 유추하기 위해 노력합니다.
+다음은 설명, 순서가 지정된 목록 및 순서가 지정되지 않은 목록을 혼합한 목록입니다. 용어 구분 기호가 ::에서 :::로 변경되어 중첩된 설명 목록이 생성되는 방식에 주목하세요.
+[source,asciidoc]
+운영 체제::
+Linux:::
+. Fedora
+- Desktop
+. Ubuntu
+- Desktop
+- Server
+BSD:::
+. FreeBSD
+. NetBSD
+클라우드 제공업체::
+PaaS:::
+. OpenShift
+. CloudBees
+IaaS:::
+. Amazon EC2
+. Rackspace
+목록이 렌더링되는 방식은 다음과 같습니다:
+운영 체제::
+Linux:::
+. Fedora
+- Desktop
+. Ubuntu
+- Desktop
+- Server
+BSD:::
+. FreeBSD
+. NetBSD
+클라우드 제공업체::
+PaaS:::
+. OpenShift
+. CloudBees
+IaaS:::
+. Amazon EC2
+. Rackspace
+목록 항목에 더 복잡한 내용을 포함시킬 수도 있습니다.
+
+
+
 == Description Lists - Horizontal Description List
+
+항목의 첫 번째 용어와 설명을 같은 줄에서 시작하려면 (즉, 수평 배열), 설명 목록에 horizontal 스타일을 추가하세요.
+[source,asciidoc]
+[horizontal]
+CPU:: 컴퓨터의 두뇌.
+하드 드라이브:: 운영 체제 및/또는 사용자 파일의 영구 저장소.
+RAM:: CPU가 작동 중에 사용하는 정보를 일시적으로 저장합니다.
+CPU:: 컴퓨터의 두뇌.
+하드 드라이브:: 운영 체제 및/또는 사용자 파일의 영구 저장소.
+RAM:: CPU가 작동 중에 사용하는 정보를 일시적으로 저장합니다.
+기본적으로 용어와 설명 열은 자동으로 크기가 조정됩니다. 내용이 원하는 방식으로 정렬되지 않으면 너비 분포를 조정해야 합니다.
+labelwidth와 itemwidth 속성을 목록에 각각 사용하여 용어와 설명 열의 너비를 제어할 수 있습니다. 두 속성은 선택 사항입니다. 각 속성의 값은 0에서 100 사이의 숫자입니다 (단위 없는 백분율). 두 속성이 모두 지정된 경우 값의 합이 100이 되어야 합니다.
+[source,asciidoc]
+[horizontal,labelwidth=25,itemwidth=75]
+짧은 용어:: 이 항목의 용어는 열의 너비 내에 맞을 가능성이 높습니다.
+여러 줄에 걸쳐 줄 바꿈되는 긴 용어:: labelwidth 속성을 사용하여 용어 열의 너비가 제한되므로 이 항목의 용어는 줄 바꿈됩니다.
+짧은 용어:: 이 항목의 용어는 열의 너비 내에 맞을 가능성이 높습니다.
+여러 줄에 걸쳐 줄 바꿈되는 긴 용어:: labelwidth 속성을 사용하여 용어 열의 너비가 제한되므로 이 항목의 용어는 줄 바꿈됩니다.
+HTML로 변환할 때 CSS를 사용하여 열 너비를 제어하려면 대신 설명 목록에 역할을 할당할 수 있습니다.
+
+
 
 == Description Lists - Question and Answer Lists
 
+질문과 답변 (qanda) 목록은 순서가 지정된 목록으로 렌더링되는 설명 목록의 특별한 형식입니다. 항목은 1부터 시작하는 아라비아 숫자를 사용하여 번호가 매겨집니다.
+=== 질문과 답변 목록 구문
+설명 목록의 각 항목은 하나의 질문과 답변 조합을 나타냅니다. 용어는 질문으로 사용되고 설명은 답변으로 사용됩니다. 항목에 여러 질문이 있는 경우 각 질문은 새 줄에 렌더링됩니다.
+[source,asciidoc]
+[qanda]
+답은 무엇인가요?::
+이것이 답입니다.
+카메라는 허용되나요?::
+백팩은 허용되나요?::
+아니오.
+=== 렌더링된 qanda 목록
+
+답은 무엇인가요?
+이것이 답입니다.
+카메라는 허용되나요?
+백팩은 허용되나요?
+아니오.
+
+
+
+
 == Description Lists - Description Lists With Marker
+
+아직 AsciiDoc 언어의 공식 부분이 아니므로 실험적으로 간주되어야 합니다.
+Asciidoctor는 설명 목록과 순서가 없는 목록 또는 순서가 있는 목록 사이의 하이브리드 목록 유형을 도입합니다. 이 하이브리드 목록은 종종 순서가 없는 또는 순서가 있는 설명 목록이라고 하며, 각각 순서가 없는 또는 순서가 있는 목록의 모습을 하고 있지만, 각 목록 항목의 주제가 굵은 텍스트로 강조되고 정지 문자와 공백으로 구분되거나 그 위에 쌓여 있다는 점이 다릅니다.
+현재 Asciidoctor PDF만 이 페이지에 정의된 구문을 지원하지만, HTML 변환기에서도 지원이 진행 중입니다. Asciidoctor EPUB 3은 순서가 없는 목록에 다른 블록 스타일(itemized 대신 unordered)을 사용한다는 점에서 약간 다른 변형을 지원합니다. 이 차이점은 향후 릴리스에서 정렬될 예정입니다.
+=== 소개
+순서가 없는 설명 목록과 순서가 있는 설명 목록에서 각 항목의 첫 번째 용어 앞에는 마커가 붙습니다. 추가 용어는 무시됩니다. 마커는 순서가 없는 목록의 경우 글머리 기호이고 순서가 있는 목록의 경우 숫자입니다. 용어는 굵은 텍스트로 나타나는 주제가 됩니다.
+다음은 마커가 있는 설명 목록의 예입니다.
+[source,asciidoc]
+boolean: 1과 0 또는 T와 F가 아닌 true와 false를 사용하세요
+number: 구두점 없이 아라비아 숫자를 사용하세요(부동 소수점 숫자의 소수점 제외)
+enumerated value: 대소문자를 구분하여 허용된 값 중 하나만 사용하세요
+이 목록 유형은 또한 용어 뒤에 삽입되는 정지 문자를 제어하여 항목 설명으로 더 자연스럽게 흐를 수 있습니다. 또한 주제가 설명 위에 쌓이도록 구성할 수 있습니다. 이 페이지에서는 이 목록 유형의 구문과 모양을 사용자 정의하는 방법을 설명합니다.
+=== 구문
+AsciiDoc에서 마커가 있는 설명 목록은 일반 설명 목록과 같은 방식으로 정의됩니다. 차이점은 순서가 없는 블록 스타일 또는 순서가 있는 블록 스타일로 주석을 달아야 한다는 것입니다. 순서가 없는 블록 스타일은 순서가 없는 목록을 만들고 순서가 있는 블록 스타일은 순서가 있는 목록을 만듭니다.
+다음은 순서가 없는 설명 목록의 예입니다.
+[source,asciidoc]
+[unordered]
+boolean:: 1과 0 또는 T와 F가 아닌 true와 false를 사용하세요
+number:: 구두점 없이 아라비아 숫자를 사용하세요(부동 소수점 숫자를 만들기 위한 소수점 제외)
+enumerated value:: 대소문자를 구분하여 허용된 값 중 하나만 사용하세요
+지원되는 곳에서 이 구문이 어떻게 나타날지 살펴보겠습니다:
+
+boolean: 1과 0 또는 T와 F가 아닌 true와 false를 사용하세요
+number: 구두점 없이 아라비아 숫자를 사용하세요(부동 소수점 숫자의 소수점 제외)
+enumerated value: 대소문자를 구분하여 허용된 값 중 하나만 사용하세요
+
+순서가 있는 목록을 만들려면 블록 스타일을 ordered로 변경하세요.
+[source,asciidoc]
+[ordered]
+&:: ampersand
+
+:: greater than
+
+
+지원되는 곳에서 이 구문이 어떻게 나타날지 살펴보겠습니다:
+
+&: ampersand
+
+
+: greater than
+
+
+
+=== 주제 정지
+기본적으로 주제(즉, 용어)는 콜론(여전히 굵게)과 공백으로 설명과 구분됩니다. subject-stop이라는 블록 속성을 사용하여 콜론을 다른 문자(또는 문자 시퀀스)로 바꿀 수 있습니다.
+[source,asciidoc]
+[unordered,subject-stop=)]
+alpha:: 부분적으로 기능이 완료되었고, 불안정하며, 변경될 수 있습니다
+beta:: 기능이 완료되었으며 테스트 중입니다
+지원되는 곳에서 이 구문이 어떻게 나타날지 살펴보겠습니다:
+
+alpha) 부분적으로 기능이 완료되었고, 불안정하며, 변경될 수 있습니다
+beta) 기능이 완료되었으며 테스트 중입니다
+
+용어가 마침표 또는 subject-stop 속성의 값으로 끝나는 경우 주제 정지가 추가되지 않습니다.
+주제와 표시되는 정지 문자 사이에 공백을 삽입하려면 subject-stop 속성의 값 시작 부분에 공백 문자를 추가하세요. 또한 공백 문자가 유지되도록 값을 큰따옴표로 묶어야 합니다.
+=== 쌓여있는
+마커가 있는 설명 목록은 기본적으로 인라인 레이아웃을 사용합니다. 즉, 주제는 주제 정지와 공백으로 구분되어 설명과 같은 줄에 나타납니다. 주제를 설명 위에 나타나게 하려면 일반 설명 목록에서와 같이 목록에 stack 역할을 추가하세요. 이 경우 정지 문자는 명시적으로 지정된 경우에만 추가됩니다.
+[source,asciidoc]
+[unordered.stack]
+boolean:: 1과 0 또는 T와 F가 아닌 true와 false를 사용하세요
+number:: 구두점 없이 아라비아 숫자를 사용하세요(부동 소수점 숫자를 만들기 위한 소수점 제외)
+enumerated value:: 대소문자를 구분하여 허용된 값 중 하나만 사용하세요
+지원되는 곳에서 이 구문이 어떻게 나타날지 살펴보겠습니다:
+boolean
+1과 0 또는 T와 F가 아닌 true와 false를 사용하세요
+number
+구두점 없이 아라비아 숫자를 사용하세요(부동 소수점 숫자의 소수점 제외)
+enumerated value
+대소문자를 구분하여 허용된 값 중 하나만 사용하세요
+우리는 stack 역할을 stacked 옵션(%stacked)으로 대체하기로 결정할 수 있습니다. 또 다른 방법으로, 우리는 기본 동작을 뒤집어 마커가 있는 설명 목록을 기본적으로 쌓이게 하고, 인라인을 옵션(%run-in)으로 만들 수 있습니다. 이러한 조정은 이 기능이 표준화될 때 이루어질 것입니다.
+=== 대안
+마커가 있는 설명 목록을 사용하는 대신, 일반 순서가 없는 목록 또는 순서가 있는 목록을 사용하고 주제와 정지 문자의 서식을 수동으로 지정할 수 있습니다.
+[source,asciidoc]
+
+boolean: 1과 0 또는 T와 F가 아닌 true와 false를 사용하세요
+number: 구두점 없이 아라비아 숫자를 사용하세요(부동 소수점 숫자의 소수점 제외)
+enumerated value: 대소문자를 구분하여 허용된 값 중 하나만 사용하세요
+
+
+이 구문은 단기적으로 최대한의 이식성을 제공합니다.
+적절한 의미론이 부족하지만 같은 결과를 얻을 수 있는 다른 방법은 빈 목록 항목 안에 단일 항목 설명 목록을 중첩하는 것입니다.
+[source,asciidoc]
+
+{empty}
+boolean:: 1과 0 또는 T와 F가 아닌 true와 false를 사용하세요
+{empty}
+number:: 구두점 없이 아라비아 숫자를 사용하세요(부동 소수점 숫자의 소수점 제외)
+{empty}
+enumerated value:: 대소문자를 구분하여 허용된 값 중 하나만 사용하세요
+
+
 
 == Links
 
+AsciiDoc은 다른 주소 지정 가능한 리소스에 대한 링크(하이퍼링크)를 만드는 다양한 방법을 제공합니다. 이 섹션의 페이지에서는 AsciiDoc에서 링크를 추가하고 사용자 정의하는 방법을 설명합니다.
+=== URL과 링크
+링크의 대상은 웹 주소라고도 하는 Uniform Resource Locator(URL)입니다. 독자가 해당 대상으로 이동하기 위해 클릭하는 텍스트를 링크 텍스트라고 합니다.
+경우에 따라 URL 대신 URI라는 용어가 사용되는 것을 볼 수 있습니다. URI가 기술적으로 더 정확한 경우도 있지만 URL은 널리 받아들여지는 용어입니다.
+URL은 고유한 리소스의 웹 주소입니다. URL은 절대 경로 또는 상대 경로일 수 있습니다. 절대 URL은 스킴, 권한(예: 도메인 이름), 선택적 파일 확장자가 있는 경로, 쿼리 문자열 및 조각 형태의 메타데이터(예: https://example.org/asciidoc/links.html?source=home)로 구성됩니다. 절대 URL은 웹 브라우저의 주소 표시줄에 입력하는 것과 같이 이 페이지의 URL로 인식할 수 있습니다. 상대 URL은 루트 경로 또는 하위 경로 뒤에 오는 절대 URL의 일부입니다(예: guides/getting-started.html).
+절대 URL에는 고유하고 인식할 수 있는 구문이 있으므로 AsciiDoc 프로세서는 매크로 치환 단계가 적용되는 모든 곳에서 URL(이스케이프되지 않은 경우)을 감지하고 자동으로 링크로 변환합니다. 이는 일반 이메일 주소에도 적용됩니다. 이 동작에 대한 자세한 내용은 자동 링크에서 확인할 수 있습니다. 상대 URL에 대한 링크를 만들려면 링크 매크로의 대상으로 명시적으로 지정해야 합니다.
+=== 링크 관련 매크로
+일반 URL 또는 이메일 주소를 링크 텍스트로 표시하는 대신 해당 텍스트를 사용자 정의할 수 있습니다. 또는 역할과 같은 속성을 링크에 적용하고 싶을 수 있습니다. 이렇게 하려면 URL 매크로를 사용하거나 복잡한 URL에 연결하는 경우 보다 결정적인 링크 매크로를 사용하면 됩니다. (또한 링크 매크로를 사용하여 상대 URL 또는 절대 URL로 인식되지 않는 URL을 사용하여 주소 지정 가능한 리소스에 대한 링크를 만들 수 있습니다).
+이메일 주소에 연결할 때는 특수한 mailto 매크로를 사용하여 미리 채워진 제목과 본문 텍스트로 링크를 향상시킬 수 있습니다.
+=== 예약 문자 인코딩
+URL에 큰따옴표("), 공백 또는 제한되지 않은 AsciiDoc 서식 표시와 같은 예약된 문자가 포함된 경우 URI 인코딩을 사용하여 이러한 문자를 인코딩해야 합니다. 예를 들어 큰따옴표는 %22로 인코딩됩니다. 밑줄은 %5F로 인코딩됩니다. 이러한 문자를 인코딩하지 않으면 URL이 망가지거나 프로세서가 실패할 수 있습니다.
+예약 문자가 포함된 q라는 쿼리 문자열 매개변수를 포함하는 URL을 만든다고 가정해 보겠습니다:
+[source,text]
+https://example.org?q=label:"Requires docs"
+URL을 인코딩하려면 브라우저에서 개발자 도구를 열고 URL을 encodeURI 함수에 전달합니다:
+[source,js]
+encodeURI('http://example.org?q=label:"Requires docs"')
+AsciiDoc 문서에서 사용할 인코딩된 URL은 다음과 같습니다:
+[source,text]
+https://example.org?q=label:%22Requires%20docs%22
+웹 애플리케이션의 기능에 따라 공백 문자는 %20 대신 +로 인코딩할 수 있습니다.
+=== URL 스킴 숨기기
+링크 텍스트가 일반 URL(또는 URI)인 경우, 해당 링크가 자동으로 생성되었든 링크 관련 매크로를 사용하여 생성되었든 관계없이 AsciiDoc 프로세서를 구성하여 스킴(예: https://)을 숨길 수 있습니다. 스킴을 숨기면 기술적인 명명법에 익숙하지 않은 사람에게 URL을 더 읽기 쉽게, 심지어 인식할 수 있게 만들 수 있습니다.
+AsciiDoc 프로세서가 링크된 URL을 스킴 부분 없이 표시하도록 구성하려면 AsciiDoc 문서의 헤더에 hide-uri-scheme 속성을 설정합니다.
+[source,asciidoc]
+= Document Title
+:hide-uri-scheme:
+https://asciidoctor.org
+속성 이름에 url 대신 uri가 사용된 것에 주목하세요.
+hide-uri-scheme 속성이 설정되면 위의 URL이 독자에게 다음과 같이 표시됩니다:
+asciidoctor.org
+URL에서 *https://*가 없는 것을 확인하세요. 접두사는 여전히 링크 대상에 존재할 것입니다.
+
+
+
 == Links - Autolinks
+
+AsciiDoc 프로세서는 매크로 치환 단계가 적용되는 곳이면 어디에서나 일반적인 URL(이스케이프되지 않은 경우)을 감지하고 자동으로 링크로 변환합니다. 이 페이지에서는 인식되는 URL 스킴과 사례별로 이 동작을 비활성화하는 방법을 설명합니다.
+=== 자동 링크를 위한 URL 스킴
+AsciiDoc는 마크업의 도움 없이 다음과 같은 일반적인 URL 스킴을 인식합니다:
+
+http
+https
+ftp
+irc
+mailto
+
+다음 예제의 URL은 인식된 프로토콜(즉, https)로 시작하므로 AsciiDoc 프로세서가 자동으로 하이퍼링크로 변환합니다.
+[source,asciidoc]
+The homepage for the Asciidoctor Project is https://www.asciidoctor.org.
+마침표는 링크에 포함되지 않습니다.
+URL은 또한 링크 텍스트로 사용됩니다. 사용자 정의 링크 텍스트를 사용하려면 URL 매크로를 사용해야 합니다.
+일반 텍스트 문서에서는 일반 URL이 꺾쇠 괄호로 둘러싸여 있는 경우가 많습니다.
+[source,asciidoc]
+You'll often see https://example.org used in examples.
+이 관례를 수용하기 위해 AsciiDoc 프로세서는 여전히 URL을 자동 링크로 인식하지만 출력에서 꺾쇠 괄호를 버립니다(중요하지 않은 것으로 간주되기 때문).
+일반 URL(즉, 자동 링크)에서 생성된 모든 링크는 자동으로 "bare" 역할이 할당됩니다. 이를 통해 테마 시스템(예: CSS)이 자동 링크(및 기타 일반 URL)를 인식하고 고유하게 스타일을 지정할 수 있습니다.
+=== 이메일 자동 링크
+AsciiDoc는 또한 대부분의 이메일 주소를 감지하고 자동으로 링크합니다.
+[source,asciidoc]
+Email us at hello@example.com to say hello.
+이것이 작동하려면 도메인 접미사는 2에서 5자 사이여야 하며(예: .com) 마침표(.), 하이픈(-) 및 플러스(+)와 같은 일반적인 기호만 허용됩니다. 이러한 제한을 준수하지 않는 이메일 주소의 경우 email 매크로를 사용할 수 있습니다.
+=== URL 및 이메일 주소 이스케이프
+URL 또는 이메일 주소의 자동 링크를 방지하려면 앞에 단일 백슬래시(\)를 추가할 수 있습니다.
+[source,asciidoc]
+Once launched, the site will be available at \https://example.org.
+If you cannot access the site, email \help@example.org for assistance.
+URL 및 이메일 주소 앞의 백슬래시는 출력에 나타나지 않습니다. URL과 이메일 주소는 모두 일반 텍스트로 표시됩니다.
+자동 링크는 매크로 치환의 기능이므로 URL 또는 이메일 주소의 자동 링크를 방지하는 또 다른 방법은 증분 치환을 사용하여 매크로 치환을 해제하는 것입니다.
+[source,asciidoc]
+[subs=-macros]
+Once launched, the site will be available at https://example.org.
+subs 속성은 단락과 같은 리프 블록에서만 인식됩니다.
+
+
 
 == Links - URL Macro
 
+AsciiDoc 구문에 익숙하다면 URL이 거의 인라인 매크로처럼 보인다는 것을 알 수 있습니다. 빠진 것은 뒤에 있는 대괄호 쌍뿐입니다. 실제로 대괄호를 추가하면 URL은 인라인 매크로로 취급됩니다. 우리는 이것을 URL 매크로라고 부릅니다.
+이 페이지에서는 URL 매크로, 이를 사용하고 싶은 경우, 그리고 링크 매크로와 어떻게 다른지에 대해 소개합니다.
+=== URL에서 매크로로
+URL을 매크로로 변환하려면 URL 끝에 대괄호 쌍을 추가하세요. 예를 들면:
+[source,asciidoc]
+https://asciidoctor.org[]
+텍스트가 지정되지 않았으므로 이 매크로는 자동 링크와 동일하게 동작합니다. 이 경우 링크에는 자동으로 "bare" 역할이 할당됩니다.
+URL 뒤에 대괄호 쌍이 오면 URL 스킴은 매크로 이름으로 이중 역할을 합니다. AsciiDoc는 자동 링크를 위한 모든 URL 스킴을 매크로 이름으로 인식합니다(예: https). 그래서 우리는 "URL 매크로"라고 하지 않고 "URL 매크로들"이라고 말합니다. 이는 매크로 집합입니다. mailto 매크로를 제외하고 모든 URL 매크로는 동일하게 동작하며 링크 매크로와도 동일하게 동작합니다.
+그렇다면 왜 URL에서 URL 매크로로 업그레이드할까요? 한 가지 이유는 URL이 일반적으로 인식되지 않을 때, 예를 들어 큰따옴표로 묶여 있을 때 URL을 강제로 구문 분석하기 위해서입니다:
+[source,asciidoc]
+Type "https://asciidoctor.org[]" into the location bar of your browser.
+그러나 더 일반적인 이유는 사용자 정의 링크 텍스트를 지정하기 위해서입니다.
+=== 사용자 정의 링크 텍스트
+URL을 표시하는 대신 링크가 사용자 정의 텍스트를 표시하도록 구성할 수 있습니다. 독자가 텍스트를 클릭하면 링크의 대상인 URL로 이동합니다.
+링크의 텍스트를 사용자 정의하려면 URL 매크로의 대괄호 사이에 해당 텍스트를 삽입하세요.
+[source,asciidoc]
+Chat with other Fedora users in the irc://irc.freenode.org/#fedora[Fedora IRC channel].
+텍스트는 일반적인 치환의 대상이므로 텍스트에 서식을 적용할 수 있습니다.
+[source,asciidoc]
+Ask questions in the https://chat.asciidoc.org[*community chat*].
+=== 링크 속성
+속성 목록을 사용하여 링크를 추가로 사용자 정의할 수 있습니다. 예를 들어 새 창을 대상으로 지정하고 역할을 적용할 수 있습니다.
+[source,asciidoc]
+Chat with other AsciiDoc users in the https://chat.asciidoc.org[*project chat*^,role=green].
+URL 매크로의 대괄호 사이에 있는 텍스트가 어떻게 구문 분석되는지 이해하려면 속성 구문 분석을 참조하세요.
+
+
+
 == Links - Link Macro
+
+link 매크로는 AsciiDoc에서 링크를 만드는 가장 명시적인 방법입니다. 자동 링크와 URL 매크로의 동작이 불충분한 경우에만 필요합니다. 이 페이지에서는 link 매크로의 구조, 필요한 경우, 그리고 사용 방법에 대해 다룹니다.
+=== 구조
+link 매크로는 인라인 매크로입니다. 다른 인라인 매크로와 마찬가지로, 구문은 매크로 이름과 대상이 콜론으로 구분되고 대괄호로 묶인 속성 목록이 뒤따르는 익숙한 패턴을 따릅니다.
+[source,asciidoc]
+link:<target>[<attrlist>]
+<target>은 링크의 대상이 됩니다. <attrlist>는 명명된 속성이 감지되지 않는 한 링크 텍스트입니다. <attrlist>가 어떻게 구문 분석되는지 알아보려면 link 매크로 속성 목록을 참조하세요.
+모든 인라인 매크로와 마찬가지로 link 매크로는 선행 백슬래시(\)를 사용하여 이스케이프할 수 있습니다.
+=== 상대 파일에 대한 링크
+현재 문서와 관련된 AsciiDoc 이외의 파일에 연결하려면 파일 이름 앞에 link 매크로를 사용하세요.
+상대 AsciiDoc 파일에 연결하려면 대신 xref 매크로를 사용하세요.
+다음은 link 매크로를 사용하여 상대 파일 경로에 연결하는 방법을 보여주는 예제입니다:
+[source,asciidoc]
+link:downloads/report.pdf[Get Report]
+AsciiDoc 프로세서는 대상이 URL이 아닌 경우에도 "Get Report"라는 텍스트로 report.pdf에 대한 링크를 생성합니다.
+대상 파일이 HTML 파일이고 해당 문서 내의 앵커에 직접 연결하려면 파일 이름 뒤에 해시(#) 다음에 앵커 이름을 추가하세요:
+[source,asciidoc]
+link:tools.html#editors[]
+상대 파일에 연결할 때는 HTML 파일이더라도 링크 텍스트가 필요합니다.
+=== link 매크로를 사용해야 하는 경우
+AsciiDoc는 자동 링크와 URL 매크로를 제공하므로 link 매크로는 자주 필요하지 않습니다. 다음은 link 매크로가 필요한 몇 가지 경우입니다:
+
+대상이 URL이 아닌 경우(예: 상대 경로)
+대상을 패스스루로 묶어 특수한 의미가 있는 문자를 이스케이프해야 하는 경우
+URL 매크로가 공백, 대괄호 또는 따옴표로 구분되지 않는 경우
+대상이 AsciiDoc에서 인식하는 스킴으로 시작하지 않는 URL인 경우
+
+가장 일반적인 상황은 대상이 URL이 아닌 경우입니다. 예를 들어, link 매크로를 사용하여 상대 경로에 대한 링크를 만들 수 있습니다.
+[source,asciidoc]
+link:report.pdf[Get Report]
+상대 경로가 다른 AsciiDoc 파일인 경우 대신 xref 매크로를 사용해야 합니다.
+또한 적어도 AsciiDoc 소스에서는 link 매크로 대상에 공백이 허용되지 않는다는 것을 발견할 수 있습니다. 대상의 공백 문자는 파서가 매크로를 인식하지 못하게 합니다. 따라서 이스케이프하거나 인코딩해야 합니다. 다음은 이를 수행하는 세 가지 방법입니다:
+예제 1. 패스스루를 사용하여 공백 이스케이프
+[source,asciidoc]
+link:pass:[My Documents/report.pdf][Get Report]
+예제 2. 문자 참조(&#32;)를 사용하여 공백 인코딩
+[source,asciidoc]
+link:My Documents/report.pdf[Get Report]
+예제 3. URL 인코딩(%20)을 사용하여 공백 인코딩
+[source,asciidoc]
+link:My%20Documents/report.pdf[Get Report]
+공백을 이스케이프하거나 인코딩하면 공백이 link 매크로를 인식하지 못하게 하는 것을 방지할 수 있습니다. URL 인코딩을 사용하는 것의 단점은 브라우저가 해당 위치에서 디코딩하지 않기 때문에 자동 링크 텍스트에 표시된다는 것입니다. 이 경우 문자 참조가 더 좋습니다.
+콜론과 같이 링크 대상에 허용되지 않는 다른 문자도 있습니다. 동일한 기술을 사용하여 이러한 문자를 이스케이프할 수 있습니다.
+예제 4. URL 인코딩(%3A)을 사용하여 콜론 인코딩
+[source,asciidoc]
+link:Avengers%3A%20Endgame.html[]
+또 다른 일반적인 경우는 특수한 의미를 가진 문자를 이스케이프하기 위해 패스스루를 사용해야 하는 경우입니다. 이 경우 AsciiDoc 프로세서는 대상을 URL로 인식하지 않으므로 link 매크로가 필요합니다. 반복되는 밑줄 문자가 포함된 URL이 그 예입니다.
+[source,asciidoc]
+link:++https://example.org/now_this__link_works.html++[]
+비슷한 상황은 URL 매크로가 공백, 대괄호 또는 따옴표로 구분되지 않는 경우입니다. 이 경우 매크로를 인식할 수 있도록 우선순위를 높이기 위해 link 매크로 접두사가 필요합니다.
+[source,asciidoc]
+|link:https://asciidoctor.org[]|
+마지막으로, 대상이 AsciiDoc에서 URL로 인식되지 않는 경우 link 매크로가 필요합니다. 예를 들어, link 매크로를 사용하여 파일 링크를 만들 수 있습니다.
+[source,asciidoc]
+link:file:///home/username[Your files]
+=== 결론
+기본적인 엄지 규칙은 대상이 URL이 아닌 경우에만 대상 앞에 link: 매크로 접두사를 붙여야 한다는 것입니다. 그렇지 않으면 접두사는 장황함만 더합니다.
+
+
 
 == Links - Troubleshooting Complex URLs
 
+URL에 밑줄(_) 또는 캐럿(^)과 같은 문자가 포함되어 있으면 올바르게 표시되지 않을 수 있습니다. 이 문제는 마크업 파서가 URL의 일부(즉, 링크 대상)를 유효한 텍스트 서식 마크업으로 해석하기 때문에 발생합니다. 대부분의 경량 마크업 언어는 문법 기반 파서를 사용하지 않기 때문에 이 문제가 있습니다. AsciiDoc 언어는 향후 URL을 더 신중하게 처리할 계획이며(Asciidoctor 이슈 #281 참조), 이는 문법 기반 파서로 이동하여 해결될 수 있습니다(Asciidoctor 이슈 #61 참조). 고맙게도 AsciiDoc 패스스루 메커니즘을 사용하여 임의의 복잡성을 가진 URL을 포함하는 많은 방법이 있습니다.
+
+=== 해결책 A
+링크가 동작하도록 하는 가장 간단한 방법은 속성에 할당하는 것입니다.
+[source,asciidoc]
+----
+= Document Title
+----
+:link-with-underscores: https://asciidoctor.org/now_this__link_works.html
+This URL has repeating underscores {link-with-underscores}.
+인라인 서식 마크업이 속성 전에 대체되기 때문에 AsciiDoc 프로세서는 속성에 할당될 때 밑줄이 있는 링크를 끊지 않습니다. URL은 문서의 나머지 부분이 서식(강조, 기울임꼴, 고정 폭 등)되는 동안 숨겨집니다.
+
+=== 해결책 B
+서식 결함을 해결하는 또 다른 방법은 텍스트 범위에 적용하려는 서식을 명시적으로 지정하는 것입니다. 이는 인라인 pass 매크로를 사용하여 수행할 수 있습니다. URL을 표시하고 보존하려면 pass 매크로 내부에 URL을 넣고 링크를 대체하는 매크로 대체를 활성화하세요.
+[source,asciidoc]
+This URL has repeating underscores pass:macros[https://asciidoctor.org/now_this__link_works.html].
+pass 매크로는 URL을 문서에서 제거하고, URL에 macros 대체를 적용한 다음, 전체 문서에 대한 대체가 완료되면 처리된 URL을 원래 위치로 복원합니다.
+또는 URL 주위에만 이중 플러스 인라인 매크로(++)를 사용할 수 있습니다. 그러나 이 접근 방식을 사용하면 AsciiDoc 프로세서가 더 이상 URL로 인식하지 않으므로 명시적인 link 접두사를 사용해야 합니다.
+[source,asciidoc]
+This URL has repeating underscores link:++https://asciidoctor.org/now_this__link_works.html++[].
+자세한 내용은 Asciidoctor 이슈 #625를 참조하세요.
+
+
+
 == Links - Link & URL Macro Attribute Parsing
+
+link 또는 URL 매크로의 대괄호 사이에서 명명된 속성이 감지되면 해당 텍스트는 속성 목록으로 구문 분석됩니다. 이 페이지에서는 이러한 상황이 발생하는 조건과 링크 텍스트를 단일 위치 속성으로 인식되도록 작성하는 방법을 설명합니다.
+=== 명명된 속성과 함께 있는 링크 텍스트
+일반적으로 link 매크로의 대괄호 사이에 있는 전체 텍스트는 링크 텍스트(즉, 첫 번째 위치 속성)로 취급됩니다.
+[source,asciidoc]
+https://chat.asciidoc.org[Discuss AsciiDoc]
+그러나 텍스트에 등호(=)가 포함되어 있으면 텍스트는 속성 목록으로 구문 분석됩니다. 속성 목록 구문 분석 및 위치 속성에 대한 정확한 규칙은 다소 복잡하며 위치 및 명명된 속성에서 설명합니다. 링크 텍스트가 제대로 인식되도록 하려면 다음 두 가지 간단한 검사를 적용할 수 있습니다:
+
+쉼표(,) 또는 등호(=)가 포함되지 않거나
+큰따옴표(")로 묶여 있습니다.
+
+첫 번째 쉼표 앞의 텍스트가 링크 텍스트로 인식되는 여러 다른 상황이 있습니다. 몇 가지 예를 살펴보겠습니다.
+다음 예제는 사용자 정의 링크 텍스트와 함께 명명된 속성이 있는 URL 매크로를 보여줍니다.
+[source,asciidoc]
+https://chat.asciidoc.org[Discuss AsciiDoc,role=resource,window=_blank]
+링크 텍스트에 쉼표가 포함되어 있고 매크로에도 명명된 속성이 있는 경우를 살펴보겠습니다. 이 경우 링크 텍스트를 큰따옴표로 묶어야 첫 번째 위치 속성으로 전체가 캡처됩니다.
+[source,asciidoc]
+https://example.org["Google, DuckDuckGo, Ecosia",role=teal]
+마찬가지로 링크 텍스트에 등호가 포함되어 있는 경우 링크 텍스트를 큰따옴표로 묶어 파서가 첫 번째 위치 속성으로 인식하도록 할 수 있습니다.
+[source,asciidoc]
+https://example.org["1=2 posits the problem of inequality"]
+인용된 링크 텍스트 자체에 텍스트를 묶는 데 사용되는 따옴표 문자가 포함된 경우 텍스트의 따옴표 문자 앞에 백슬래시를 붙여 이스케이프하세요.
+[source,asciidoc]
+https://example.org["href=\"#top\" attribute"] creates link to top of page
+링크 텍스트에 등호가 포함되어 있을 때 모든 경우에 큰따옴표 묶음이 필요한 것은 아닙니다. 엄밀히 말하면, 등호 앞의 텍스트가 유효한 속성 이름과 일치하는 경우에만 묶음이 필요합니다. 그러나 안전을 위해 큰따옴표를 사용하는 것이 가장 좋습니다.
+마지막으로 링크 텍스트를 지정하지 않고 명명된 속성을 사용하려면 명명된 속성을 지정하기만 하면 됩니다. (즉, 첫 번째 위치 속성을 비워 두면 대상이 링크 텍스트로 사용됩니다).
+[source,asciidoc]
+https://chat.asciidoc.org[role=button,window=_blank,opts=nofollow]
+link 매크로는 모든 일반 속성(id, role 및 opts)을 인식합니다. 또한 link 매크로에 특정한 몇 가지 속성도 인식합니다.
+=== 별도의 창 대상 지정
+기본적으로 link 매크로에 의해 생성된 링크는 현재 창을 대상으로 합니다. 즉, 링크를 클릭하면 현재 페이지가 대체됩니다.
+window 속성을 사용하여 링크가 별도의 창(또는 탭)에서 열리도록 구성할 수 있습니다.
+[source,asciidoc]
+https://asciidoctor.org[Asciidoctor,window=read-later]
+HTML 출력에서 window 속성의 값은 <a> 태그의 target 속성에 할당됩니다(예: target=read-later).
+=== 빈 창 대상 지정
+대부분의 경우 window 속성을 사용하여 빈 창을 대상으로 지정합니다. 현재 사이트 외부의 위치를 가리키는 링크를 구성하는 것은 독자의 흐름을 방해하지 않기 위한 일반적인 관행입니다. 이 동작을 활성화하려면 window 속성을 특수 값 _blank로 설정합니다.
+[source,asciidoc]
+https://asciidoctor.org[Asciidoctor,window=_blank]
+HTML 출력에서 window 속성의 값은 <a> 태그의 target 속성에 rel=noopener 속성과 함께 할당됩니다(예: target=_blank).
+값 _blank의 시작 부분에 있는 밑줄은 같은 줄이나 단락의 다른 곳에 다른 밑줄이 나타날 때 예기치 않게 제한된 서식 쌍을 형성하여 매크로가 깨지게 할 수 있습니다. 값의 시작 부분에 있는 밑줄을 이스케이프하거나(즉, window=\_blank) 빈 창 단축어를 사용하여 이 문제를 방지할 수 있습니다.
+=== noopener 및 nofollow
+window 속성의 값이 _blank인 경우 AsciiDoc 프로세서는 HTML 출력의 <a> 요소에 rel="noopener" 속성도 추가합니다. 이렇게 하는 것은 보안 모범 사례로 간주됩니다.
+창이 _blank가 아닌 경우 매크로에 noopener 옵션을 설정하여 이 동작을 명시적으로 활성화해야 합니다:
+[source,asciidoc]
+https://asciidoctor.org[Asciidoctor,window=read-later,opts=noopener]
+검색 인덱서가 링크를 따르지 않도록 하려면 매크로에 nofollow 옵션을 추가할 수 있습니다. 이 옵션은 noopener 옵션이 암시적으로 또는 명시적으로 설정된 경우에만 작동합니다.
+[source,asciidoc]
+https://asciidoctor.org[Asciidoctor,window=_blank,opts=nofollow]
+또는
+[source,asciidoc]
+https://asciidoctor.org[Asciidoctor,window=read-later,opts="noopener,nofollow"]
+사이트 내에서 인덱싱을 미세 조정하려면 링크가 별도의 창을 대상으로 하지 않는 경우에도 nofollow 옵션을 지정할 수 있습니다.
+=== 빈 창 단축어
+외부 링크가 빈 창을 대상으로 하도록 구성하는 것은 일반적인 관행입니다. 따라서 AsciiDoc는 이를 위한 단축어를 제공합니다.
+명명된 속성 window=_blank 대신 링크 텍스트 끝에 캐럿(^)을 삽입할 수 있습니다. 이 구문은 값 _blank의 시작 부분에 있는 밑줄이 같은 줄이나 단락에 다른 밑줄이 나타날 때 예기치 않게 제한된 서식 쌍을 형성하는 것에 대해 걱정할 필요가 없다는 추가적인 이점이 있습니다.
+링크의 원시 HTML을 봅시다:
+[source,asciidoc]
+view-source:asciidoctor.org[Asciidoctor homepage^].
+드문 경우지만 같은 줄이나 단락에서 캐럿 구문을 두 번 이상 사용하는 경우 백슬래시로 첫 번째 발생을 이스케이프해야 할 수 있습니다. 그러나 프로세서는 이를 요구 사항으로 만들지 않도록 노력해야 합니다.
+속성 목록에 큰따옴표로 묶인 링크 텍스트와 명명된 속성이 모두 있는 경우 캐럿은 링크 텍스트의 끝에 있어야 하지만 큰따옴표 안에 있어야 합니다.
+[source,asciidoc]
+https://example.org["Google, DuckDuckGo, Ecosia^",role=btn]
+명명된 속성이 없는 경우 링크 텍스트를 따옴표로 묶어서는 안 됩니다.
+[source,asciidoc]
+https://example.org[Google, DuckDuckGo, Ecosia^]
+
+
 
 == Links - Mailto Macro
 
+mailto 매크로는 URL 매크로의 특수화로, 텍스트로 이메일 링크를 정의하고 제목 및 본문과 같은 추가 메타데이터로 보강할 수 있는 기능을 추가합니다.
+=== 링크 텍스트 및 명명된 속성
+속성 목록을 사용하면 id와 role과 같은 링크 텍스트와 명명된 속성을 지정할 수 있습니다. 다른 URL 매크로와 달리, 속성 목록을 추가하려면 이메일 주소 앞에 mailto: 접두사를 추가해야 합니다.
+명시적인 링크 텍스트가 있는 이메일 링크의 예시입니다.
+[source,asciidoc]
+mailto:join@discuss.example.org[Subscribe]
+이 링크에 역할을 추가하려면 쉼표 뒤에 role 속성을 추가하면 됩니다.
+[source,asciidoc]
+mailto:join@discuss.example.org[Subscribe,role=email]
+링크 텍스트에 쉼표가 포함된 경우 텍스트를 큰따옴표로 묶어야 합니다. 그렇지 않으면 쉼표 뒤의 텍스트 부분이 추가 속성 목록 항목으로 해석됩니다.
+[source,asciidoc]
+mailto:join@discuss.example.org["Click, subscribe, and participate!"]
+속성이 어떻게 구문 분석되는지 자세히 알아보려면 속성 구문 분석을 참조하세요.
+=== 제목 및 본문
+다른 URL 매크로와 마찬가지로, 이메일 매크로의 첫 번째 위치 속성은 링크 텍스트입니다. 텍스트에 쉼표가 있고 텍스트가 따옴표로 묶여 있지 않거나 쉼표가 닫는 따옴표 뒤에 오는 경우, 다음 위치 속성은 제목 줄로 취급됩니다.
+예를 들어, 독자가 링크를 클릭할 때 제목 줄을 채우도록 이메일 링크를 구성할 수 있습니다:
+[source,asciidoc]
+mailto:join@discuss.example.org[Subscribe,Subscribe me]
+독자가 링크를 클릭하면 적합한 이메일 클라이언트가 제목 줄을 "Subscribe me"로 채웁니다.
+이메일 본문도 채워지길 원한다면 세 번째 위치 인수에 본문 텍스트를 지정하세요.
+[source,asciidoc]
+mailto:join@discuss.example.org[Subscribe,Subscribe me,I want to participate.]
+독자가 링크를 클릭하면 적합한 이메일 클라이언트가 본문을 "I want to participate."로 채웁니다.
+이메일 주소를 링크 텍스트로 재사용하려면 첫 번째 위치 속성을 비워 두세요.
+[source,asciidoc]
+mailto:join@discuss.example.org[,Subscribe me,I want to participate.]
+제목만 지정하려면 본문을 생략하세요.
+[source,asciidoc]
+mailto:join@discuss.example.org[,Subscribe me]
+제목이나 본문에 쉼표가 포함된 경우 해당 값은 큰따옴표로 묶어야 합니다.
+[source,asciidoc]
+mailto:join@discuss.example.org[Subscribe,"I want to participate, so please subscribe me"]
+속성이 어떻게 구문 분석되는지 자세히 알아보려면 속성 구문 분석을 참조하세요.
+
+
+
 == Links - Link, URL, and Mailto Macro Attributes Reference
+
+이러한 속성은 link, URL 및 mailto(email) 매크로에 적용됩니다.
+
+[%header,cols="3,2,5"]
+|===
+|속성 |값 |예제 구문 |설명
+|id
+|출력에서 요소의 고유 식별자
+|https://asciidoctor.org[Home,id=home]
+|
+|role
+|인라인 요소에 사용 가능한 CSS 클래스
+|https://chat.asciidoc.org[Discuss AsciiDoc,role=teal]
+|
+|title
+|링크에 대한 설명, 종종 툴팁으로 표시됩니다.
+|https://asciidoctor.org[Home,title=Project home page]
+|
+|window
+|any
+|https://chat.asciidoc.org[Discuss AsciiDoc,window=_blank]
+|빈 창 대상은 링크 텍스트의 끝에 ^를 사용하여 지정할 수도 있습니다.
+|window (단축어)
+|^
+|https://example.org[Google, DuckDuckGo, Ecosia^] +
+https://chat.asciidoc.org[Discuss AsciiDoc^]
+|
+|opts
+|링크 생성을 위한 추가 옵션입니다.
+|https://asciidoctor.org[Home,opts=nofollow]
+|옵션 이름에는 nofollow, noopener가 포함됩니다.
+|===
+
 
 == Cross References
 
+현재 AsciiDoc 문서 내의 다른 위치 또는 다른 AsciiDoc 문서의 위치로 연결되는 링크를 상호 참조(xref라고도 함)라고 합니다. 상호 참조를 만들려면 먼저 참조가 가리킬 위치(즉, 앵커)를 정의해야 합니다. 그런 다음 인라인 xref 매크로의 양식 중 하나를 사용하여 해당 위치에 대한 참조를 만들어야 합니다. 거기에서 다양한 방식으로 참조의 텍스트를 사용자 정의할 수 있습니다.
+=== 자동 앵커
+많은 앵커가 이미 정의되어 있다는 것을 이해하는 것이 중요합니다. 기본 설정을 사용하면 AsciiDoc 프로세서는 모든 섹션과 개별 제목에 대한 앵커를 자동으로 만듭니다. 이렇게 하려면 해당 섹션(또는 개별 제목)에 대한 ID를 생성하고 해당 ID를 참조 카탈로그에 등록합니다. 그런 다음 해당 ID를 상호 참조의 대상으로 사용할 수 있습니다.
+예를 들어, 다음 섹션을 고려해 보겠습니다.
+
+[source, asciidoc]
+----
+= Section Title
+----
+AsciiDoc 프로세서는 이 섹션에 자동으로 ID _section_title을 할당하며, 이를 사용하여 이 섹션에 대한 참조를 만들기 위한 xref의 대상으로 사용할 수 있습니다. 또한 이 ID가 생성되는 방식을 사용자 정의할 수 있습니다. AsciiDoc 프로세서가 이러한 ID를 생성하는 방법에 대한 자세한 내용은 섹션 ID 자동 생성을 참조하세요.
+섹션 이외의 콘텐츠 요소를 참조하는 경우 해당 요소에 명시적으로 앵커를 정의해야 합니다.
+=== 내부 상호 참조
+AsciiDoc에서는 단축 xref를 사용하여 동일한 문서 내에서 ID를 가진 요소(예: 섹션, 블록, 목록 항목 등)에 대한 상호 참조를 만듭니다. 단축 xref는 매크로 치환에 의해 처리됩니다.
+상호 참조가 ID와 텍스트를 모두 지정하는 경우 텍스트는 형식이 지정되고 링크 텍스트로 사용됩니다. 상호 참조가 ID만 지정하는 경우 대상 요소의 reftext(일반적으로 형식이 지정된 제목)가 자동으로 링크 텍스트로 사용됩니다. 요소가 reftext를 정의하지 않으면 대신 ID의 양식화된 형태가 사용됩니다. ID가 참조된 요소에 명시적으로 할당되었는지 또는 자동 생성되었는지는 이 메커니즘의 작동 방식에 영향을 미치지 않습니다.
+현재 AsciiDoc 프로세서는 다음 요소에 대한 상호 참조를 해결할 수 있습니다:
+
+섹션(ID 또는 블록 앵커)
+블록(ID 또는 블록 앵커)
+블록 매크로(ID)
+단락 내 어디에서나 인라인 앵커
+목록 항목 또는 테이블 셀의 시작 부분에 있는 인라인 앵커
+참고 문헌 목록의 참고 문헌 앵커
+
+프로세서는 형식이 지정된 텍스트 범위에 할당된 ID를 해결할 수 없습니다. 상호 참조를 해결할 수 없고 상세 모드가 활성화된 경우 AsciiDoc 프로세서는 가능한 잘못된 참조에 대한 경고를 발행합니다. 이 경우 출력 문서는 대상을 맹목적으로 참조하므로 여전히 작동할 가능성이 있습니다.
+대상 블록 또는 섹션의 ID(또는 선택적 앵커가 있는 다른 문서의 경로)를 이중 꺾쇠 괄호로 묶어 상호 참조를 만듭니다.
+.대상 섹션의 ID를 사용한 상호 참조 예제
+[source, asciidoc]
+<<anchors>> 섹션에서는 자동 앵커가 어떻게 작동하는지 설명합니다.
+예제 1의 결과는 아래에 표시됩니다.
+자동 앵커 섹션에서는 자동 앵커가 어떻게 작동하는지 설명합니다.
+=== 명시적 링크 텍스트
+변환기는 일반적으로 대상의 reftext를 링크의 기본 텍스트로 사용합니다. 문서가 구문 분석될 때 reftext의 속성 참조가 즉시 대체됩니다. reftext가 표시될 때 추가 reftext 치환(specialchars, 따옴표 및 대체)이 텍스트에 적용됩니다.
+상호 참조 위치에 대체 텍스트를 지정하여 대상의 reftext를 재정의할 수 있습니다. ID 뒤에 쉼표를 추가한 다음 상호 참조에 표시할 사용자 정의 텍스트를 입력하세요.
+.사용자 정의 xreflabel 텍스트가 포함된 상호 참조 예제
+[source, asciidoc]
+<<link-macro-attributes,링크 매크로 내에서 속성을 사용하는 방법>>에 대해 알아보세요.
+이 경우 대상은 점(.)이 포함되어 있더라도 동일한 문서 내의 ID로 간주됩니다.
+또한 인라인 xref 매크로를 xref 단축 대안으로 사용할 수 있습니다.
+.인라인 xref 매크로 예제
+[source, asciidoc]
+xref:link-macro-attributes[링크 매크로 내에서 속성을 사용하는 방법]에 대해 알아보세요.
+그러나 xref 매크로의 사용은 문서 간 상호 참조를 만드는 데 사용하는 것이 가장 좋습니다.
+xref 매크로를 사용할 때 대상에 점(.)이 포함되어 있으면 동일한 문서 내의 ID에 대한 참조가 아닌 다른 문서에 대한 참조로 처리됩니다. 동일한 문서 내의 ID에 연결하려는 경우 대상 앞에 해시(#)가 와야 합니다.
+=== 자연스러운 상호 참조
+ID 대신 제목을 사용하여 블록 또는 섹션에 대한 참조를 만들 수도 있습니다. 이러한 유형의 참조를 자연스러운 상호 참조라고 합니다. 제목에는 하나 이상의 공백 문자가 포함되거나 하나 이상의 대문자가 포함되어야 합니다.
+.섹션 제목을 사용한 상호 참조 예제
+[source, asciidoc]
+<<Internal Cross References>>를 참조하세요.
+경험에 비추어 볼 때, 자연스러운 상호 참조는 빠른 개발 또는 단기 콘텐츠에만 사용해야 합니다. 콘텐츠가 성숙함에 따라 참조에 ID를 사용하도록 전환해야 하며, 이상적으로는 명시적으로 선언된 ID를 사용해야 합니다. 그렇게 하면 참조의 안정성을 최대화하고 제목 수정으로부터 보호할 수 있습니다.
+
+
+
 == Cross References - Document to Document Cross References
+
+=== 문서 간 상호 참조
+인라인 xref 매크로는 다른 AsciiDoc 문서의 ID에도 링크할 수 있습니다. 이렇게 하면 특정 변환기(예: HTML 링크)에 연결된 문서 간 직접 링크를 사용할 필요가 없습니다. 또한 다른 문서의 섹션에 대한 참조를 설정하려는 작성자의 의도를 캡처합니다.
+
+AsciiDoc에서 상호 참조를 정의하는 방법은 다음과 같습니다:
+
+[source,asciidoc]
+<<anchors>> 섹션에서는 자동 앵커가 어떻게 작동하는지 설명합니다.
+이 상호 참조는 ID가 anchors인 섹션에 대한 링크를 만듭니다.
+
+상호 참조가 document-a.adoc 문서에 정의되어 있다고 가정해 보겠습니다. 대상 섹션이 별도의 문서인 document-b.adoc에 있는 경우 작성자는 다음과 같이 작성하고 싶어할 수 있습니다:
+
+[source,asciidoc]
+자세한 내용은 link:document-b.html#section-b[Section B]를 참조하세요.
+그러나 이 링크는 HTML 출력에 연결되어 있습니다. 더 나쁜 것은 document-b.adoc가 document-a.adoc와 동일한 문서에 포함되어 있는 경우 링크가 존재하지 않는 문서를 참조한다는 것입니다!
+
+이러한 문제는 문서 간 xref를 사용하여 해결할 수 있습니다:
+
+[source,asciidoc]
+자세한 내용은 xref:document-b.adoc#section-b[Section B]를 참조하세요.
+이제 대상의 ID가 해시 기호(#) 뒤에 배치됩니다. 해시 앞에는 참조 문서의 이름이 옵니다(파일 확장자는 선택 사항). AsciiDoc 프로세서가 (아직) 별도의 문서에서 섹션 제목을 해결할 필요가 없기 때문에 링크 텍스트도 추가했습니다.
+
+로컬(즉, 문서 내) 상호 참조의 링크 텍스트는 선택 사항이지만 문서 간 상호 참조의 링크 텍스트는 (현재) 필수입니다.
+AsciiDoc 프로세서가 이 상호 참조에 대한 링크를 생성할 때 먼저 document-b.adoc가 document-a.doc와 동일한 문서에 포함되어 있는지 확인합니다(xref 대상을 가장 바깥쪽 문서를 기준으로 포함 대상과 비교). 그렇지 않은 경우 원래 파일 확장자를 출력 파일의 파일 확장자로 지능적으로 대체하여 document-b.html에 대한 링크를 생성합니다.
+
+[source,html]
+<a href="document-b.html#section-b">Section B</a>
+document-b.adoc가 document-a.doc와 동일한 문서에 포함되어 있는 경우 문서는 링크 대상에서 삭제되고 일반 상호 참조의 출력처럼 보일 것입니다:
+
+[source,html]
+<a href="#section-b">Section B</a>
+이제 골치 아픔 없이 문서 간 상호 참조를 만들 수 있습니다.
+
+=== 소스 파일 간 탐색
+소스 저장소의 웹 인터페이스 또는 편집기 미리보기와 같은 특정 환경에서는 AsciiDoc 소스 파일의 URL을 방문할 때 생성된 HTML을 볼 수 있습니다. 이를 고려하지 않으면 문서 간 상호 참조에 영향을 미칩니다.
+
+html5 백엔드의 문서 간 상호 참조에 대한 기본 접미사가 .html이므로 이러한 환경에서 생성된 결과 링크는 존재하지 않는 HTML 파일을 가리킬 수 있습니다. 이 경우 문서 간 상호 참조를 변경하여 다른 AsciiDoc 소스 파일을 참조해야 합니다.
+
+문서 간 상호 참조에 선택된 파일 확장자는 relfilesuffix 속성에 의해 제어됩니다. 기본적으로 이 속성은 설정되지 않고 대신 outfilesuffix의 값이 사용됩니다. 사용되는 파일 확장자를 변경하려면 relfilesuffix 속성을 설정하면 됩니다.
+
+다음 예제는 소스 간 참조를 만들 때 문서 간 상호 참조에 대한 파일 확장자를 제어하기 위해 relfilesuffix 속성을 사용하는 방법을 보여줍니다. 할당은 env-name 확인 뒤에 숨겨져 있으며, env-name은 이러한 유형의 참조를 만들어야 하는 환경에서만 설정되는 속성입니다.
+
+[source,asciidoc]
+----
+= Document Title
+ifdef::env-name[:relfilesuffix: .adoc]
+----
+
+See the xref:README.adoc[README].
+
+또는 link:README{relfilesuffix}[README]와 같이 링크를 작성할 수도 있습니다.
+생성된 문서의 링크는 이제 README.html 대신 README.adoc를 가리킵니다.
+
+GitHub, GitLab 또는 브라우저 미리보기 확장 프로그램에서는 이 구성이 실제로 필요하지 않습니다. 해당 환경에서는 relfilesuffix의 값을 소스 파일의 파일 확장자와 일치하도록 자동으로 설정하기 때문입니다. 그러나 다른 환경에서는 이 설정이 여전히 필요할 수 있으므로 알아두는 것이 좋습니다.
+
+=== 다른 구조에 대한 참조 매핑
+
+relfilesuffix는 문서 간 상호 참조의 해결된 경로 끝을 제어할 수 있지만 relfileprefix 속성은 경로의 시작을 제어할 수 있습니다. 문서 간 상호 참조의 경로를 해결할 때 relfileprefix 속성이 설정되면 이 속성의 값이 경로 앞에 추가됩니다. 이 두 속성이 함께 사용되는 경우를 살펴보겠습니다.
+
+웹 사이트 아키텍처에서 일반적인 관행은 파일을 자체 폴더로 이동하여 경로 형식을 독립적으로 만드는 것입니다("indexify"라고 함). 예를 들어 filename.html 경로는 filename(filename/index.html을 대상으로 함)이 됩니다. 그러나 이는 문서 간 상호 참조에 문제가 있습니다. filename.html 경로로 해결되는 모든 상호 참조는 이제 파일이 하위 폴더로 이동했기 때문에 더 이상 유효하지 않습니다(따라서 참조 문서와 더 이상 형제 관계가 아님).
+
+이 문제를 해결하려면 다음 두 가지 속성을 정의할 수 있습니다:
+
+[source,asciidoc]
+:relfileprefix: ../ :relfilesuffix: /
+
+이제 상호 참조 <<filename.adoc,link text>>는 filename.html 대신 ../filename으로 해결됩니다. 이 변경 사항은 설명된 웹 사이트 아키텍처와 관련이 있으므로 특정 환경(ifdef 지시문 사용 또는 API를 통해)에서만 이러한 속성을 설정하는 것이 좋습니다.
+
+
 
 == Cross References - Cross Reference Text and Styles
 
+xrefstyle 문서 속성을 사용하여 자동 상호 참조 텍스트의 스타일을 사용자 정의할 수 있습니다. 이 사용자 정의는 DocBook 툴체인의 상호 참조 텍스트 서식을 AsciiDoc 처리, 특히 변환 중에 가져옵니다.
+
+이것은 AsciiDoc 언어의 새로운 기능이므로 모든 변환기에서 지원되지 않을 수 있습니다. Asciidoctor의 HTML, PDF 및 EPUB 3 변환기에서 지원을 찾을 수 있습니다. DocBook 툴체인이 이미 제공하는 기능이므로 DocBook 변환기에서는 지원되지 않습니다.
+
+=== 기본 스타일
+
+기본적으로 상호 참조 텍스트는 참조된 요소의 제목과 일치합니다. 예를 들어 "Installation"이라는 제목의 섹션에 연결하는 경우 상호 참조 링크의 텍스트는 다음과 같이 나타납니다:
+
+[source,text]
+Installation
+참조된 요소에 reftext 속성이 지정된 경우 해당 값이 제목보다 우선합니다. 예를 들어, 이전 예제의 섹션이 다음과 같이 작성되었다고 가정해 보겠습니다:
+
+[source,asciidoc]
+[reftext="Installation Procedure"] === Installation
+이 경우 상호 참조 링크의 텍스트는 다음과 같이 나타납니다:
+
+[source,text]
+Installation Procedure
+구문 분석 중에 reftext의 속성 참조가 대체되고 변환 중에 사용될 때 값에 reftext 대체(specialchars, 따옴표 및 대체)가 적용됩니다.
+
+reftext가 지정되지 않은 경우 상호 참조의 텍스트가 자동으로 생성됩니다. 기본적으로 이 텍스트는 참조의 제목입니다.
+
+=== 상호 참조 스타일
+
+상호 참조의 생성된 텍스트는 xrefstyle에 의해 제어됩니다. 또한 요소 유형(섹션, 그림 등)에 따라 다릅니다. xrefstyle 값이 상호 참조의 생성된 텍스트에 어떤 영향을 미치는지 알아보기 위해 다음 문서를 살펴보겠습니다.
+
+[source,asciidoc]
+----
+== Installation
+----
+
+.Big Cats image::big-cats.png[]
+상호 참조의 생성된 텍스트를 사용자 정의하기 위해 선택할 수 있는 xrefstyle 문서 속성에서 지원하는 세 가지 기본 제공 스타일이 있습니다.
+
+[source,asciidoc]
+:xrefstyle: full
+참조 번호와 강조된(장 또는 부록) 또는 따옴표로 묶인 제목(예: Section 2.3, "Installation") (예: Figure 1, "Big Cats") 뒤에 참조에 대한 기호를 사용합니다.
+[source,asciidoc]
+:xrefstyle: short
+참조 번호(예: Section 2.3) (예: Figure 1) 뒤에 참조에 대한 기호를 사용합니다.
+[source,asciidoc]
+:xrefstyle: basic
+제목만 사용하고, 참조가 장 또는 부록인 경우에만 강조 표시를 적용합니다(예: Installation) (예: Big Cats).
+xrefstyle 속성은 단일 참조에 대해 xrefstyle 값을 재정의하기 위해 xref 매크로에 직접 지정할 수도 있습니다(예: xref:installation[xrefstyle=short]). 요소 속성은 동일한 세 가지 스타일을 지원합니다.
+
+xrefstyle 서식은 제목과 번호(또는 명시적 캡션)가 모두 있지만 명시적 reftext가 없는 참조에만 적용됩니다. 참조가 장 또는 부록인 경우 제목은 따옴표 대신 이탤릭체로 표시됩니다(xrefstyle이 basic인 경우에도).
+
+"Installation"이라는 제목의 섹션을 참조하고 번호가 2.3이라고 가정해 보겠습니다. full 스타일은 다음과 같이 표시됩니다:
+
+[source,text]
+Section 2.3, "Installation"
+short 스타일은 다음과 같이 표시됩니다:
+
+[source,text]
+Section 2.3
+basic 스타일은 다음과 같이 표시됩니다:
+
+[source,text]
+----
+Installation
+----
+
+full 및 short 스타일은 캡션이 있는 참조에만 적용됩니다. 구체적으로 대상 블록 유형(예: 목록 블록의 경우 listing-caption, 예제 블록의 경우 example-caption, 테이블의 경우 table-caption 등)에 대해 해당 <context>-caption 속성이 설정되어 있어야 합니다. 그렇지 않으면 basic 스타일이 사용됩니다.
+
+=== 참조 기호
+문서 속성을 사용하여 참조 번호 앞에 배치되는 기호를 사용자 정의할 수 있습니다. 이 참조 기호는 참조의 유형(예: Chapter 또는 Section)을 나타냅니다.
+
+chapter-refsig — 장에 대한 상호 참조에 사용할 기호를 정의합니다(기본값: Chapter).
+section-refsig — 섹션에 대한 상호 참조에 사용할 기호를 정의합니다(기본값: Section).
+appendix-refsig — 부록에 대한 상호 참조에 사용할 기호를 정의합니다(기본값: Appendix).
+(부분에 대한 번호 매기기가 지원되면 부분 상호 참조에 대한 기호 속성이 도입될 것입니다).
+
+예를 들어 "Section" 단어를 사용자 정의하려면 문서 헤더에 section-refsig 속성을 정의합니다:
+
+[source,asciidoc]
+:section-refsig: Sect.
+그러면 full xrefstyle이 다음과 같이 표시됩니다:
+
+[source,text]
+Sect. 2.3, "Installation"
+short xrefstyle은 다음과 같이 표시됩니다:
+
+[source,text]
+Sect. 2.3
+속성 설정을 해제하면 상호 참조 텍스트에서 기호가 삭제됩니다. 예를 들면:
+
+[source,asciidoc]
+:!section-refsig:
+이 경우 full xrefstyle은 번호와 제목만 표시합니다:
+
+[source,text]
+2.3, "Installation"
+short xrefstyle은 번호만 표시합니다:
+
+[source,text]
+2.3
+basic xrefstyle은 기호의 값에 영향을 받지 않습니다.
+
+기본 제공되는 스타일은 위에서 언급한 스타일뿐입니다. 사용자 정의 서식 문자열에 대한 지원이 계획되어 있습니다. 자세한 내용은 #2212를 참조하세요. 그때까지는 사용자 정의 변환기에서 사용자 정의 서식을 구현하거나 노드의 xreftext 메서드를 재정의할 수 있습니다.
+
+
+
 == Cross References - Validate Cross References
+
+=== 내부 상호 참조의 제한된 유효성 검사
+AsciiDoc 프로세서는 내부 상호 참조의 유효성을 검사하는 데 제한적인 지원만 제공하면 됩니다. 유효성 검사는 상호 참조가 처음 방문될 때 발생합니다. 구문 분석 트리에 저장되지 않은 일부 참조(예: 단락 중간의 앵커)가 여전히 있어 거짓 양성을 초래할 수 있으므로 이러한 유효성 검사는 플래그 뒤에 숨겨져 있습니다.
+Asciidoctor를 사용할 때 다음과 같은 여러 가지 방법으로 상호 참조의 유효성 검사를 활성화할 수 있습니다:
+
+CLI를 사용할 때 -v CLI 옵션 전달
+API를 사용할 때 전역 변수 $VERBOSE를 true 값으로 설정
+API를 사용할 때 전역 로거의 level을 INFO로 설정(즉, Asciidoctor::LoggerManager.logger.level = :info)
+
+이러한 모든 조정은 프로세서를 pedantic 모드로 전환합니다. 이 모드에서 파서는 상호 참조의 유효성을 즉시 검사하고 참조가 유효하지 않으면 경고 메시지를 발행합니다. 전역 변수 $VERBOSE를 true로 설정하면 Ruby의 경고도 활성화되는데, 이는 원하는 바가 아닐 수 있습니다.
+다음 예제를 살펴보겠습니다:
+[source,asciidoc]
+<<foobar>>를 참조하세요.
+[#foobaz]
+== Foobaz
+이 문서에서 Asciidoctor를 verbose/pedantic 모드(-v)로 실행하면 다음과 같은 경고 메시지를 로거에 보냅니다.
+[source,text]
+asciidoctor: WARNING: invalid reference: foobar
+AsciiDoc 프로세서는 동일한 문서 내에서 참조의 유효성을 검사하기만 하면 됩니다(포함된 내용이 해결된 후).
+
+
 
 == Footnotes
 
@@ -6440,21 +7265,527 @@ See <<heading>>.
 
 == Images
 
+AsciiDoc에는 블록과 인라인의 두 가지 이미지 매크로 유형이 있습니다. 모든 매크로와 마찬가지로 블록 및 인라인 형식은 매크로 이름 뒤에 오는 콜론 수로 구분됩니다. 블록 형식은 두 개의 콜론(::)을 사용하는 반면 인라인 형식은 하나의 콜론(:)만 사용합니다.
+=== 블록 이미지 매크로
+블록 이미지는 문서에서 개별 요소, 즉 자체 줄로 표시됩니다. 블록 이미지는 이미지 매크로 이름으로 지정되고 그 뒤에 두 개의 콜론(::)이 붙습니다. 빈 줄이 앞에 오고 그 자체로 한 줄에 입력된 다음 빈 줄이 뒤따릅니다.
+.블록 이미지 매크로 예제 1
+[source,asciidoc]
+문서의 내용.
+image::sunset.jpg[]
+문서의 내용
+블록 이미지를 삽입하려면 이미지 매크로 이름 바로 뒤에 두 개의 콜론(::)을 입력하세요.
+콜론 뒤에 이미지 파일 대상을 입력하세요. 매크로를 완성하려면 대상 바로 뒤에 대괄호([]) 한 쌍을 입력하세요.
+예제 1의 결과는 아래에 표시됩니다.
+image::sunset.jpg[]
+대상은 필수입니다. 대상은 상대 경로 또는 URL일 수 있습니다. 대상이 해석되는 방식은 프로세서 설정 및/또는 출력 형식에 따라 다릅니다. 변환기가 이미지를 참조하는 출력을 생성하는 경우 경로는 발행된 문서를 기준으로 상대적이어야 합니다. 변환기가 출력 문서에 이미지를 포함하는 경우(예: 인라인 SVG, data-uri 설정, PDF로 직접 변환) 대상은 변환 시점에 해결 가능해야 합니다. 후자의 경우 프로세서의 보안 설정이 허용하는 경우에만 URL이 해결됩니다(예: allow-uri-read).
+대상에는 공백 문자가 포함될 수 있습니다. HTML 출력에서 이러한 공백은 URL 인코딩됩니다(즉, %20).
+대괄호 안에 쉼표로 구분된 선택적 속성 목록을 지정하거나 비워둘 수 있습니다. alt 텍스트를 지정하려면 대괄호 안에 입력하세요.
+.블록 이미지 매크로 alt 텍스트 예제 2
+[source,asciidoc]
+image::sunset.jpg[Sunset]
+alt 텍스트에 쉼표가 포함되어 있거나 등호 뒤에 유효한 속성 이름으로 시작하는 경우 alt 텍스트를 큰따옴표로 묶어야 합니다. 큰따옴표 묶음은 쉼표가 속성 구분 기호로 해석되는 것을 효과적으로 이스케이프합니다. 매크로의 속성 목록이 어떻게 구문 분석되는지 알아보려면 속성 목록 구문 분석을 참조하세요.
+.쉼표가 포함된 alt 텍스트가 있는 블록 이미지 매크로 예제 3
+[source,asciidoc]
+image::sunset.jpg["Mesa Verde Sunset, by JAVH"]
+alt 텍스트를 작은따옴표로 묶어 쉼표를 이스케이프할 수 있지만, 그렇게 하면 암시적으로 대체가 활성화됩니다. alt 텍스트에 대체를 적용해야 하는 경우가 아니라면 큰따옴표를 묶음으로 사용하는 것이 좋습니다.
+이미지에 ID와 제목을 지정하고, 크기를 설정하고, 링크로 만들 수도 있습니다.
+.속성 목록이 있는 블록 이미지 매크로 예제 4
+[source,asciidoc]
+.산 석양
+[#img-sunset,link=https://www.flickr.com/photos/javh/5448336655]
+image::sunset.jpg[Sunset,200,100]
+
+블록 이미지의 제목을 정의하며, 렌더링할 때 이미지 아래에 표시됩니다.
+블록에 ID를 할당하고 이미지를 링크로 만듭니다. link 속성은 블록 매크로의 속성 목록 내에서도 정의할 수 있습니다.
+첫 번째 위치 속성인 Sunset은 이미지의 alt 텍스트입니다.
+두 번째와 세 번째 위치 속성은 각각 너비와 높이를 정의합니다.
+
+예제 4의 결과는 아래에 표시됩니다.
+image::sunset.jpg[Sunset,200,100]
+.Figure 1. 산 석양
+=== 그림 캡션 레이블
+블록 이미지에 제목이 정의되면 이미지 제목 앞에 캡션 레이블(Figure)이 붙고 자동으로 번호가 매겨집니다. 그림 캡션 레이블과 번호를 끄려면 문서 헤더에서 figure-caption 속성을 해제하세요.
+[source,asciidoc]
+----
+= Document Title
+:figure-caption!:
+----
+
+=== 인라인 이미지 매크로
+인라인 이미지는 단락이나 사이드바 블록과 같은 다른 요소의 흐름에 표시됩니다. 인라인 이미지 매크로는 매크로 이름 뒤에 단일 콜론(:)이 오는 것을 제외하면 블록 이미지 매크로와 거의 동일합니다.
+.인라인 이미지 매크로 예제 5
+[source,asciidoc]
+Click image:play.png[] to get the party started.
+Click image:pause.png[title=Pause] when you need a break.
+
+요소의 흐름에서 매크로 이름과 단일 콜론(image:)을 입력한 다음 이미지 대상을 입력하세요. 대괄호([]) 한 쌍으로 매크로를 완성하세요.
+대괄호 안에 쉼표로 구분된 속성 목록을 지정하거나 비워둘 수 있습니다.
+
+예제 5의 결과는 아래에 표시됩니다.
+Click image:play.png[] to get the party started.
+Click image:pause.png[title=Pause] when you need a break.
+대상은 필수입니다. 대상은 상대 경로 또는 URL일 수 있습니다. 대상이 해석되는 방식은 프로세서 설정 및/또는 출력 형식에 따라 다릅니다. 변환기가 이미지를 참조하는 출력을 생성하는 경우 경로는 발행된 문서를 기준으로 상대적이어야 합니다. 변환기가 출력 문서에 이미지를 포함하는 경우(예: 인라인 SVG, data-uri 설정, PDF로 직접 변환) 대상은 변환 시점에 해결 가능해야 합니다. 후자의 경우 프로세서의 보안 설정이 허용하는 경우에만 URL이 해결됩니다(예: allow-uri-read).
+대상에는 공백 문자가 포함될 수 있습니다. HTML 출력에서 이러한 공백은 URL 인코딩됩니다(즉, %20).
+인라인 이미지의 alt 텍스트에는 블록 이미지와 동일한 요구 사항이 있지만, 닫는 대괄호를 이스케이프해야 한다는 제한이 추가됩니다.
+인라인 이미지의 경우 선택적 제목이 툴팁으로 표시됩니다.
+
+
+
 == Images - Set the Images Directory
+
+=== imagesdir 속성
+이미지 카탈로그의 위치에 대한 경로는 imagesdir 속성에 의해 제어됩니다.
+==== imagesdir 속성 구문
+imagesdir는 문서 속성입니다. 그 값은 모든 이미지 매크로 대상의 시작 부분에 자동으로 추가됩니다. 이미지의 해결된 위치는 다음과 같습니다: <value-of-imagesdir> + <image-macro-target>. 따라서 이미지 매크로에서 이 속성을 참조할 필요가 없습니다. 문서 헤더에서만 설정하면 됩니다.
+.예제 1. 잘못됨
+[source,asciidoc]
+image::{imagesdir}/name-of-image.png[]
+.예제 2. 올바름
+[source,asciidoc]
+image::name-of-image.png[]
+imagesdir의 값은 절대 경로, 상대 경로 또는 URL일 수 있습니다. 기본적으로 imagesdir 값은 비어 있습니다. 즉, 이미지는 문서를 기준으로 해결됩니다. 이미지 매크로의 대상이 절대 경로 또는 URL인 경우 imagesdir의 값은 대상 경로에 추가되지 않습니다.
+프로세서가 모든 이미지 대상의 시작 부분에 imagesdir의 값을 추가하는 이점은 변환기별로 이미지가 위치한 폴더를 전역적으로 제어할 수 있다는 것입니다. 이 폴더를 이미지 카탈로그라고 합니다. 다른 출력 형식에서는 이미지를 다른 위치에 저장해야 하므로 이 속성을 사용하면 많은 다양한 시나리오에 적응할 수 있습니다.
+이미지의 대상을 정의할 때 모든 이미지 매크로에 해당 공통 경로를 하드 코딩하는 것을 피하기 위해 imagesdir에 의존하는 것이 좋습니다. 항상 이미지가 이미지 카탈로그와 관련하여 어디에 있는지 생각하세요.
+imagesdir 속성은 API에 의해 잠겨 있지 않은 한 문서의 여러 곳에서 설정할 수 있습니다. 이 기술은 문서의 다른 부분, 장 또는 섹션에 대한 이미지를 다른 위치에 저장하는 경우에 유용합니다.
+
+
 
 == Images - Insert Images from a URL
 
+=== 이미지 URL 대상
+URL(예: 블로그, 이미지 호스팅 서비스, 서버 등)에서 제공되는 이미지를 참조할 수 있으며 이미지를 다운로드하여 로컬에 저장하는 것에 대해 걱정할 필요가 없습니다.
+URL 대상을 가진 이미지의 몇 가지 예는 다음과 같습니다:
+.URL 대상이 있는 블록 이미지 예제 1
+[source, asciidoc]
+image::https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg[Tux,250,350]
+.URL 대상이 있는 인라인 이미지 예제 2
+[source, asciidoc]
+You can find image:https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg[Linux,25,35] everywhere these days.
+You can find image:https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg[Linux,25,35] everywhere these days.
+이미지 대상이 URL인 경우 imagesdir의 값은 무시됩니다.
+모든 이미지에 URL 접두사를 입력하는 것을 피하고 모든 이미지가 동일한 서버에 있는 경우 imagesdir 속성을 사용하여 기본 URL을 설정할 수 있습니다:
+.이미지의 기본 URL로 URL 사용 예제 3
+[source, asciidoc]
+:imagesdir-old: {imagesdir}
+:imagesdir: https://upload.wikimedia.org/wikipedia/commons
+image::3/35/Tux.svg[Tux,250,350]
+:imagesdir: {imagesdir-old}
+이번에는 이미지 대상이 URL이 아니기 때문에 imagesdir이 사용됩니다(imagesdir의 값이 URL일 뿐입니다).
+
+
+
 == Images - Position and Frame Images
+
+이미지는 아이디어를 설명하거나, 말하는 것보다 보여주거나, 독자가 텍스트와 연결되도록 도와주는 등 텍스트를 향상시키는 좋은 방법입니다.
+기본적으로 이미지와 텍스트는 기름과 물처럼 동작합니다. 이미지는 텍스트와 공간을 공유하는 것을 좋아하지 않습니다. 그들은 그것에 대해 약간 "고집스러운" 편입니다. 그래서 우리는 이미지와 텍스트가 함께 흐르도록 이미지 매크로의 컨트롤 조정에 중점을 두었습니다.
+이미지를 배치할 때 두 가지 접근 방식을 취할 수 있습니다:
+
+명명된 속성
+역할
+
+=== 배치 속성
+AsciiDoc는 블록 이미지에 align 속성을 지원하여 블록 내에서 이미지를 정렬합니다(예: 왼쪽, 오른쪽 또는 가운데). 명명된 속성 float는 블록과 인라인 이미지 매크로 모두에 적용될 수 있습니다. float는 이미지를 페이지의 한쪽으로 끌어당기고 각각 블록 또는 인라인 내용을 그 주위에 배치합니다.
+다음은 floating 블록 이미지의 예입니다. 이미지 뒤에 오는 단락이나 다른 블록은 이미지 옆의 사용 가능한 공간으로 float 됩니다. 이미지는 이미지 블록의 가운데에 수평으로 배치됩니다.
+.블록 이미지를 오른쪽으로 당기고 블록 내에서 가운데 정렬 예제 1
+[source,asciidoc]
+image::tiger.png[Tiger,200,200,float="right",align="center"]
+다음은 floating 인라인 이미지의 예입니다. 이미지는 단락 텍스트의 오른쪽 상단 모서리로 float 됩니다.
+.단락 텍스트의 오른쪽으로 당겨진 인라인 이미지 예제 2
+[source,asciidoc]
+image:linux.png[Linux,150,150,float="right"]
+You can find Linux everywhere these days!
+명명된 속성을 사용할 때 CSS는 인라인으로 추가됩니다(예: style="float: left"). 이는 페이지의 테마를 사용자 정의하려고 할 때 페이지의 스타일을 지정하기 어렵게 만들 수 있기 때문에 나쁜 관행입니다. 이러한 종류의 것들에 CSS 클래스를 사용하는 것이 훨씬 더 좋습니다. CSS 클래스는 AsciiDoc 용어로 역할에 매핑됩니다.
+=== 배치 역할
+다음은 위의 예제이며, 이제 기본 Asciidoctor 스타일시트의 CSS 클래스에 매핑되는 역할을 사용하도록 구성되었습니다:
+.배치 역할을 사용하는 블록 이미지 매크로 예제 3
+[source,asciidoc]
+[.right.text-center]
+image::tiger.png[Tiger,200,200]
+.배치 역할을 사용하는 인라인 이미지 매크로 예제 4
+[source,asciidoc]
+image:sunset.jpg[Sunset,150,150,role=right] What a beautiful sunset!
+다음 표는 이미지 배치에 기본적으로 사용할 수 있는 모든 역할을 나열합니다.
+.이미지 배치를 위한 역할
+[cols="1,1,1,1,1,1"]
+|===
+|       |Float          |Align
+|Role   |left   |right |text-left |text-right |text-center
+|Block Image |Yes |Yes |Yes |Yes |Yes
+|Inline Image |Yes |Yes |No |No |No
+|===
+이미지에 float 방향만 설정하는 것은 적절한 배치에 충분하지 않습니다. 기본적으로 이미지와 텍스트 사이에 공간이 남지 않기 때문입니다. 이 문제를 완화하기 위해 우리는 배치 명명 속성이나 역할 중 하나를 사용하는 이미지에 적절한 여백을 추가했습니다.
+이미지 스타일을 사용자 정의하려면, 아마도 여백을 사용자 정의하려면, 스타일시트에 자신만의 추가 항목을 제공할 수 있습니다(기본 스타일시트를 기반으로 하는 자체 스타일시트를 사용하거나 docinfo 파일에 스타일을 추가하여).
+역할에 대한 단축 구문(.)은 아직 이미지 스타일과 함께 사용할 수 없습니다.
+=== 프레이밍 역할
+텍스트에서 이미지를 더 오프셋하기 위해 테두리에 이미지를 프레이밍하는 것이 일반적입니다. thumb 역할(또는 약어로 th)을 사용하여 블록 또는 인라인 이미지를 썸네일로 표시되도록 스타일을 지정할 수 있습니다.
+thumb 역할은 이미지의 크기를 변경하지 않습니다. 이를 위해서는 이미지에 높이와 너비를 할당해야 합니다.
+다음은 블로그 게시물에 이미지를 추가하는 일반적인 예입니다. 이미지는 오른쪽으로 float 되고 텍스트에서 더 두드러지도록 프레임이 적용됩니다.
+[source,asciidoc]
+image:logo.png[role="related thumb right"] Here's text that will wrap around the image to the left.
+이미지에 related 역할을 추가했습니다. 이 역할은 기술적으로 필요하지 않지만 이미지에 의미론적 의미를 부여합니다.
+=== float 제어
+이미지를 floating 하기 시작하면 너무 많은 내용이 이미지 주위에 floating 되는 것을 발견할 수 있습니다. 필요한 것은 float를 해제하는 방법입니다. 그것은 또 다른 역할인 float-group을 사용하여 제공됩니다.
+두 개의 이미지를 floating 하여 서로 나란히 배치하고 다음 단락이 그 아래에 나타나기를 원한다고 가정해 보겠습니다.
+[source,asciidoc]
+[.left]
+.Image A
+image::a.png[A,240,180]
+[.left]
+.Image B
+image::b.png[B,240,180,title=Image B]
+Text below images.
+이 예제가 변환되어 브라우저에서 볼 때 단락 텍스트는 이미지의 오른쪽에 나타납니다. 이 동작을 수정하려면 자체 포함된 float가 있는 블록에서 이미지를 "그룹화"하기만 하면 됩니다. 다음은 이 작업을 수행하는 방법입니다:
+[source,asciidoc]
+[.float-group]
+[.left]
+.Image A
+image::a.png[A,240,180]
+[.left]
+.Image B
+image::b.png[B,240,180]
+Text below images.
+이번에는 텍스트가 우리가 원하는 대로 이미지 아래에 나타납니다.
+
+
 
 == Images - Add Link to Image
 
+=== link 속성
+link 속성을 사용하여 이미지를 링크로 변환할 수 있습니다.
+블록 또는 이미지 매크로의 link 속성은 이미지가 link 매크로로 둘러싸인 것처럼 동작합니다. 인라인 이미지 매크로를 link 매크로로 감싸는 것이 가능하지만 그 조합은 잘 지원되지 않고 미묘한 구문 분석 문제를 일으킬 수 있습니다. 따라서 이미지 매크로에 link 속성을 사용해야 합니다.
+link 속성의 값은 link 매크로의 대상과 유사합니다. 모든 URL 또는 상대 경로를 가리킬 수 있습니다.
+블록 이미지 매크로의 경우 link 속성을 매크로 위의 블록 속성 줄에 추가하거나 매크로의 내용 안에 추가할 수 있습니다.
+[source,asciidoc]
+[link=https://example.org]
+image::logo.png[Logo]
+또는
+[source,asciidoc]
+image::logo.png[Logo,link=https://example.org]
+인라인 매크로의 경우 link 속성은 매크로의 내용 안에 추가되어야 합니다.
+[source,asciidoc]
+image:apply.jpg[Apply,link=https://apply.example.org] today!
+=== 링크 제어
+link 속성을 사용할 때 링크 매크로에서 지원되는 동일한 컨트롤을 사용하여 링크가 구성되는 방식을 제어할 수 있습니다. 해당 컨트롤은 다음과 같습니다:
+
+window 속성 - 브라우저에 지정된 명명된 창에서 링크를 열도록 지시합니다.
+nofollow 옵션 - 검색 엔진에 링크를 따르지 않도록 지시합니다.
+noopener 옵션 - 브라우저가 새 브라우징 컨텍스트에 원래 문서에 대한 액세스 권한을 부여하지 않고 대상으로 이동하도록 지시합니다.
+
+window 속성의 값이 _blank일 때 noopener 옵션이 자동으로 활성화됩니다.
+다음은 이러한 컨트롤을 사용하는 방법을 보여주는 예입니다.
+[source,asciidoc]
+image::logo.png[Logo,link=https://example.org,window=_blank,opts=nofollow]
+이러한 링크 컨트롤이 작동하는 방식에 대한 자세한 내용은 link 매크로 문서의 별도의 창 대상 지정 섹션을 참조하세요.
+
+
+
 == Images - Adjust Image Sizes
+
+이미지는 종종 매체에 따라 크기를 조정해야 하므로 이미지 크기를 지정하는 몇 가지 방법이 있습니다.
+
+대부분의 출력 형식에서 이미지가 콘텐츠 너비나 높이를 초과하지 않는 한 지정된 너비가 준수되며, 이 경우 원래 종횡비를 유지하면서 맞춰 크기가 조정됩니다(즉, 반응형 크기 조정).
+
+=== width 및 height 속성
+이미지 크기를 지정하는 기본 방법은 이미지 매크로에 width 및 height 속성을 정의하는 것입니다. 이 두 속성은 매우 일반적이므로 두 이미지 매크로 모두에서 두 번째 및 세 번째(이름 없는) 위치 속성으로 매핑됩니다.
+
+[source,asciidoc]
+image::flower.jpg[Flower,640,480]
+이는 다음과 같은 긴 버전과 동일합니다:
+
+[source,asciidoc]
+image::flower.jpg[alt=Flower,width=640,height=480]
+width 및 height 속성의 값은 단위 없는 정수여야 합니다. px 단위가 암시됩니다. 프로세서가 허용할 수 있지만 % 값에 의존해서는 안 됩니다. % 단위는 이전 버전의 HTML에서 지원되었지만 HTML 5부터 제거되었습니다. PDF 또는 DocBook 출력에 % 값을 지정해야 하는 경우 각각 pdfwidth 또는 scaledwidth를 사용하세요. HTML 출력에서 콘텐츠 영역을 기준으로 이미지 크기를 조정하려면 역할을 사용하세요.
+
+width 및 height의 값을 사용하여 이미지 크기를 조정할 수 있지만 이러한 속성은 주로 CSS 픽셀로 이미지의 고유한 크기를 지정하기 위한 것입니다. width 및 height 속성은 HTML 출력의 <img> 요소에 동일한 이름의 속성에 매핑됩니다. 이러한 속성은 브라우저에 페이지 재배치를 최소화하기 위해 레이아웃 중에 이미지에 예약할 공간을 알려주는 힌트를 제공하므로 중요합니다. height 속성은 width 속성도 지정된 경우에만 지정해야 하며, 이미지의 종횡비를 존중해야 합니다.
+
+=== 자동 이미지 크기 조정
+기본 Asciidoctor 스타일시트는 반응형 이미지를 구현합니다(너비 방향 크기 조정 사용). 콘텐츠 영역의 너비가 이미지의 너비보다 작으면 이미지가 맞춰서 축소됩니다. 이 기능을 지원하기 위해 모든 크기에서 이미지의 고유한 종횡비가 유지됩니다.
+
+따라서 이미지의 크기를 지정할 때 이미지의 고유한 종횡비를 존중하는 값을 선택해야 합니다. 값이 종횡비를 존중하지 않으면 브라우저는 높이를 무시합니다.
+
+=== pdfwidth 속성
+AsciiDoc는 Asciidoctor PDF를 사용하여 PDF로 변환할 때 이미지 크기를 조정하기 위해 다음 속성을 인식합니다:
+
+pdfwidth - Asciidoctor PDF를 사용하여 변환할 때 PDF에서 이미지의 선호 너비입니다.
+pdfwidth 속성은 다음 단위를 허용합니다:
+
+px: 출력 장치 픽셀(96dpi로 가정)
+pt(또는 없음): 포인트(1인치의 1/72)
+pc: 파이카(1인치의 1/6)
+cm: 센티미터
+mm: 밀리미터
+in: 인치
+%: 콘텐츠 너비의 백분율(여백 사이의 영역)
+vw: 페이지 너비의 백분율(가장자리에서 가장자리까지)
+iw: 이미지의 고유한 너비의 백분율
+pdfwidth가 제공되지 않으면 Asciidoctor PDF는 scaledwidth 또는 width(단위 없음, 픽셀로 가정)도 해당 순서대로 허용합니다. 자세한 내용은 Asciidoctor PDF의 이미지 크기 조정을 참조하세요.
+
+=== scaledwidth 속성
+AsciiDoc는 DocBook으로 변환할 때 또는 Asciidoctor PDF를 사용하여 PDF로 변환할 때 이미지 크기를 조정하기 위해 다음 속성을 인식합니다. scaledwidth 속성은 다른 변환기에서는 무시됩니다.
+
+scaledwidth - DocBook 툴체인을 사용하여 PDF로 변환할 때 이미지의 선호 너비입니다. (scale과 상호 배타적)
+scale - DocBook 툴체인을 사용하여 PDF로 변환할 때 원래 이미지 크기를 이 양만큼 조정합니다. (scaledwidth와 상호 배타적)
+scaledwidth는 vw 단위를 허용하지 않는 것을 제외하고는 pdfwidth와 유사하게 이미지 크기를 조정합니다.
+
+DocBook과 함께 사용할 때 scaledwidth의 값은 다음 단위를 가질 수 있습니다:
+
+px: 출력 장치 픽셀(72dpi로 가정)
+pt: 포인트(1인치의 1/72)
+pc: 파이카(1인치의 1/6)
+cm: 센티미터
+mm: 밀리미터
+in: 인치
+em: em(현재 글꼴 크기)
+%(또는 단위 없음): 콘텐츠 너비의 백분율(여백 사이의 영역)
+AsciiDoc의 scaledwidth 속성은 DocBook의 imagedata 태그에 width 속성으로 매핑되는 반면 AsciiDoc의 width 속성은 DocBook의 imagedata 태그에 contentwidth 속성으로 매핑됩니다. AsciiDoc에서 width 및 scaledwidth 속성이 모두 지정된 경우 scaledwidth가 우선하므로 DocBook 출력에는 width 속성만 있게 됩니다.
+
+=== 이미지 크기 조정 요약
+.이미지 크기 조정 속성
+[cols="1,1,1,1,1"]
+|===
+|Backend |Absolute size |Relative to original size |Relative to content width |Relative to page width
+
+|html
+|width=120 +
+(assumed to be px)
+|Not possible
+|role=half-width
+|role=half-view-width
+
+|pdf
+
+|pdfwidth=100mm +
+(or cm, in, pc, pt, px)
+|Not possible +
+(support for the scale attribute is pending)
+|pdfwidth=80%
+|pdfwidth=50vw
+
+|docbook, pdf
+|scaledwidth=100mm +
+(or cm, em, in, pc, pt, px)
+
+|scale=75
+|scaledwidth=50%
+|Not possible
+|===
+
+다음은 다양한 출력 형식에서 이미지 크기를 제어하기 위해 이러한 속성을 함께 사용하는 방법의 예입니다:
+
+[source,asciidoc]
+image::flower.jpg[Flower,640,480,pdfwidth=50%,scaledwidth=50%]
+크기 조정 속성의 캐스케이딩 동작이 사용 사례에 적합하지 않은 경우 문서 속성을 사용하여 사용 중인 백엔드에 적합한 속성을 설정하는 것을 고려해 볼 수 있습니다. 다음 예제를 살펴보세요:
+
+[source,asciidoc]
+ifdef::backend-html5[] :twoinches: width=144 // using a role requires adding a corresponding rule to the CSS :full-width: role=full-width
+:half-width: role=half-width :half-size: role=half-size :thumbnail: width=60 endif::[] ifdef::backend-pdf[] :twoinches: pdfwidth=2in // NOTE use pdfwidth=100vw to make the image stretch edge to edge :full-width: pdfwidth=100% :half-width: pdfwidth=50% // NOTE scale is not yet supported by the PDF converter :half-size: pdfwidth=50% :thumbnail: pdfwidth=20mm endif::[] ifdef::backend-docbook5[] :twoinches: scaledwidth=2in :full-width: scaledwidth=100% :half-width: scaledwidth=50% :half-size: scale=50 :thumbnail: scaledwidth=20mm endif::[]
+그런 다음 다음 구문을 사용하여 이미지가 콘텐츠 영역 너비의 절반이 되도록 지정할 수 있습니다:
+
+[source,asciidoc]
+image::image.jpg[{half-width}]
+문서 전체에 걸쳐 일관성을 제공하는 것 외에도 이 기술은 향후 변경 사항으로부터 보호하는 데 도움이 될 것입니다. 더 자세한 예제는 이 토론 목록의 스레드를 참조하세요.
+
+
 
 == Images - Specify Image Format
 
+독자에게 이미지는 그저 이미지일 뿐이지만, 다양한 이미지 형식은 출력 형식에서 참조되거나 포함되도록 변환기에 의해 다르게 처리되어야 합니다. SVG와 같은 일부 이미지 형식은 추가 동작을 활성화하기도 합니다. 이 페이지에서는 AsciiDoc 프로세서가 이미지의 형식을 결정하는 방법과 형식을 결정할 수 없는 경우 format 속성을 사용하여 명시적으로 지정할 수 있는 방법을 알아봅니다.
+=== 자동 이미지 형식
+대부분의 경우 대상의 파일 확장자(예: .svg)에서 이미지 형식을 결정할 수 있습니다. 다음은 파일 확장자가 있는 이미지 대상을 보여주는 예입니다:
+[source,asciidoc]
+image::avatar.svg[]
+이 경우 변환기는 파일 확장자 .svg를 기반으로 이것이 SVG 이미지임을 결정할 수 있습니다. 따라서 작성자는 이미지 형식을 지정할 필요가 없습니다. 작성자는 이미지 형식을 결정할 수 없을 때만 형식을 지정해야 합니다.
+=== format 속성
+파일 확장자가 없거나 URL의 경우 일반적인 위치에 없는 경우 작성자는 이미지 형식을 명시적으로 지정해야 합니다. 블록 또는 인라인 이미지 매크로의 format 속성을 사용하여 이미지의 형식을 지정할 수 있습니다.
+[source,asciidoc]
+image::https://example.org/avatar[format=svg]
+이 경우 대상에 파일 확장자가 없기 때문에 변환기는 이것이 SVG 이미지임을 결정할 수 없습니다. 그러나 작성자가 format=svg를 지정했기 때문에 변환기는 이를 SVG 이미지로 인식할 수 있습니다.
+다음은 이미지 형식을 자동으로 결정할 수 없는 몇 가지 경우입니다:
+
+대상에 파일 확장자가 없는 경우
+대상이 인식되지 않는 파일 확장자를 사용하는 경우
+대상이 쿼리 문자열을 포함하는 URL인 경우(따라서 파일 확장자가 숨겨짐)
+
+format 속성의 값은 서브 MIME 유형(슬래시 뒤의 부분)입니다(예: PNG 이미지의 경우 png). 이 규칙의 한 가지 예외는 SVG의 형식으로, svg+xml 대신 svg로 지정됩니다. 일반적인 이미지 형식과 해당 MIME 유형 값 목록은 이미지 파일 유형 및 형식 가이드 페이지에서 찾을 수 있습니다.
+
+=== 형식은 언제 사용되나요?
+변환기가 거의 항상 이미지 형식을 알아야 하는 몇 가지 시나리오가 있습니다. 하나는 SVG 대상을 구별하는 것입니다. 다른 하나는 이미지를 데이터 URI로 변환하는 것입니다. 또 다른 하나는 변환기가 이미지를 다시 인코딩해야 하는 경우입니다.
+AsciiDoc는 HTML 출력에 SVG를 포함하는 방법과 폴백 이미지를 제공할지 여부와 같은 SVG 이미지에 대한 추가 설정을 인식합니다. 변환기가 파일을 읽고 처리해야 하는 경우 SVG의 내용이 XML 문서이므로 SVG를 처리하기 위해 종종 다른 라이브러리를 사용해야 합니다. 따라서 거의 모든 변환기에서 SVG 대상을 인식하는 것이 필수적입니다.
+문서에 data-uri 속성이 설정되어 있으면 AsciiDoc 프로세서는 이미지를 데이터 URI로 변환해야 합니다. 먼저 SVG의 데이터 URI는 다른 형식의 데이터 URI와 다릅니다. 그러나 SVG가 아닌 이미지의 데이터 URI를 만들 때에도 해당 이미지의 MIME 유형을 데이터 URI에 포함해야 하며, 이 경우 이미지 형식을 알아야 합니다.
+PDF 변환기와 같은 일부 변환기는 이미지 데이터를 다시 인코딩해야 합니다. 이는 변환기가 이미지 데이터를 구문 분석해야 함을 의미하며, 이를 위해 추가 라이브러리를 로드해야 할 수 있습니다. 해당 처리를 수행하려면 거의 확실히 이미지의 형식을 알아야 합니다. 또한 변환기가 처리할 수 없는 형식을 이미지가 사용하는지 작성자에게 알릴 수 있는 기회를 제공합니다.
+볼 수 있듯이 이미지 형식이 항상 필요한 것은 아니지만 대상의 파일 확장자에서 명확하지 않은 경우 형식을 지정해야 할 만큼 충분히 자주 필요합니다.
+
+
+
 == Images - SVG Images
 
+블록과 인라인 이미지 매크로에는 모두 확장 가능한 벡터 그래픽(SVG)에 대한 기본 제공 지원이 있습니다. 그러나 SVG를 웹 페이지에 포함하는 방법은 한 가지 이상이 있으며, 사용되는 전략은 SVG의 동작(또는 오작동)에 영향을 줄 수 있습니다. 따라서 이러한 매크로는 SVG가 포함되는 방식(즉, 참조되는 방식)을 제어하기 위한 추가 옵션을 제공합니다.
+
+=== SVG 치수
+루트 <svg> 요소의 viewBox 속성은 필수입니다. viewBox는 SVG 데이터 내부의 x 및 y 값이 배치되는 좌표 공간을 설정합니다. 이 정보가 없으면 변환기는 SVG 데이터를 제대로 해석하고 캔버스로 변환할 수 없습니다.
+
+루트 <svg> 요소에서 width 및 height 속성을 사용하지 않는 것이 좋습니다. viewBox만 지정하는 SVG가 문서에서 가장 잘 작동한다는 것을 알 수 있습니다. 그것은 SVG 데이터 자체가 무한히 확장 가능하기 때문입니다. 명시적 너비와 높이를 할당하면 문서에서 SVG의 크기를 조정하거나 배치하는 방법이 제한될 수 있습니다. 대신 이미지 매크로에 너비(또는 pdfwidth와 같은 유사한 속성)를 지정하거나 CSS를 사용하는 것이 좋습니다.
+
+특히 width="100%"와 같은 백분율 너비를 사용하지 않도록 해야 합니다. SVG 사양에 따르면 이는 종횡비를 변경하지 않고 사용 가능한 모든 공간을 사용하는 것을 의미합니다. 결과적으로 PDF와 같은 페이지 지향 미디어에서 SVG 위와 아래에 큰 간격이 생길 수 있습니다. 너비와 높이를 지정하는 경우 적어도 값이 고정되어 있고 데이터의 종횡비를 존중하는지 확인하세요.
+
+=== SVG 이미지 옵션
+이미지 대상이 SVG일 때 매크로의 options 속성(opts로 자주 줄여 씀)은 SVG가 참조되는 방식을 제어하기 위해 다음 값 중 하나를 허용합니다:
+
+none (기본값)
+interactive
+inline
+다음 표는 이러한 옵션이 미치는 영향을 보여줍니다.
+
+.SVG 이미지에 대한 옵션 값 시연
+[cols="1,1,1"]
+|===
+|옵션 |이미지 |설명
+
+|none (기본값)
+|image::sample.svg[Static,300]
+|정적 +
+
+SVG가 hover 이벤트에 응답하지 않는 것을 관찰하세요.
+
+|interactive
+|image::sample.svg[Interactive,300,opts=interactive]
+|대화형 +
+SVG 위로 마우스를 가져가면 색상이 변경되는 것을 관찰하세요.
+
+|inline
+|image::sample.svg[Embedded,300,opts=inline]
+|포함됨 +
+SVG 위로 마우스를 가져가면 색상이 변경되는 것을 관찰하세요. SVG는 문서 스타일시트에서 CSS도 상속받습니다.
+|===
+
+이러한 옵션 값이 작동하는 방식과 각각을 사용해야 하는 경우는 아래에 설명되어 있습니다:
+
+.HTML 출력에서 SVG 이미지가 참조되는 방식을 제어하는 옵션 값
+[cols="1,1,1,1"]
+
+|===
+|Option |HTML Element Used |Effect |When To Use
+
+|none (기본값)
+|<img>
+|이미지가 래스터화됨
+|정적 이미지, 대화형 기능 없음, 사용자 지정 글꼴 없음
+
+|interactive
+
+|<object>
+|이미지가 실시간 대화형 객체로 포함됨
+|CSS 애니메이션, 스크립팅, 웹 글꼴을 사용하거나 폴백 이미지를 지정하려는 경우
+
+|inline
+|<svg>
+|SVG가 HTML 자체에 직접 포함됨
+|CSS 애니메이션, 스크립팅, 웹 글꼴을 사용하거나 검색 엔진이 SVG 내용을 검색하도록 하려는 경우 +
+주 DOM의 JavaScript로 SVG 내용에 접근하거나 주 DOM의 스타일을 상속받도록 하려는 경우
+|===
+
+interactive 옵션을 사용할 때 fallback 속성을 사용하여 폴백 이미지를 지정할 수 있습니다. 브라우저가 <object> 태그를 지원하지 않는 경우 폴백 이미지가 사용됩니다. fallback 속성의 값이 상대 경로인 경우 imagesdir 문서 속성의 값이 접두사로 붙습니다.
+
+inline 또는 interactive 옵션을 사용할 때 크기 조정이 제대로 작동하려면 루트 <svg> 요소에 viewBox 속성을 정의해야 합니다.
+
+inline 옵션을 사용할 때 AsciiDoc에서 이미지 매크로에 너비 또는 높이를 지정하면 <svg> 요소의 width, height 및 style 속성이 제거됩니다. 또한 inline을 사용할 때 기본 SVG 요소(예: <svg>)에는 네임스페이스가 없어야 합니다.
+
+interactive 옵션을 사용하는 경우 SVG 파일에서 글꼴을 선언하는 CSS에 XML 스타일시트 선언을 사용하여 연결해야 합니다.
+
+inline 또는 interactive 옵션을 사용하여 SVG를 삽입하는 경우 svgo 또는 SVG Editor와 같은 도구를 사용하여 SVG를 최적화하는 것이 좋습니다.
+
+SVG로 작업하면서 주어진 상황에서 어떤 방법을 사용할지 결정하는 데 더 편안해질 것입니다. 처음 선택할 때만 혼란스러울 뿐입니다. 웹에서 SVG 사용에 대해 자세히 알아보려면 온라인 책 SVG on the Web: A Practical Guide와 SVG에 대한 이 기사들을 참조하세요.
+
+
+
 == Images - Images Reference
+
+=== 문서 속성 및 값
+[cols="1,1,1,1"]
+|===
+|Attribute |Value(s) |Example Syntax |Comments
+|imagesdir
+|empty, filesystem path, or base URL
+|:imagesdir: images
+|상대 이미지 대상 앞에 추가되며, 필요한 경우 파일 구분자를 사용하여 결합됩니다. 이미지 대상이 절대 URL 또는 경로인 경우 사용되지 않습니다. 기본값은 비어 있습니다.
+|===
+=== 블록 및 인라인 이미지 속성 및 값
+[cols="1,1,1,1"]
+|===
+|Attribute |Value(s) |Example Syntax |Comments
+|id
+|User defined text
+|id=sunset-img (or [[sunset-img]] or [#sunset-img] above block macro)
+|
+|alt
+|User defined text in first position of attribute list or named attribute
+|image::sunset.jpg[Brilliant sunset] (or alt=Sunset)
+|
+|fallback
+|Image path relative to imagesdir or an absolute path or URL
+|image::tiger.svg[fallback=tiger.png]
+|대상이 SVG이고 opts=interactive인 경우에만 적용 가능
+|title
+|User defined text
+|in attrlist: title="A mountain sunset" (enclosing quotes only required if value contains a comma) +
+above block macro: .A mountain sunset
+|블록: 제목이 이미지 아래에 표시됨 +
+인라인: 제목이 툴팁으로 표시됨
+|format
+|The format of the image, specified as a sub-MIME type (except in the case of an SVG, which is specified as svg).
+|format=svg
+|변환기가 이미지의 형식을 알아야 하고 대상이 파일 확장자로 끝나지 않는 경우(또는 다른 방법으로 감지할 수 없는 경우)에만 필요합니다.
+|caption
+|User defined text
+|caption="Figure 8: "
+|블록 이미지에만 적용됩니다.
+|width
+|User defined size in pixels
+|image::sunset.jpg[Sunset,300] (or width=300)
+|
+|height
+|User defined size in pixels
+|image::sunset.jpg[Sunset,300,200] (or height=200)
+|높이는 너비 속성이 설정된 경우에만 설정해야 하며 이미지의 종횡비를 존중해야 합니다.
+|link
+|User defined location of external URI
+|link=https://www.flickr.com/photos/javh/5448336655
+|
+|window
+|User defined window target for the link attribute
+|window=_blank
+|
+|scale
+|A scaling factor to apply to the intrinsic image dimensions
+|scale=80
+|DocBook에만 해당
+|scaledwidth
+|User defined width for block images
+|scaledwidth=25%
+|DocBook 및 Asciidoctor PDF에만 해당
+|pdfwidth
+|User defined width for images in a PDF
+|pdfwidth=80vw
+|Asciidoctor PDF에만 해당
+|align
+|left, center, right
+|align=left
+|블록 이미지에만 해당. align 및 float 속성은 상호 배타적입니다.
+|float
+|left, right
+|float=right
+|블록 이미지에만 해당. float 및 align 속성은 상호 배타적입니다. float를 범위로 지정하려면 float 그룹을 사용하세요.
+|role
+|user-defined, left, right, th, thumb, related, rel
+|role="thumb right" (or [.thumb.right] above block macro)
+|이미지의 float 위치를 지정하려면 역할을 사용하는 것이 좋습니다. 역할 단축 구문(.)은 블록 이미지 위의 블록 속성 목록에서만 사용할 수 있습니다.
+|opts
+|Additional options for link creation and SVG targets.
+|image::sunset.jpg[Sunset, link=https://example.org, opts=nofollow] +
+image::chart.svg[opts=inline]
+|옵션 이름에는 nofollow, noopener, inline(SVG 전용), interactive(SVG 전용)이 포함됩니다.
+|===
+
 
 == Audio and Video
 
